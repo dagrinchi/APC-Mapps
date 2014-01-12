@@ -1,0 +1,305 @@
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+html, body {
+    height: 100%;
+    margin: 0px !important;
+    padding: 0px !important;
+    background-color: #fff !important;
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+}
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+}
+
+h1, h2, h3 {
+    line-height: 2rem !important;
+}
+
+.event {
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    background-color:#e45f1b;
+    display:block;
+    text-align: center;
+}
+
+.event.received {
+    background-color:#e45f1b;
+    display:none;
+    text-align: center;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+.gm-style img {
+    max-width: none;
+}
+
+.gm-style label {
+    width: auto; display:inline;
+}
+
+.map-canvas {
+    float: left;
+    position: relative;    
+    width: 100%;
+}
+
+.map-canvas-a, .map-canvas-b{
+    margin-top: 41px;
+}
+
+.map-canvas-c {
+    margin-top: 70px;
+}
+
+.overlay-a {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    /*background-color: #ff5500;
+    opacity: 0.2;*/
+}
+
+#cooperationCollapse {
+    background-color: rgba(39, 174, 39, 0.2);
+}
+
+#demandCollapse {
+    background-color: rgba(255, 85, 0, 0.2);
+}
+
+.overlay-b {
+    position: absolute;
+    right: 0;   
+    width: 100%;
+    /*background-color: #27ae27;
+    opacity: 0.2;*/
+}
+
+.thumbnails h2 {
+    font-size: 150% !important;
+}
+
+.thumbnails, .tile, .tile-double {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.tile {
+    margin: 0px !important;
+}
+
+.tile img {
+    width: 50%;
+    margin-top: 9%;
+    margin-bottom: 5%;
+    max-width: 100px;
+}
+
+.accordion {
+    margin: 0 !important;
+}
+
+.accordion-group {
+    border: none !important;
+    margin: 0 !important;
+}
+
+/*iPad mini*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio: 1)  {
+   
+}
+
+/* ipad portrait 1 2 3 */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) 
+and (-webkit-min-device-pixel-ratio: 1) {
+   
+}
+
+/*iPad Retina*/
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) { 
+   
+} 
+
+/*iPhone 5*/
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : portrait) {
+    
+}
+
+/*iPhone 2G/3G/3GS Resolution*/
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) 
+and (orientation : portrait) {
+    
+}
+
+/*iPhone 4/4s*/
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) 
+and (orientation : portrait) {
+    
+}
+
+.container-fluid {
+    padding: 0;        
+}
+
+.container {
+    margin: 0 !important;
+    width: 100%;
+    padding-bottom: 47px;
+    position: relative;
+}
+.loading-box-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/loader.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #000;
+    opacity: 0.5;
+    display: none;
+}
+
+.introWrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f3f3f3), color-stop(51%,#ededed), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+.introLogo {
+    padding-top: 30%;
+    padding-bottom: 15%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.introLogo img {
+    width: 100%;
+}
+
+.introSubtitle{
+   font-size: 1em;
+   margin:0px;
+   overflow:visible;
+   padding:0px;
+   text-align:center; 
+   letter-spacing: -1px;
+}
+
+#progressLabel {
+    margin:0;
+    padding:0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.pb {
+    position: relative;
+    background: #fff;
+    border: 1px solid #e6e6e6; 
+    overflow: hidden;
+    margin: 5px auto;
+    width: 200px;
+    height: 22px;
+    border-radius: 20px;
+}
+.pb > div {
+    width: 0;
+    height: 22px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #1a82f7;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#0099FF), to(#1a82f7)); 
+    background: -webkit-linear-gradient(top, #0099FF, #1a82f7); 
+    background: -moz-linear-gradient(top, #0099FF, #1a82f7); 
+    background: -ms-linear-gradient(top, #0099FF, #1a82f7); 
+    background: -o-linear-gradient(top, #0099FF, #1a82f7);
+    border-radius: 20px;
+}
+
+.pb > p {
+    position: absolute;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    top: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.gmnoprint a, .gmnoprint span {
+    display:none;
+}
+
+.thumbnails a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
