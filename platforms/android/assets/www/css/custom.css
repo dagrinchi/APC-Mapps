@@ -1,0 +1,408 @@
+#demandProyects {
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 100;
+    text-rendering: optimizelegibility;
+    font-size: 1.1rem;
+    color: #fff;
+    text-shadow: none;
+    border: none;
+    background-image: url(../img/colombia.svg);
+    background-size: 32px;
+    background-position: 4px center;
+    background-repeat: no-repeat;
+    background-color: #f5a932;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+#southProyects {
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 100;
+    text-rendering: optimizelegibility;
+    font-size: 1.1rem;
+    color: #fff;
+    text-shadow: none;
+    border: none;
+    background-image: url(../img/south.svg);
+    background-size: 32px;
+    background-position: 4px center;
+    background-repeat: no-repeat;
+    background-color: #8c44ae;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+#descriptionText {
+    padding: 20px 45px 0px 45px;  
+}
+
+#agree {
+    border: 1px solid #134f7f;
+    background-color: #288edf;
+    box-shadow: inset 0 1px rgba(255,255,255,0.36);
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 0 -1px rgba(0,0,0,0.36);
+}
+
+#apcVocabulary {
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 100;
+    text-rendering: optimizelegibility;
+    font-size: 1.2rem;
+    background-color: #8d1016;
+    color: #ffffff;
+    text-shadow: none;
+    border: none;
+    background-image: url(../img/glosary.svg);
+    background-size: 32px;
+    background-position: 120px 3px;
+    background-repeat: no-repeat;
+    cursor: pointer;   
+}
+
+#aboutUs{
+    padding: 20px 30px 0px 30px;
+}
+
+#blocksList {
+    background-color: #ffffff;
+    padding: 11px;
+    border-radius: 6px;
+}
+
+#containerLogo {
+    background-color: #ffffff;
+    box-shadow: none;
+    padding: 1rem 1rem 0rem 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+#containerLogo2 {
+    background-color: #ffffff;
+    box-shadow: none;
+    padding: 0rem 1rem 1rem 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+
+#logoApc {
+    width: 100%;
+}
+#logogov {
+    width: 100%;
+}
+
+
+
+#introContainer{
+    padding: 30px 30px 30px 30px;
+}
+
+#introBody {
+    background-color: #fff;
+}
+
+#header-wrap {
+    background: #eeeeff;
+    position: fixed;
+    width: 100%;
+    height: 4.375rem;
+    top: 0;
+    z-index: 1;
+}
+#containerBig{ 
+    /*margin-top: 4.375rem;*/
+    margin-top: 7.375rem;      
+}
+
+/*** colores headers ***/
+#header-prioridades-coop{
+    background-color: #2e8bcc;
+    opacity: 0.75;     
+    box-shadow: none;
+}
+
+#header-sur-sur{
+    background-color: #8c44ae;
+    opacity: 0.75;     
+}
+
+#header-proyectos{
+    background-color: #27ae27;
+    opacity: 0.75;       
+}
+
+#header-directorio{
+    background-color: #f1c40f;
+    opacity: 0.75;       
+}
+
+#header-directorio{
+    background-color: #f1c40f;
+    opacity: 0.75;       
+}
+
+#header-ejecutas-proyectos{
+    background-color: #ff5500;
+    opacity: 0.75;       
+}
+
+#header-acerca-de{
+    background-color: #f31212;;
+    opacity: 0.75;       
+}
+
+#header-detalles{
+    background-color: #1abc9c;
+    opacity: 0.85;       
+}
+
+#text-head-prioridades{
+    font-weight: 400;
+    color: #F8F2F2;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    line-height: 25px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+#text-head-sur-sur{
+    font-weight: 400;
+    color: #F8F2F2;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    line-height: 25px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+#text-head-proyectos{
+    font-weight: 400;
+    color: #F8F2F2;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    line-height: 25px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+    color: #fff;
+    font-size: 1.5rem; 
+}
+
+#text-head-detalles{
+    font-weight: 400;
+    color: #F8F2F2;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    line-height: 25px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+    color: #fff;
+    font-size: 1.5rem; 
+}
+
+#text-head-directorio{
+    font-weight: 400;
+    color: #F8F2F2;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    line-height: 25px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+#text-head-ejeccutas-proyectos{
+    font-weight: 400;
+    color: #F8F2F2;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    line-height: 25px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+#text-head-acerca{
+    font-weight: 400;
+    color: #F8F2F2;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    line-height: 25px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+/*All the css for text content and paragraph*/
+#textLong1{
+    font-family: 'Didact Gothic', sans-serif;
+}
+
+#textLong2{
+    font-family: 'Didact Gothic', sans-serif;
+}
+
+.aceptar {  
+    display:none;
+    height:300px;
+    background-color: #ECF0F1;
+    padding:20px;
+    margin-top:10px;
+    border-bottom:8px solid #27AE60;
+}
+
+.denegar { 
+    height: 300px;
+    background-color: #ECF0F1;
+    padding: 20px;
+    margin-top: 10px;
+    border-bottom: 8px solid #D35400;
+}
+
+#hightligher1{
+    background-color: #27AE60;
+    color: #fff;
+}
+
+#hightligher2{
+    background-color: #D35400;
+    color: #fff;
+}
+
+#h4-custom{
+    line-height: 16px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-bottom: 0px;  
+}
+
+#h4-directorio{
+    color: #575656;
+    text-decoration: none;
+    font-weight: 200;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+#p1,#p2{
+    margin: 0 0 0.5px;
+}
+
+/*estilos para pagina de detalles*/
+#descriptionText-detalles {
+   padding:  0px 5px 0px 5px;    
+}
+
+#titulo {
+    margin: 12.5px 0;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 100;
+    line-height: 25px;
+    color: inherit;
+    text-rendering: optimizelegibility;
+    background-color: #1abc9c;
+    color: #fff;
+    font-size: 1.3rem;
+    padding: 5px;
+    border-radius: 3px 3px 0px 0px;
+    height: 2.8rem;
+}
+
+#detalles-contenedor {
+    background-color: #ecf0f1;
+    padding: 15px;
+    margin-top: -13px;
+    width: 100%;
+    padding: 0px 0px 0px 10px;
+}
+
+#panel-detalles{
+    background: #ecf0f1;
+    padding: 0px; 
+    border: 0px solid #000; 
+    height: 1%; 
+    overflow: hidden;
+    margin-top: -13px;
+}
+
+#col-left-detalles{
+    border: 0px solid #000000; 
+    float: left; 
+    width: 40%;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    font-style: normal;
+}
+
+#col-right-detalles{
+    border: 0px solid #000000; 
+    float: right; 
+    width: 59%;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+}
+
+#bottom-panel{
+    width: 100%;
+    color: #fff;
+    height: 6rem;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+}
+
+#container-botton-panel{
+    padding: 7px;
+    background-color: #1abc9c;
+    border-radius: 0px 0px 3px 3px;
+}
+/*fin de estilos pagina detalles*/
+
+.detalleProyecto table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+.detalleProyecto tr:nth-of-type(odd) { 
+    background: #eee; 
+}
+.detalleProyecto th { 
+    background: #1abc9c;
+    color: white;  
+}
+.detalleProyecto td, th { 
+    padding: 6px;
+    border: 0px solid #ccc;
+    text-align: left;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 200;
+    line-height: 15px;
+    text-rendering: optimizeLegibility;
+    font-size: 1rem; 
+}
+
+#col1 {
+    width: 30% !important;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 100;
+    line-height: 25px;
+}    
+
+#col2 {
+    width: 70%;
+    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+

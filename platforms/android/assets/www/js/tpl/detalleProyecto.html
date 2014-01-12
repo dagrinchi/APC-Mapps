@@ -1,0 +1,106 @@
+<div id="header-wrap">
+    <div id="header-detalles" class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item left quarter">
+            <a class="topcoat-icon-button--quiet" href="#inicio">
+                <img src="img/home.svg" width="27px" height="28px">
+            </a>    
+        </div>
+        <div class="topcoat-navigation-bar__item center half" style="margin-top: 15px;">  
+            <h1 id="text-head-detalles" class="topcoat-navigation-bar__title">Detalles del proyecto</h1>
+        </div>        
+    </div>
+    <span style="height: 5px; margin-top: -6px; display: block; background-color: #16a085;" id="anonymous_element_6"></span>
+</div>    
+
+<div class="container" style="top: 4.375rem;">
+  <div id="descriptionText-detalles">   
+    <div id="blocksList-detalles">
+        <div>
+            <div id="titulo"><%= enci %></div>
+          </div>
+          <div id="panel-detalles">   
+              <table class="detalleProyecto">
+                <thead>
+                <tr>
+                    <th id="col1">Código</th>
+                    <th id="col2">#<%= codigoenci %></%></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Tipo de actor</td>
+                    <td><%= tipoactor %></%></td>
+                    
+                </tr>
+                <tr>
+                    <td>Actor</td>
+                    <td><%= actor %></%></td>
+                </tr>
+                <tr>
+                    <td>Código proyecto</td>
+                    <td><%= codigoproyecto %></%></td>
+                </tr>
+                <tr>
+                    <td>Ejecutor</td>
+                    <td><%= ejecutor %></%></td>
+                </tr>
+                <tr>
+                    <td>Estado</td>
+                    <td><%= estadoproyecto %></%></td>
+                </tr>
+                <tr>
+                    <td>Fecha inicio</td>
+                    <td><%= fechainicio %></%></td>
+                </tr>
+                <tr>
+                    <td>Fecha finalización</td>
+                    <td><%= fechafinalizacion %></%></td>
+                </tr>
+                <tr>
+                    <td>Moneda</td>
+                    <td><%= moneda %></%></td>
+                </tr>
+                <tr>
+                    <td>Municipio</td>
+                    <td><%= municipio %></%></td>
+                </tr>
+                <tr>
+                    <td>Otros sectores</td>
+                    <td><%= otrossectoresrelacionados %></%></td>
+                </tr>
+                <tr>
+                    <td>Población beneficiada</td>
+                    <td><%= poblacionbeneficiada %></td>
+                </tr>
+                <tr>
+                    <td>Sector lider</td>
+                    <td><%= sectorliderpolitica %></td>
+                </tr>
+                <tr>
+                    <td>Territorio</td>
+                    <td><%= territorio %></%></td>
+                </tr>
+                <tr>
+                    <td>Aporte internacional</td>
+                    <td><%= total_aporte_intercional %></%>&nbsp;<%= moneda %></%></td>
+                </tr>
+                <tr>
+                    <td>Aporte nacional</td>
+                    <td><%= total_aporte_nacional %></%>&nbsp;<%= moneda %></%></td>
+                </tr>
+                <tr>
+                    <td>Total aportes</td>
+                    <td><%= total_aportes %></%>&nbsp;<%= moneda %></%></td>
+                </tr>   
+                </tbody>
+            </table>       
+          </div>
+          <div id="container-botton-panel">
+            <div id="bottom-panel">
+              <%= proyectoprograma %></%>
+            </div>  
+          </div>                 
+        </div>         
+    </div>  
+  </div>      
+</div>
