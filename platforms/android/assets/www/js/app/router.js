@@ -42,151 +42,154 @@ define(function(require) {
         },
 
         initialize: function() {
-            if (this.checkConnection()) {
-                require(['app/views/map'], function(MapView) {
-                    if (typeof APC.views.mapDemanda === 'undefined')
-                        APC.views.mapDemanda = new MapView({
-                            id: "map-canvas-a",
-                            className: "map-canvas map-canvas-a",
-                            zoom: 4,
-                            minZoom: 4,
-                            latitude: 19.872195816700884,
-                            longitude: -106.65585937499998
-                            // ,
-                            // styles: [{
-                            //     "stylers": [{
-                            //         "invert_lightness": true
-                            //     }]
-                            // }, {
-                            //     "featureType": "landscape",
-                            //     "stylers": [{
-                            //         "color": "#003c81"
-                            //     }]
-                            // }, {
-                            //     "featureType": "road",
-                            //     "stylers": [{
-                            //         "color": "#d4e4e4"
-                            //     }, {
-                            //         "lightness": -19
-                            //     }]
-                            // }, {
-                            //     "featureType": "poi",
-                            //     "stylers": [{
-                            //         "visibility": "off"
-                            //     }]
-                            // }, {
-                            //     "featureType": "administrative",
-                            //     "stylers": [{
-                            //         "lightness": 25
-                            //     }]
-                            // }]
-                        });
 
-                    if (typeof APC.views.mapCooperacion === 'undefined')
-                        APC.views.mapCooperacion = new MapView({
-                            id: "map-canvas-b",
-                            className: "map-canvas map-canvas-b",
-                            zoom: 4,
-                            minZoom: 4,
-                            latitude: 19.872195816700884,
-                            longitude: -106.65585937499998
-                            // ,
-                            // styles: [{
-                            //     "stylers": [{
-                            //         "invert_lightness": true
-                            //     }]
-                            // }, {
-                            //     "featureType": "landscape",
-                            //     "stylers": [{
-                            //         "color": "#003c81"
-                            //     }]
-                            // }, {
-                            //     "featureType": "road",
-                            //     "stylers": [{
-                            //         "color": "#d4e4e4"
-                            //     }, {
-                            //         "lightness": -19
-                            //     }]
-                            // }, {
-                            //     "featureType": "poi",
-                            //     "stylers": [{
-                            //         "visibility": "off"
-                            //     }]
-                            // }, {
-                            //     "featureType": "administrative",
-                            //     "stylers": [{
-                            //         "lightness": 25
-                            //     }]
-                            // }]
-                        });
+            require(['app/views/map'], function(MapView) {
+                if (typeof APC.views.mapDemanda === 'undefined')
+                    APC.views.mapDemanda = new MapView({
+                        id: "map-canvas-a",
+                        className: "map-canvas map-canvas-a",
+                        zoom: 4,
+                        minZoom: 4,
+                        latitude: 19.872195816700884,
+                        longitude: -106.65585937499998
+                        // ,
+                        // styles: [{
+                        //     "stylers": [{
+                        //         "invert_lightness": true
+                        //     }]
+                        // }, {
+                        //     "featureType": "landscape",
+                        //     "stylers": [{
+                        //         "color": "#003c81"
+                        //     }]
+                        // }, {
+                        //     "featureType": "road",
+                        //     "stylers": [{
+                        //         "color": "#d4e4e4"
+                        //     }, {
+                        //         "lightness": -19
+                        //     }]
+                        // }, {
+                        //     "featureType": "poi",
+                        //     "stylers": [{
+                        //         "visibility": "off"
+                        //     }]
+                        // }, {
+                        //     "featureType": "administrative",
+                        //     "stylers": [{
+                        //         "lightness": 25
+                        //     }]
+                        // }]
+                    });
 
-                    if (typeof APC.views.mapSursur === 'undefined')
-                        APC.views.mapSursur = new MapView({
-                            id: "map-canvas-c",
-                            className: "map-canvas map-canvas-c",
-                            zoom: 1,
-                            minZoom: 1,
-                            latitude: 84.82717505894134,
-                            longitude: -182.87009974999998
-                            // ,
-                            // styles: [{
-                            //     "stylers": [{
-                            //         "invert_lightness": true
-                            //     }]
-                            // }, {
-                            //     "featureType": "landscape",
-                            //     "stylers": [{
-                            //         "color": "#8c44ae"
-                            //     }]
-                            // }, {
-                            //     "featureType": "road",
-                            //     "stylers": [{
-                            //         "color": "#d4e4e4"
-                            //     }, {
-                            //         "lightness": -19
-                            //     }]
-                            // }, {
-                            //     "featureType": "poi",
-                            //     "stylers": [{
-                            //         "visibility": "off"
-                            //     }]
-                            // }, {
-                            //     "featureType": "administrative",
-                            //     "stylers": [{
-                            //         "lightness": 25
-                            //     }]
-                            // }]
-                        });
+                if (typeof APC.views.mapCooperacion === 'undefined')
+                    APC.views.mapCooperacion = new MapView({
+                        id: "map-canvas-b",
+                        className: "map-canvas map-canvas-b",
+                        zoom: 4,
+                        minZoom: 4,
+                        latitude: 19.872195816700884,
+                        longitude: -106.65585937499998
+                        // ,
+                        // styles: [{
+                        //     "stylers": [{
+                        //         "invert_lightness": true
+                        //     }]
+                        // }, {
+                        //     "featureType": "landscape",
+                        //     "stylers": [{
+                        //         "color": "#003c81"
+                        //     }]
+                        // }, {
+                        //     "featureType": "road",
+                        //     "stylers": [{
+                        //         "color": "#d4e4e4"
+                        //     }, {
+                        //         "lightness": -19
+                        //     }]
+                        // }, {
+                        //     "featureType": "poi",
+                        //     "stylers": [{
+                        //         "visibility": "off"
+                        //     }]
+                        // }, {
+                        //     "featureType": "administrative",
+                        //     "stylers": [{
+                        //         "lightness": 25
+                        //     }]
+                        // }]
+                    });
 
-                });
-            } else {
-                navigator.notification.alert('No hay una conexión a internet!', function() {
-                }, 'Atención', 'Reintentar');
-            }
+                if (typeof APC.views.mapSursur === 'undefined')
+                    APC.views.mapSursur = new MapView({
+                        id: "map-canvas-c",
+                        className: "map-canvas map-canvas-c",
+                        zoom: 1,
+                        minZoom: 1,
+                        latitude: 84.82717505894134,
+                        longitude: -182.87009974999998
+                        // ,
+                        // styles: [{
+                        //     "stylers": [{
+                        //         "invert_lightness": true
+                        //     }]
+                        // }, {
+                        //     "featureType": "landscape",
+                        //     "stylers": [{
+                        //         "color": "#8c44ae"
+                        //     }]
+                        // }, {
+                        //     "featureType": "road",
+                        //     "stylers": [{
+                        //         "color": "#d4e4e4"
+                        //     }, {
+                        //         "lightness": -19
+                        //     }]
+                        // }, {
+                        //     "featureType": "poi",
+                        //     "stylers": [{
+                        //         "visibility": "off"
+                        //     }]
+                        // }, {
+                        //     "featureType": "administrative",
+                        //     "stylers": [{
+                        //         "lightness": 25
+                        //     }]
+                        // }]
+                    });
+
+            });
         },
 
         intro: function() {
-            require(['app/utils/init', 'app/views/intro'], function(Initdb, IntroView) {
+            if (this.checkConnection()) {
+                require(['app/utils/init', 'app/views/intro'], function(Initdb, IntroView) {
 
-                APC.views.introView = new IntroView();
-                APC.views.introView.render();
+                    APC.views.introView = new IntroView();
+                    APC.views.introView.render();
 
-                APC.utils.initdb = new Initdb();
-                $.when(APC.utils.initdb).then(function(r) {
-                    APC.views.introView.progressBar(r.count, r.msg);
-                    setTimeout(function() {
-                        APC.router.navigate("inicio", {
-                            trigger: true
-                        });
-                    }, 1000);
-                }, function(err) {
-                    navigator.notification.alert('El repositorio de datos Open Data no está disponible ó se ha perdido la conexión con la red, inténtalo más tarde!', function() {}, 'Atención', 'Reintentar');
-                }, function(r) {
-                    APC.views.introView.progressBar(r.count, r.msg);
+                    APC.utils.initdb = new Initdb();
+                    $.when(APC.utils.initdb).then(function(r) {
+                        APC.views.introView.progressBar(r.count, r.msg);
+                        setTimeout(function() {
+                            APC.router.navigate("inicio", {
+                                trigger: true
+                            });
+                        }, 1000);
+                    }, function(err) {
+                        navigator.notification.alert('El repositorio de datos Open Data no está disponible ó se ha perdido la conexión con la red, inténtalo más tarde!', function() {
+                            Backbone.history.loadUrl("/");
+                        }, 'Atención', 'Reintentar');
+                    }, function(r) {
+                        APC.views.introView.progressBar(r.count, r.msg);
+                    });
                 });
-            });
-
-            return this;
+            } else {
+                navigator.notification.alert('No hay una conexión a internet!', function() {
+                    console.log("Start again!!!");
+                    Backbone.history.loadUrl("/");
+                }, 'Atención', 'Reintentar');
+            }
         },
 
         inicio: function() {
@@ -199,82 +202,96 @@ define(function(require) {
         },
 
         prioridades: function() {
-            require([
-                'app/collections/demanda',
-                'app/collections/demActores',
-                'app/collections/demTerritorios',
-                'app/collections/demMunicipios',
-                'app/collections/demAreas',
-                'app/collections/demSectores',
-                'app/collections/proTerritorios',
-                'app/collections/proAreas',
-                'app/collections/cooperacion',
-                'app/views/prioridades'
-            ], function(
-                DemandaCollection,
-                DemActoresCollection,
-                DemTerritoriosCollection,
-                DemMunicipiosCollection,
-                DemAreasCollection,
-                DemSectoresCollection,
-                ProTerritoriosCollection,
-                ProAreasCollection,
-                CooperacionCollection,
-                PrioridadesPageView) {
+            if (this.checkConnection()) {
+                require([
+                    'app/collections/demanda',
+                    'app/collections/demActores',
+                    'app/collections/demTerritorios',
+                    'app/collections/demMunicipios',
+                    'app/collections/demAreas',
+                    'app/collections/demSectores',
+                    'app/collections/proTerritorios',
+                    'app/collections/proAreas',
+                    'app/collections/cooperacion',
+                    'app/views/prioridades'
+                ], function(
+                    DemandaCollection,
+                    DemActoresCollection,
+                    DemTerritoriosCollection,
+                    DemMunicipiosCollection,
+                    DemAreasCollection,
+                    DemSectoresCollection,
+                    ProTerritoriosCollection,
+                    ProAreasCollection,
+                    CooperacionCollection,
+                    PrioridadesPageView) {
 
-                $("#loadingBox").fadeIn(500, function() {
-                    if (typeof APC.collections.demCollection === 'undefined')
-                        APC.collections.demCollection = new DemandaCollection();
+                    $("#loadingBox").fadeIn(500, function() {
+                        if (typeof APC.collections.demCollection === 'undefined')
+                            APC.collections.demCollection = new DemandaCollection();
 
-                    if (typeof APC.collections.demActoresCollection === 'undefined')
-                        APC.collections.demActoresCollection = new DemActoresCollection();
-                    if (typeof APC.collections.demTerritoriosCollection === 'undefined')
-                        APC.collections.demTerritoriosCollection = new DemTerritoriosCollection();
-                    if (typeof APC.collections.demMunicipiosCollection === 'undefined')
-                        APC.collections.demMunicipiosCollection = new DemMunicipiosCollection();
-                    if (typeof APC.collections.demAreasCollection === 'undefined')
-                        APC.collections.demAreasCollection = new DemAreasCollection();
-                    if (typeof APC.collections.demSectoresCollection === 'undefined')
-                        APC.collections.demSectoresCollection = new DemSectoresCollection();
+                        if (typeof APC.collections.demActoresCollection === 'undefined')
+                            APC.collections.demActoresCollection = new DemActoresCollection();
+                        if (typeof APC.collections.demTerritoriosCollection === 'undefined')
+                            APC.collections.demTerritoriosCollection = new DemTerritoriosCollection();
+                        if (typeof APC.collections.demMunicipiosCollection === 'undefined')
+                            APC.collections.demMunicipiosCollection = new DemMunicipiosCollection();
+                        if (typeof APC.collections.demAreasCollection === 'undefined')
+                            APC.collections.demAreasCollection = new DemAreasCollection();
+                        if (typeof APC.collections.demSectoresCollection === 'undefined')
+                            APC.collections.demSectoresCollection = new DemSectoresCollection();
 
-                    if (typeof APC.collections.proTerritoriosCollection === 'undefined')
-                        APC.collections.proTerritoriosCollection = new ProTerritoriosCollection();
-                    if (typeof APC.collections.proAreasCollection === 'undefined')
-                        APC.collections.proAreasCollection = new ProAreasCollection();
+                        if (typeof APC.collections.proTerritoriosCollection === 'undefined')
+                            APC.collections.proTerritoriosCollection = new ProTerritoriosCollection();
+                        if (typeof APC.collections.proAreasCollection === 'undefined')
+                            APC.collections.proAreasCollection = new ProAreasCollection();
 
-                    if (typeof APC.collections.coopCollection === 'undefined')
-                        APC.collections.coopCollection = new CooperacionCollection();
+                        if (typeof APC.collections.coopCollection === 'undefined')
+                            APC.collections.coopCollection = new CooperacionCollection();
 
-                    $.when(APC.collections.demCollection.findAll(),
-                        APC.collections.coopCollection.findAll(),
-                        APC.collections.demActoresCollection.findAll(),
-                        APC.collections.demTerritoriosCollection.findAll(),
-                        APC.collections.demMunicipiosCollection.findAll(),
-                        APC.collections.demAreasCollection.findAll(),
-                        APC.collections.demSectoresCollection.findAll(),
-                        APC.collections.proTerritoriosCollection.findAll(),
-                        APC.collections.proAreasCollection.findAll()).done(function() {
+                        $.when(APC.collections.demCollection.findAll(),
+                            APC.collections.coopCollection.findAll(),
+                            APC.collections.demActoresCollection.findAll(),
+                            APC.collections.demTerritoriosCollection.findAll(),
+                            APC.collections.demMunicipiosCollection.findAll(),
+                            APC.collections.demAreasCollection.findAll(),
+                            APC.collections.demSectoresCollection.findAll(),
+                            APC.collections.proTerritoriosCollection.findAll(),
+                            APC.collections.proAreasCollection.findAll()).done(function() {
 
-                        if (typeof APC.views.prioridadesPageView === 'undefined')
-                            APC.views.prioridadesPageView = new PrioridadesPageView();
-                        APC.views.prioridadesPageView.render();
+                            if (typeof APC.views.prioridadesPageView === 'undefined')
+                                APC.views.prioridadesPageView = new PrioridadesPageView();
+                            APC.views.prioridadesPageView.render();
+                        });
                     });
                 });
-            });
+            } else {
+                navigator.notification.alert('No hay una conexión a internet!', function() {
+                    console.log("Start again!!!");
+                    Backbone.history.loadUrl("#inicio");
+                }, 'Atención', 'Reintentar');
+            }
         },
 
         sursur: function() {
-            require(['app/views/sursur', 'app/collections/sursur'], function(sursurview, sursurCollection) {
-                $("#loadingBox").fadeIn(500, function() {
-                    if (typeof APC.collections.sursurCollection === 'undefined')
-                        APC.collections.sursurCollection = new sursurCollection();
-                    $.when(APC.collections.sursurCollection.findAll()).done(function() {
-                        APC.views.sursurview = new sursurview();
-                        APC.views.sursurview.render();
-                        APC.collections.sursurCollection.initMapMarkers();
+            if (this.checkConnection()) {
+                require(['app/views/sursur', 'app/collections/sursur'], function(sursurview, sursurCollection) {
+                    $("#loadingBox").fadeIn(500, function() {
+                        if (typeof APC.collections.sursurCollection === 'undefined')
+                            APC.collections.sursurCollection = new sursurCollection();
+                        $.when(APC.collections.sursurCollection.findAll()).done(function() {
+                            APC.views.sursurview = new sursurview();
+                            APC.views.sursurview.render();
+                            APC.collections.sursurCollection.initMapMarkers();
+                        });
                     });
                 });
-            });
+            } else {
+                navigator.notification.alert('No hay una conexión a internet!', function() {
+                    console.log("Start again!!!");
+                    Backbone.history.loadUrl("#inicio");
+                }, 'Atención', 'Reintentar');
+            }
         },
 
         proyectos: function() {
@@ -332,12 +349,19 @@ define(function(require) {
         },
 
         acercade: function() {
-            require(['app/views/acercade'], function(AcercadeView) {
-                $("#loadingBox").fadeIn(500, function() {
-                    APC.views.acercadeView = new AcercadeView();
-                    APC.views.acercadeView.render();
+            if (this.checkConnection()) {
+                require(['app/views/acercade'], function(AcercadeView) {
+                    $("#loadingBox").fadeIn(500, function() {
+                        APC.views.acercadeView = new AcercadeView();
+                        APC.views.acercadeView.render();
+                    });
                 });
-            });
+            } else {
+                navigator.notification.alert('No hay una conexión a internet!', function() {
+                    console.log("Start again!!!");
+                    Backbone.history.loadUrl("#inicio");
+                }, 'Atención', 'Reintentar');
+            }
         }
 
     });

@@ -198,7 +198,7 @@ define(function(require) {
                     });
                     setTimeout(function() {
                         modal.render();
-                    }, 500);
+                    }, 600);
                 });
             });
 

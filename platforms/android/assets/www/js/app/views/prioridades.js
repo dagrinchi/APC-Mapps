@@ -51,7 +51,7 @@ define(function(require) {
             this.template = _.template(modalTpl, {
                 title: self.options.title,
                 list: self.options.list
-            });
+            });            
         },
 
         events: {
@@ -93,9 +93,10 @@ define(function(require) {
             }
         },
 
-        render: function() {
+        render: function() {            
             this.$el.html(this.template);
             this.$el.modal('show');
+            this.$el.children(".modal-body").height($(window).height() - 200);
             return this;
         }
     });
