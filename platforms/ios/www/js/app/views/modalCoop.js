@@ -16,13 +16,13 @@ define(function(require) {
         Backbone = require('backbone'),
         _ = require('underscore'),        
         modalTpl = require('text!tpl/modal.html'),
-        demMarker = require('text!tpl/demMarkerListItem.html'),
+        coopMarker = require('text!tpl/coopMarkerListItem.html'),
         bootstrap = require('bootstrap/bootstrap');
 
     var listItemView = Backbone.View.extend({
         tagName: 'h4',
         className: '',        
-        template: _.template(demMarker),
+        template: _.template(coopMarker),
         render: function() {                                    
             this.$el.html(this.template(this.model.toJSON()));
             return this;

@@ -74,14 +74,28 @@
 #containerLogo {
     background-color: #ffffff;
     box-shadow: none;
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
     overflow: hidden;
     position: relative;
 }
 
+#containerLogo2 {
+    background-color: #ffffff;
+    box-shadow: none;
+    padding: 0rem 1rem 1rem 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+
 #logoApc {
     width: 100%;
 }
+#logogov {
+    width: 100%;
+}
+
+
 
 #introContainer{
     padding: 30px 30px 30px 30px;
@@ -150,7 +164,6 @@
     font-weight: 400;
     color: #F8F2F2;
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
-    font-weight: 100;
     line-height: 25px;
     color: inherit;
     text-rendering: optimizelegibility;
@@ -162,7 +175,6 @@
     font-weight: 400;
     color: #F8F2F2;
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
-    font-weight: 100;
     line-height: 25px;
     color: inherit;
     text-rendering: optimizelegibility;
@@ -174,7 +186,6 @@
     font-weight: 400;
     color: #F8F2F2;
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
-    font-weight: 100;
     line-height: 25px;
     color: inherit;
     text-rendering: optimizelegibility;
@@ -186,7 +197,6 @@
     font-weight: 400;
     color: #F8F2F2;
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
-    font-weight: 100;
     line-height: 25px;
     color: inherit;
     text-rendering: optimizelegibility;
@@ -198,7 +208,6 @@
     font-weight: 400;
     color: #F8F2F2;
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
-    font-weight: 100;
     line-height: 25px;
     color: inherit;
     text-rendering: optimizelegibility;
@@ -210,7 +219,6 @@
     font-weight: 400;
     color: #F8F2F2;
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
-    font-weight: 100;
     line-height: 25px;
     color: inherit;
     text-rendering: optimizelegibility;
@@ -222,7 +230,6 @@
     font-weight: 400;
     color: #F8F2F2;
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
-    font-weight: 100;
     line-height: 25px;
     color: inherit;
     text-rendering: optimizelegibility;

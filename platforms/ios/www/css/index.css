@@ -303,3 +303,7 @@ and (orientation : portrait) {
     height: 100%;
     overflow: hidden;
 }
+
+.modal-body {
+    max-height: 600px !important;
+}

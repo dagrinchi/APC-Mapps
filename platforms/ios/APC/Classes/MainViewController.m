@@ -29,6 +29,10 @@
 
 @implementation MainViewController
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

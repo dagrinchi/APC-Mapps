@@ -55,6 +55,8 @@ define(function(require) {
                 title: self.options.title,
                 content: listElement.render().$el.html()
             }));
+
+            this.$el.children(".modal-body").height($(window).height() - 200);
             this.$el.modal('show');            
             return this;
         }
