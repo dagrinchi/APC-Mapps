@@ -23,7 +23,7 @@ define(function(require) {
         events: {
             "click #registrate": "btnRegistrate",
             "click #informate": "btnInformate",
-            "click #myonoffswitch": "chkSwitch"
+            "click .bool-slider .inset .control": "chkSwitch"
         },
 
         btnRegistrate: function() {            
@@ -35,13 +35,26 @@ define(function(require) {
         },
 
         chkSwitch: function(e) {
-            if (e.currentTarget.checked) {
-                $('#denegar').slideUp();
-                $('#aceptar').slideDown();
-            } else {
-                $('#aceptar').slideUp();
-                $('#denegar').slideDown();
+            var el = e.target;
+            if (!$(el).parent().parent().hasClass('disabled')) {
+                if ($(el).parent().parent().hasClass('true')) {
+                    $(el).parent().parent().addClass('false').removeClass('true');
+                    $('#aceptar').slideUp();
+                    $('#denegar').slideDown(); 
+                } else {
+                    $(el).parent().parent().addClass('true').removeClass('false');
+                    $('#denegar').slideUp();
+                    $('#aceptar').slideDown();
+                }
             }
+
+            // if (e.currentTarget.checked) {
+            //     $('#denegar').slideUp();
+            //     $('#aceptar').slideDown();
+            // } else {
+            //     $('#aceptar').slideUp();
+            //     $('#denegar').slideDown();
+            // }
         },
 
         render: function() {
