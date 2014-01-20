@@ -43,7 +43,7 @@ define(function(require) {
         findAll: function() {
 
             var self = this;
-            this.baseapc.execute("SELECT DISTINCT pais FROM sursur", model, function(data) {
+            this.baseapc.execute("SELECT DISTINCT pais FROM sursur ORDER BY pais", model, function(data) {
                 self.reset(data);
                 deferred.resolve();
             });
@@ -63,7 +63,7 @@ define(function(require) {
             var pais = this.models[this.nextAddress].get("pais");
             var RowKey = this.models[this.nextAddress].get("RowKey");           
             
-            if (this.nextAddress < this.length - 1) {
+            if (this.nextAddress < this.length) {
                 setTimeout("APC.collections.sursurCollection.getAddress('" + search + "','" + RowKey + "','" + pais + "')", this.delay);
                 this.nextAddress++;
             } else {
@@ -82,7 +82,7 @@ define(function(require) {
                     var lat = p.lat();
                     var lng = p.lng();
                     self.createMarker(RowKey, lat, lng, pais);
-                    //console.log('address=' + search + ' lat=' + lat + ' lng=' + lng + '(delay=' + self.delay + 'ms)');
+                    // console.log('address=' + search + ' lat=' + lat + ' lng=' + lng + '(delay=' + self.delay + 'ms)');
                     self.delay = 100;
                 } else {
                     if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
@@ -90,7 +90,7 @@ define(function(require) {
                         self.delay++;
                     } else {
                         var reason = "Code " + status;
-                        //console.error('address="' + search + '" error=' + reason + '(delay=' + self.delay + 'ms)');
+                        console.error('address="' + search + '" error=' + reason + '(delay=' + self.delay + 'ms)');
                     }
                 }
                 self.geoCoder();

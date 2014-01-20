@@ -11,7 +11,11 @@ var APC = {
     router: {},
     models: {},
     collections: {},
-    views: {},
+    views: {
+        mapDemanda: {},
+        mapCooperacion: {},
+        mapSursur: {}
+    },
     utils: {},
     selection: {
         demanda: {

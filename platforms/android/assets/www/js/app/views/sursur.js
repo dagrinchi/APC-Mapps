@@ -28,13 +28,7 @@ define(function(require) {
 
         render: function() {
             this.$el.html(this.template);
-            $("#map-canvas-c").replaceWith(APC.views.mapSursur.el);
-            
-            var wh = $(window).height() - 70;            
-            $(".map-canvas-c").height(wh);
-
-            google.maps.event.trigger(APC.views.mapSursur.map, 'resize');
-            
+            APC.views.mapSursur.render();
             return this;
         }
     });

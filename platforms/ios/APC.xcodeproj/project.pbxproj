@@ -48,6 +48,7 @@
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		D78326C96846487FA47D9FC4 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A07ADBEFD3B741E3AF4C8838 /* CDVLogger.m */; };
 		F840E1F1165FE0F500CFE078 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = F840E1F0165FE0F500CFE078 /* config.xml */; };
+		6A085BB7862D4B4C9E9EDFF7 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E113804A4E4370B0E56036 /* CDVLocation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,8 @@
 		F0D14C9F06034B6E9FF8C258 /* CDVNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVNotification.m; path = org.apache.cordova.dialogs/CDVNotification.m; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = APC/config.xml; sourceTree = "<group>"; };
 		F8C67B8B8657421491998887 /* CDVReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVReachability.m; path = "org.apache.cordova.network-information/CDVReachability.m"; sourceTree = "<group>"; };
+		C4E113804A4E4370B0E56036 /* CDVLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLocation.m"; path = "org.apache.cordova.geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		26C5A06DD73944CE9C53D740 /* CDVLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLocation.h"; path = "org.apache.cordova.geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +264,8 @@
 				B0E9617E91814214B9A36DD4 /* CDVVibration.h */,
 				16E6CA0827E34CB5980E8E8A /* CDVInAppBrowser.m */,
 				73A08D3247484C06823B8E03 /* CDVInAppBrowser.h */,
+				C4E113804A4E4370B0E56036 /* CDVLocation.m */,
+				26C5A06DD73944CE9C53D740 /* CDVLocation.h */,
 			);
 			name = Plugins;
 			path = APC/Plugins;
@@ -453,6 +458,7 @@
 				B769A7BD54374C2F8840D231 /* CDVReachability.m in Sources */,
 				5F5A70D9671848D1AACA2703 /* CDVVibration.m in Sources */,
 				3A7C48A8FFE745848C016561 /* CDVInAppBrowser.m in Sources */,
+				6A085BB7862D4B4C9E9EDFF7 /* CDVLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
