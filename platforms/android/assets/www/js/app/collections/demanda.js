@@ -22,9 +22,9 @@ define(function(require) {
 
     return Backbone.Collection.extend({
 
-        sqlInit: "SELECT DISTINCT * FROM demanda LEFT JOIN (SELECT DISTINCT demanda.municipio mun, dane.lat, dane.long FROM demanda INNER JOIN dane ON dane.nommun LIKE demanda.municipio WHERE demanda.municipio IS NOT '' GROUP BY demanda.municipio) municipios ON municipios.mun = demanda.municipio ",
+        sqlInit: "select * from demanda LEFT join dane on (((demanda.municipio like dane.nommun) and (demanda.territorio like dane.nomdep)) or ((demanda.municipio NOT like dane.nommun) and (demanda.territorio like dane.nomdep) and demanda.municipio = '' and demanda.territorio = 'AMBITO NACIONAL') OR ((demanda.municipio = dane.nommun) and (demanda.territorio like dane.nomdep) and demanda.municipio = '' and demanda.territorio != 'AMBITO NACIONAL' AND dane.nommun != 'AMBITO NACIONAL')) ",
 
-        sqlEnd: " GROUP BY demanda.codigoproyecto, demanda.municipio",
+        sqlEnd: "",
 
         markers: [],
 
@@ -37,9 +37,12 @@ define(function(require) {
         baseapc: {},
 
         initialize: function() {
-            this.geo = new google.maps.Geocoder();
-            this.bounds = new google.maps.LatLngBounds();
-            this.infowindow = new google.maps.InfoWindow();
+            var self = this;
+            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
+                self.geo = new google.maps.Geocoder();
+                self.bounds = new google.maps.LatLngBounds();
+                self.infowindow = new google.maps.InfoWindow();
+            });
             this.baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
         },
 
@@ -93,7 +96,7 @@ define(function(require) {
             });
 
             $.each(selection, function(k1, v1) {
-                sql += " AND (";
+                sql += " WHERE (";
                 $.each(v1, function(k2, v2) {
                     if (k2 > 0) {
                         sql += " OR ";
@@ -106,6 +109,7 @@ define(function(require) {
             });
 
             sql += this.sqlEnd;
+            console.log(sql);
             return sql;
         },
 
@@ -176,33 +180,35 @@ define(function(require) {
 
         createMarker: function(RowKey, add, lat, lng) {
             var self = this;
-            var contentString = '<a href="#proyectos/' + RowKey + '">' + add + '</a>';
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: APC.views.mapDemanda.map,
-                zIndex: Math.round(4.5 * -100000) << 5
-            });
-
-            this.markers.push(marker);
-
-            google.maps.event.addListener(marker, 'click', function() {
-
-                if (typeof APC.collections.demByMunicipios === 'undefined')
-                    APC.collections.demByMunicipios = new demandaByMunicipios();
-
-                $.when(APC.collections.demByMunicipios.findByMunicipio(add)).done(function() {
-                    var modal = new modalView({
-                        id: RowKey,
-                        title: add,
-                        collection: APC.collections.demByMunicipios
-                    });
-                    setTimeout(function() {
-                        modal.render();
-                    }, 600);
+            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
+                var contentString = '<a href="#proyectos/' + RowKey + '">' + add + '</a>';
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    map: APC.views.mapDemanda.map,
+                    zIndex: Math.round(4.5 * -100000) << 5
                 });
-            });
 
-            this.bounds.extend(marker.position);
+                self.markers.push(marker);
+
+                google.maps.event.addListener(marker, 'click', function() {
+
+                    if (typeof APC.collections.demByMunicipios === 'undefined')
+                        APC.collections.demByMunicipios = new demandaByMunicipios();
+
+                    $.when(APC.collections.demByMunicipios.findByMunicipio(add)).done(function() {
+                        var modal = new modalView({
+                            id: RowKey,
+                            title: add,
+                            collection: APC.collections.demByMunicipios
+                        });
+                        setTimeout(function() {
+                            modal.render();
+                        }, 600);
+                    });
+                });
+
+                self.bounds.extend(marker.position);
+            });
         }
 
     });

@@ -23,7 +23,7 @@ var APC = {
                 actor: [],
                 territorio: [],
                 municipio: [],
-                otrossectoresrelacionados: [],
+                codigoenci: [],
                 sectorliderpolitica: []
             }
         },

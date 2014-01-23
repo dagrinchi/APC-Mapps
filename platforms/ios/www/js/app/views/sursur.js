@@ -26,6 +26,27 @@ define(function(require) {
             
         },
 
+        events: {
+            "click .share": "btnShare"
+        },
+
+
+        btnShare: function() {
+            require(['html2canvas'], function() {
+                html2canvas(document.getElementsByTagName("body"), {
+                    useCORS: true,
+                    onrendered: function(canvas) {                        
+                        window.plugins.socialsharing.available(function(isAvailable) {
+                            if (isAvailable) {                                
+                                window.plugins.socialsharing.share("APC-Mapps", "APC-Mapps", canvas.toDataURL(), "http://www.apccolombia.gov.co/");
+                            }
+                        });
+                    }
+                });
+            });
+            return false;
+        },
+
         render: function() {
             this.$el.html(this.template);
             APC.views.mapSursur.render();

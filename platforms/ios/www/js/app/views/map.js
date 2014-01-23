@@ -42,8 +42,10 @@ define(function(require) {
 			var self = this;			
 			$("#" + self.id).width("100%");
 			$("#" + self.id).height(self.options.height);
-						
-			self.map = new google.maps.Map(document.getElementById(self.id), self.mapOptions);
+			
+			require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {			
+				self.map = new google.maps.Map(document.getElementById(self.id), self.mapOptions);
+			});		
 			return this;
 		}
 	});

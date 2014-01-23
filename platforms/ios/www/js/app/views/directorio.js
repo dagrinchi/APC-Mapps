@@ -22,6 +22,20 @@ define(function(require) {
 		tagName: 'li',
 		className: 'topcoat-list__item',
 		template: _.template(directorioItemTpl),
+		
+		events: {
+            "click .share": "btnShare"
+        },
+        
+        btnShare: function(e) {
+        	window.plugins.socialsharing.available(function(isAvailable) {
+                if (isAvailable) {                                
+                    window.plugins.socialsharing.share(e.delegateTarget.innerText, "APC-Mapps", null, "http://www.apccolombia.gov.co/");
+                }
+            });
+            return false;
+        },
+		
 		render: function() {
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;

@@ -30,7 +30,7 @@ define(function(require) {
         findAll: function() {
             var baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
             var self = this;            
-            baseapc.execute("select distinct dci.areacooperacion as item from dci", model, function(data) {
+            baseapc.execute("select distinct dci.areacooperacion as item, dci.areacooperacion as value from dci", model, function(data) {
                 self.reset(data);
                 deferred.resolve();
             });

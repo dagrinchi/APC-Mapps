@@ -23,7 +23,7 @@ define(function(require) {
 
     return Backbone.Collection.extend({
 
-        sql : "SELECT DISTINCT * FROM dci INNER JOIN (SELECT DISTINCT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON dane.nomdep LIKE dci.terrirorio WHERE dane.codmun = '' GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ",
+        sql: "SELECT DISTINCT * FROM dci INNER JOIN (SELECT DISTINCT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON dane.nomdep LIKE dci.terrirorio WHERE dane.codmun = '' GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ",
 
         markers: [],
 
@@ -36,16 +36,19 @@ define(function(require) {
         baseapc: {},
 
         initialize: function() {
-            this.geo = new google.maps.Geocoder();
-            this.bounds = new google.maps.LatLngBounds();
-            // this.infowindow = new google.maps.InfoWindow();
+            var self = this;
+            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
+                self.geo = new google.maps.Geocoder();
+                self.bounds = new google.maps.LatLngBounds();
+                self.infowindow = new google.maps.InfoWindow();
+            });
             this.baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
         },
 
         findAll: function() {
             var deferred = $.Deferred();
             var self = this;
-            
+
             this.baseapc.execute(self.sql, model, function(data) {
                 self.reset(data);
                 deferred.resolve();
@@ -115,52 +118,57 @@ define(function(require) {
             var self = this;
 
             $.each(this.models, function(k1, v1) {
-                self.createMarker(v1.get("RowKey"), v1.get("terrirorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));                
+                self.createMarker(v1.get("RowKey"), v1.get("terrirorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
             });
 
             if (typeof APC.views.mapCooperacion.markerCluster !== "undefined") {
-               APC.views.mapCooperacion.markerCluster.clearMarkers(); 
+                APC.views.mapCooperacion.markerCluster.clearMarkers();
             }
             require(['markerclustererCompiled'], function() {
                 APC.views.mapCooperacion.markerCluster = new MarkerClusterer(APC.views.mapCooperacion.map, self.markers, {
                     maxZoom: 11,
                     gridSize: 50
-                });                
+                });
             });
             APC.views.mapCooperacion.map.fitBounds(self.bounds);
         },
 
         createMarker: function(RowKey, add, lat, lng) {
             var self = this;
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: APC.views.mapCooperacion.map,
-                zIndex: Math.round(4.5 * -100000) << 5
-            });
 
-            this.markers.push(marker);
+            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
 
-            google.maps.event.addListener(marker, 'click', function() {
-
-                if (typeof APC.collections.coopByDepartamento === 'undefined')
-                    APC.collections.coopByDepartamento = new coopByDepto();
-
-                $.when(APC.collections.coopByDepartamento.findByDepartamento(add)).done(function() {
-                    var modal = new modalView({
-                        id: RowKey,
-                        title: add,
-                        collection: APC.collections.coopByDepartamento
-                    });
-                    setTimeout(function() {
-                        modal.render();
-                    }, 600);
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    map: APC.views.mapCooperacion.map,
+                    zIndex: Math.round(4.5 * -100000) << 5
                 });
 
-                // self.infowindow.setContent(add);
-                // self.infowindow.open(APC.views.mapCooperacion.map, marker);
-            });
+                self.markers.push(marker);
 
-            this.bounds.extend(marker.position);
+                google.maps.event.addListener(marker, 'click', function() {
+
+                    if (typeof APC.collections.coopByDepartamento === 'undefined')
+                        APC.collections.coopByDepartamento = new coopByDepto();
+
+                    $.when(APC.collections.coopByDepartamento.findByDepartamento(add)).done(function() {
+                        var modal = new modalView({
+                            id: RowKey,
+                            title: add,
+                            collection: APC.collections.coopByDepartamento
+                        });
+                        setTimeout(function() {
+                            modal.render();
+                        }, 600);
+                    });
+
+                    // self.infowindow.setContent(add);
+                    // self.infowindow.open(APC.views.mapCooperacion.map, marker);
+                });
+
+                self.bounds.extend(marker.position);
+
+            });
         }
 
     });

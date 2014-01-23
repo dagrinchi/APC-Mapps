@@ -128,18 +128,13 @@ define(function(require) {
                     onrendered: function(canvas) {                        
                         window.plugins.socialsharing.available(function(isAvailable) {
                             if (isAvailable) {                                
-                                window.plugins.socialsharing.share("APC-Mapps", "APC-Mapps", canvas.toDataURL(), "http://www.apccolombia.gov.co/",
-                                function(){
-                                    console.log("THE MUSIC IS THE ANSWER!!!!");
-                                },
-                                function(e){
-                                    console.log("WITHOUT MUSIC THE LIFE IS A MISTAKE!!!!" + e);
-                                });
+                                window.plugins.socialsharing.share("APC-Mapps", "APC-Mapps", canvas.toDataURL(), "http://www.apccolombia.gov.co/");
                             }
                         });
                     }
                 });
             });
+            return false;
         },
 
         btnDemActores: function() {            
@@ -197,7 +192,7 @@ define(function(require) {
                 title: "Áreas",
                 list: APC.views.demAreasListView.render().$el.html(),
                 table: "demanda",
-                cols: "otrossectoresrelacionados"
+                cols: "codigoenci"
             });
             APC.views.demAreasModalListView.render();
         },
@@ -253,13 +248,17 @@ define(function(require) {
             APC.views.mapDemanda.render();
             APC.views.mapCooperacion.render();
 
-            google.maps.event.addListener(APC.views.mapDemanda.map, 'dragend', function() {
-                APC.views.mapCooperacion.map.setCenter(APC.views.mapDemanda.map.getCenter());
-                APC.views.mapCooperacion.map.setZoom(APC.views.mapDemanda.map.getZoom());
-            });
-            google.maps.event.addListener(APC.views.mapCooperacion.map, 'dragend', function() {
-                APC.views.mapDemanda.map.setCenter(APC.views.mapCooperacion.map.getCenter());
-                APC.views.mapDemanda.map.setZoom(APC.views.mapCooperacion.map.getZoom());
+            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
+
+                google.maps.event.addListener(APC.views.mapDemanda.map, 'dragend', function() {
+                    APC.views.mapCooperacion.map.setCenter(APC.views.mapDemanda.map.getCenter());
+                    APC.views.mapCooperacion.map.setZoom(APC.views.mapDemanda.map.getZoom());
+                });
+                google.maps.event.addListener(APC.views.mapCooperacion.map, 'dragend', function() {
+                    APC.views.mapDemanda.map.setCenter(APC.views.mapCooperacion.map.getCenter());
+                    APC.views.mapDemanda.map.setZoom(APC.views.mapCooperacion.map.getZoom());
+                });
+
             });
             
             return this;
