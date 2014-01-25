@@ -85,7 +85,7 @@ h1, h2, h3 {
 }
 
 .map-canvas-c {
-    margin-top: 70px;
+    margin-top: 41px;
 }
 
 .overlay-a {
@@ -103,6 +103,17 @@ h1, h2, h3 {
 
 #demandCollapse {
     background-color: rgba(255, 85, 0, 0.2);
+}
+
+#sursurCollapse {
+    background-color: rgba(79, 79, 171, 0.2);
+}
+
+.overlay-c {
+    position: absolute;
+    left: 0;   
+    top: 0;
+    width: 100%;
 }
 
 .overlay-b {

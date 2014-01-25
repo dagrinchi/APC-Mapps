@@ -32,6 +32,12 @@ var APC = {
                 terrirorio: [],
                 areacooperacion: []
             }
+        },
+        sursur: {
+            cols: {
+                areacooperacion: [],
+                sectorliderpolitica: []
+            }
         }
     }
 };
@@ -66,7 +72,7 @@ require(['../../phonegap', 'fastclick', 'app/router'], function(phonegap, fclick
         fclick.attach(document.body);
         APC.router = new router();
         Backbone.history.start();
-    });   
+    });
 });
 // require(['fastclick', 'app/router'], function(fclick, router) {
 //     fclick.attach(document.body);

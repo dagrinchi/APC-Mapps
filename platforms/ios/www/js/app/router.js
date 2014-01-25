@@ -24,6 +24,7 @@ define(function(require) {
             "cooperacionsursur": "sursur",
             "proyectos": "proyectos",
             "proyectos/:RowKey": "detalleProyecto",
+            "sursur/:RowKey": "detalleSursur",
             "directorio": "directorio",
             "ejecutasproyectos": "ejecutas",
             "acercade": "acercade"
@@ -83,7 +84,7 @@ define(function(require) {
                         id: "map-canvas-c",
                         latitude: position.coords.latitude,
                         longitude: position.coords.longitude,
-                        height: wh - 70
+                        height: wh - 111
                     });
 
                     APC.views.introView = new IntroView();
@@ -197,11 +198,19 @@ define(function(require) {
 
         sursur: function() {
             if (this.checkConnection() && typeof google !== 'undefined') {
-                require(['app/views/sursur', 'app/collections/sursur'], function(sursurview, sursurCollection) {
+                require(['app/views/sursur', 'app/collections/surAreas', 'app/collections/surSectores', 'app/collections/sursur'], function(sursurview, SurAreasCollection, SurSectoresCollection, sursurCollection) {
                     $("#loadingBox").fadeIn(500, function() {
+                        
+                        if (typeof APC.collections.surAreasCollection === 'undefined')
+                            APC.collections.surAreasCollection = new SurAreasCollection();
+                        if (typeof APC.collections.surSectoresCollection === 'undefined')
+                            APC.collections.surSectoresCollection = new SurSectoresCollection();
                         if (typeof APC.collections.sursurCollection === 'undefined')
                             APC.collections.sursurCollection = new sursurCollection();
-                        $.when(APC.collections.sursurCollection.findAll()).done(function() {
+
+                        $.when(APC.collections.surAreasCollection.findAll(),
+                            APC.collections.surSectoresCollection.findAll(),
+                            APC.collections.sursurCollection.findAll()).done(function() {
                             APC.views.sursurview = new sursurview();
                             APC.views.sursurview.render();
                             APC.collections.sursurCollection.initMapMarkers();
@@ -214,6 +223,19 @@ define(function(require) {
                     Backbone.history.loadUrl("/");
                 }, 'Atención', 'Reintentar');
             }
+        },
+
+        detalleSursur: function(RowKey) {
+            var self = this;
+            require(['app/models/sursur', 'app/views/detalleSursur'], function(sursurModel, detalleSursurView) {
+                APC.models.sursur = new sursurModel();
+                APC.models.sursur.findByRowKey(RowKey, function(model) {
+                    APC.views.detalleSursurPage = new detalleSursurView({
+                        model: model
+                    });
+                    APC.views.detalleSursurPage.render();
+                });
+            });
         },
 
         proyectos: function() {
