@@ -8,24 +8,29 @@
     <div class="topcoat-navigation-bar__item center half" style="margin-top: 15px;">  
         <h1 id="text-head-proyectos" class="topcoat-navigation-bar__title">Proyectos</h1>
     </div>
+    <div class="topcoat-navigation-bar__item right quarter"> 
+            <a class="topcoat-icon-button--quiet question" href="#">
+                <img src="img/question.svg" width="27px" height="28px" />
+            </a>
+    </div>
   </div>
-     <span style="height: 5px; margin-top: -6px; display: block; background-color: #4C8429;" id="anonymous_element_6"></span>
 <div class="topcoat-navigation-bar" style="height: 3.5rem; padding-right: 54px;">
-      <input id="search-project" type="search" value="" placeholder="Buscar..." class="topcoat-search-input full" style="margin-top: 9px; padding-left: 30px;">
+      <input id="search-project" type="search" value="" placeholder="Buscar nombre del proyecto..." class="topcoat-search-input full" style="margin-top: 9px; padding-left: 30px;">
 </div>    
 </div>    
 <div id="containerBig">
  <div class="container">
-    
-    <div class="topcoat-list" id="projectList"></div>
+    <div class="topcoat-list" id="projectList" style="display: block;"></div>
+    <div class="topcoat-list" id="sursurList" style="display: none;"></div>
 </div>
 
 <div class="topcoat-tab-bar full" style="position: fixed; bottom: 0px;">
    <div class="topcoat-button-bar__item">
-     <button id="demandProyects" class="topcoat-button-bar__button full">Demanda</button>
+     <a href="#" id="demandProyects" class="topcoat-button-bar__button full" style="text-align: center;">Demanda</a>
    </div>
    <div class="topcoat-button-bar__item">
-     <button id="southProyects" class="topcoat-button-bar__button full">Sur-Sur</button>
+     <a href="#" id="southProyects" class="topcoat-button-bar__button full" style="text-align: center;">Sur-Sur</a>
    </div>
 </div>
 </div>     
+<div id="loadingBox" class="loading-box-wrapper"></div>

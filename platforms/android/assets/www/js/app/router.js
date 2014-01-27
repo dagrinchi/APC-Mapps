@@ -246,17 +246,17 @@ define(function(require) {
             var wh = $(window).height();
             var limit = 10;
 
-            require(['app/collections/proyectos', 'app/views/proyectos'], function(ProyectosCollection, ProyectosPageView) {
+            require(['app/collections/proyectos', 'app/collections/sursurProyectos', 'app/views/proyectos'], function(ProyectosCollection, SursurProyectosColl, ProyectosPageView) {
                 $("#loadingBox").fadeIn(500, function() {
 
                     if (typeof APC.collections.proCollection === 'undefined')
                         APC.collections.proCollection = new ProyectosCollection();
 
-                    APC.collections.proCollection.proOff = 0;
-                    $.when(APC.collections.proCollection.findAll()).done(function() {
-                        APC.views.ProyectosPageView = new ProyectosPageView({
-                            collection: APC.collections.proCollection
-                        });
+                    if (typeof APC.collections.sursurProCollection === 'undefined')
+                        APC.collections.sursurProCollection = new SursurProyectosColl();
+
+                    $.when(APC.collections.proCollection.findAll(), APC.collections.sursurProCollection.findAll()).done(function() {
+                        APC.views.ProyectosPageView = new ProyectosPageView();
                         APC.views.ProyectosPageView.render();
                     });
                 });

@@ -424,6 +424,6 @@ and (orientation : portrait) {
     cursor: default;
 }
 
-#projectList, #dirList {
+#projectList, #dirList, #sursurList {
     overflow: scroll !important;
 }

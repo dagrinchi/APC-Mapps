@@ -16,6 +16,7 @@ define(function(require) {
 		Backbone = require('backbone'),
 		_ = require('underscore'),
 		proyectoTpl = require('text!tpl/proyectosItem.html'),
+		sursurTpl = require('text!tpl/sursurItem.html'),
 		proyectosPageTpl = require('text!tpl/proyectosPage.html');
 
 	var ProyectoView = Backbone.View.extend({
@@ -36,10 +37,20 @@ define(function(require) {
 		className: 'topcoat-list__container',
 		
 		initialize: function() {			
+			this.collection.bind("add", this.addOne, this);
 			this.collection.bind("reset", this.render, this);
 		},
 
+		addOne: function(proyecto) {			
+			var proyectoView = new ProyectoView({
+				model: proyecto
+			});
+			this.$el.append(proyectoView.render().el);
+		},
+
 		render: function() {			
+			this.$el.empty();
+
 			var frag = document.createDocumentFragment();
 			this.collection.each(function(proyecto) {
 				var proyectoView = new ProyectoView({
@@ -51,54 +62,129 @@ define(function(require) {
 		}
 	});
 
+	var SursurView = Backbone.View.extend({
+		
+		tagName: 'li',
+		className: 'topcoat-list__item',
+		template: _.template(sursurTpl),
+		
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		}
+	});
+
+
+	var sursurListView = Backbone.View.extend({
+		
+		tagName: "ul",
+		className: 'topcoat-list__container',
+		
+		initialize: function() {			
+			this.collection.bind("add", this.addOne, this);
+			this.collection.bind("reset", this.render, this);
+		},
+
+		addOne: function(sursur) {
+			var sursurView = new SursurView({
+				model: sursur
+			});
+			this.$el.append(sursurView.render().el);
+		},
+
+		render: function() {			
+			this.$el.empty();
+
+			var frag = document.createDocumentFragment();
+			this.collection.each(function(sursur) {
+				var sursurView = new SursurView({
+					model: sursur
+				});
+				this.$el.append(frag.appendChild(sursurView.render().el));
+			}, this);
+			return this;
+		}
+	});
+
 	return Backbone.View.extend({
 
 		el: "body",
 		
 		events: {
-			"keyup #search-project": "search",
+			"keyup #search-project": "searchProyectos",
 			"click #demandProyects": "proyectosDemanda",
 			"click #southProyects": "proyectosSursur"
 		},
 		
-		search: function(event) {
+		searchProyectos: function(event) {
 			var key = $('#search-project').val();
 			if (key.length  > 4) {
-				this.collection.findByName(key);
+				APC.collections.proCollection.findByName(key);
+				APC.collections.sursurProCollection.findByName(key);
+				// $("#projectList").off("scroll");
+				// $("#sursurList").off("scroll");
 			}
 		},
 
 		proyectosDemanda: function() {
-			$('#search-project').val("");
-			this.collection.findAll();
+			$("#sursurList").hide();
+			$("#loadingBox").fadeIn(500, function() {
+				$("#projectList").show();
+				$("#loadingBox").hide();
+				$('#search-project').val("");
+				APC.collections.proCollection.findAll();
+			});
+			return false;
 		},
 
 		proyectosSursur: function() {
-			$('#search-project').val("");
-			this.collection.findAllSursur();
+			$("#projectList").hide();
+			$("#loadingBox").fadeIn(500, function() {				
+				$("#sursurList").show();
+				$("#loadingBox").hide();
+				$('#search-project').val("");
+				APC.collections.sursurProCollection.findAll();
+			});
+			return false;
 		},
 
-		scrollList: function(e) {
+		scrollProyectosList: function(e) {
 			var st = $(e.currentTarget).scrollTop() + $(e.currentTarget).height() + 200;
 			var sh = $(e.currentTarget).children().height();
 			if (st > sh) {
 				APC.collections.proCollection.proOff += 20;
-				APC.collections.proCollection.findAll();
+				APC.collections.proCollection.findNext();
+			}
+		},
+
+		scrollSursurList: function(e) {
+			var st = $(e.currentTarget).scrollTop() + $(e.currentTarget).height() + 200;
+			var sh = $(e.currentTarget).children().height();
+			if (st > sh) {
+				APC.collections.sursurProCollection.surOff += 20;
+				APC.collections.sursurProCollection.findNext();
 			}
 		},
 		
 		render: function() {
 			var self = this;
-			var list = new ProyectosView({
-				collection: self.collection
+			var listProyectos = new ProyectosView({
+				collection: APC.collections.proCollection
+			});
+
+			var listSursur = new sursurListView({
+				collection: APC.collections.sursurProCollection
 			});
 
 			this.$el.html(_.template(proyectosPageTpl));
 
 			$("#projectList").height($(window).height() - 167);
-			$("#projectList").html(list.render().el);
+			$("#projectList").html(listProyectos.render().el);
+			$("#projectList").on("scroll", this.scrollProyectosList);
 
-			$("#projectList").on("scroll", this.scrollList);
+			$("#sursurList").height($(window).height() - 167);
+			$("#sursurList").html(listSursur.render().el);
+			$("#sursurList").on("scroll", this.scrollSursurList);
 			return this;
 		}
 	});

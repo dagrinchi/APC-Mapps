@@ -13,8 +13,9 @@ define(function(require) {
     "use strict";
 
     var Backbone = require('backbone'),
-        DB = require('app/utils/db'),
-        model = require('app/models/proyectos');
+        DB = require('app/utils/db');
+
+    var model = Backbone.Model.extend({ });
 
     var $ = require('jquery'),
         deferred = $.Deferred();
@@ -24,9 +25,9 @@ define(function(require) {
 
         baseapc: {},
 
-        proOff: 0,
+        surOff: 0,
 
-        proLimit: 20,
+        surLimit: 20,
 
         initialize: function(options) {
             this.baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
@@ -34,7 +35,7 @@ define(function(require) {
 
         findByName: function(key) {            
             var self = this;
-            var sql = "SELECT DISTINCT RowKey, proyectoprograma FROM demanda WHERE proyectoprograma LIKE '%" + key + "%' GROUP BY codigoproyecto ORDER BY proyectoprograma";            
+            var sql = "SELECT DISTINCT RowKey, programaproyectoactividad proyectoprograma FROM sursur WHERE programaproyectoactividad LIKE '%" + key + "%' ORDER BY programaproyectoactividad";            
             this.baseapc.execute(sql, model, function(data) {
                 self.reset(data);               
             });
@@ -42,20 +43,16 @@ define(function(require) {
 
         findAll: function() {            
             var self = this;
-            this.proOff = 0;
-            var sql = "SELECT DISTINCT RowKey, proyectoprograma FROM demanda GROUP BY codigoproyecto ORDER BY proyectoprograma LIMIT 0, " + this.proLimit;
-        
+            this.surOff = 0;
+            var sql = "SELECT DISTINCT RowKey, programaproyectoactividad proyectoprograma FROM sursur GROUP BY programaproyectoactividad ORDER BY programaproyectoactividad LIMIT 0, " + this.surLimit;
             this.baseapc.execute(sql, model, function(data) {
-                self.reset(data);
-                deferred.resolve();
+                self.reset(data);                
             });
-
-            return deferred.promise();
         },
 
         findNext: function() {            
             var self = this;
-            var sql = "SELECT DISTINCT RowKey, proyectoprograma FROM demanda GROUP BY codigoproyecto ORDER BY proyectoprograma LIMIT " + this.proOff + ", " + this.proLimit;
+            var sql = "SELECT DISTINCT RowKey, programaproyectoactividad proyectoprograma FROM sursur GROUP BY programaproyectoactividad ORDER BY programaproyectoactividad LIMIT " + this.surOff + ", " + this.surLimit;
             this.baseapc.execute(sql, model, function(data) {
                 self.add(data);                
             });
