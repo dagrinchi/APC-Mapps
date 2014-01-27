@@ -1,0 +1,72 @@
+ <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Detalle Sur-sur</h3>
+  </div>
+  <div class="modal-body">    
+<div class="container">
+  <div id="descriptionText-detalles">   
+    <div id="blocksList-detalles">
+          <div>
+            <div id="titulo" style="background-color: #8c44ae; margin: 0;"><%= pais %></div>
+          </div>
+          <div id="panel-detalles">   
+              <table>
+                <thead>
+                <tr>
+                    <th id="col1">Tipo de cooperación</th>
+                    <th id="col2">#<%= tipocooperacon %></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Modalidad de cooperación</td>
+                        <td><%= modalidadcooperacion %></td>
+                    </tr>
+                    <tr>
+                        <td>Proyecto</td>
+                        <td><%= programaproyectoactividad %></td>
+                    </tr>
+                    <tr>
+                        <td>Fuente de cooperación</td>
+                        <td><%= fuentecooperacion %></td>
+                    </tr>
+                    <tr>
+                        <td> Oferta/Demanda </td>
+                        <td><%= ofertademanda %></td>
+                    </tr>
+                    <tr>
+                        <td>Área de cooperación</td>
+                        <td><%= areacooperacion %></td>
+                    </tr>
+                    <tr>
+                        <td>Ejecutor Nacional</td>
+                        <td><%= ejecutornacional %></td>
+                    </tr>
+                    <tr>
+                        <td>Ejecutor Internacional</td>
+                        <td><%= ejecutorinternacional %></td>
+                    </tr>
+                </tbody>
+            </table>       
+          </div>
+          <div id="container-botton-panel" style="background-color: #8c44ae;">
+            <div id="bottom-panel">
+                <table>
+                    <tbody>
+                        <tr>
+                        <td>Territorio de cooperación</td>
+                        </tr>
+                        <tr>
+                        <td><%= territorio %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>  
+          </div>                 
+        </div>         
+    </div>  
+</div>     
+  </div>
+  <div class="modal-footer">    
+    <button class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+  </div>

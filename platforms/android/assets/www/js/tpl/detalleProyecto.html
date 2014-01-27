@@ -1,0 +1,111 @@
+ <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Detalle proyecto</h3>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div id="descriptionText-detalles">   
+        <div id="blocksList-detalles">
+            <div id="panel-detalles">   
+                  <table class="detalleProyecto">
+                    <thead>
+                    <tr>
+                        <th id="col1">Código proyecto</th>
+                        <th id="col2">#<%= codigoproyecto %></%></th>
+                    </tr>
+                    <tr>
+                        <th id="col1a">Proyecto</th>
+                        <th id="col2a"><%= proyectoprograma %></%></th>
+                    </tr>    
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Objetivo</td>
+                        <td><%= objetivoproyectoprograma %></%></td>
+                    </tr>
+                    <tr>
+                        <td>Código Enci</td>
+                        <td>#<%= codigoenci %></%></td>
+                    </tr>   
+                    <tr>
+                        <td>Enci</td>
+                        <td><%= enci %></%></td>
+                    </tr>     
+                    <tr>
+                        <td>Tipo de actor</td>
+                        <td><%= tipoactor %></%></td>
+                    </tr>
+                    <tr>
+                        <td>Actor</td>
+                        <td><%= actor %></%></td>
+                    </tr>
+                    <tr>
+                        <td>Estado</td>
+                        <td><%= estadoproyecto %></%></td>
+                    </tr>
+                    <tr>
+                        <td>Ejecutor</td>
+                        <td><%= ejecutor %></%></td>
+                    </tr> 
+                    <tr>
+                        <td>Sector lider</td>
+                        <td><%= sectorliderpolitica %></td>
+                    </tr> 
+                    <tr>
+                        <td>Otros sectores</td>
+                        <td><%= otrossectoresrelacionados %></%></td>
+                    </tr> 
+                    <tr>
+                        <td>Moneda</td>
+                        <td><%= moneda %></%></td>
+                    </tr> 
+                    <tr>
+                        <td>Aporte nacional</td>
+                        <td><%= total_aporte_nacional %></%>&nbsp;<%= moneda %></%></td>
+                    </tr>    
+                    <tr>
+                        <td>Aporte internacional</td>
+                        <td><%= total_aporte_intercional %></%>&nbsp;<%= moneda %></%></td>
+                    </tr>         
+                    <tr>
+                        <td>Total aportes</td>
+                        <td><%= total_aportes %></%>&nbsp;<%= moneda %></%></td>
+                    </tr>
+                    <tr>
+                        <td>Código territorio</td>
+                        <td><%= codigoterritorios %></%></td>
+                    </tr>    
+                    <tr>
+                        <td>Territorio</td>
+                        <td><%= territorio %></%></td>
+                    </tr> 
+                    <tr>
+                        <td>Código municipio</td>
+                        <td><%= codigomunicipios %></%></td>
+                    </tr>    
+                    <tr>
+                        <td>Municipio</td>
+                        <td><%= municipio %></%></td>
+                    </tr> 
+                    <tr>
+                        <td>Población beneficiada</td>
+                        <td><%= poblacionbeneficiada %></td>
+                    </tr>     
+                    <tr>
+                        <td>Fecha inicio</td>
+                        <td><%= fechainicio %></%></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha finalización</td>
+                        <td><%= fechafinalizacion %></%></td>
+                    </tr>          
+                    </tbody>
+                </table>       
+              </div>
+            </div>         
+        </div>  
+    </div>      
+  </div>
+  <div class="modal-footer">    
+    <button class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+  </div>
