@@ -28,10 +28,12 @@ define(function(require) {
 
         btnRegistrate: function() {            
             var ref = window.open(encodeURI('http://www.apccolombia.gov.co/recursos_user/Documentos/Ficha-Presentacion-Proyectos-2013.doc'), '_system', 'location=yes');
+            return false;
         },
 
         btnInformate: function() {
-            var ref = window.open(encodeURI('http://www.apccolombia.gov.co/?idcategoria=40#&panel1-1'), '_system', 'location=yes');
+            var ref = window.open(encodeURI('http://www.apccolombia.gov.co/?idcategoria=40#&panel1-1'), '_blank', 'location=yes');
+            return false;
         },
 
         chkSwitch: function(e) {
@@ -59,6 +61,7 @@ define(function(require) {
 
         render: function() {
             this.$el.html(this.template);
+            $(".container").height($(window).height() - 117);
             return this;
         }
     });

@@ -9,7 +9,18 @@
             <div id="panel-detalles">   
                   <table class="detalleProyecto">
                     <thead>
-                             
+                      <tr>
+                        <th id="col1">TERRITORIO</th>
+                        <th id="col2"><%= terrirorio %></th>
+                      </tr>
+                    </thead>  
+                    <tbody>    
+                      <tr><td>Punto Focal </td><td><%=puntofocal%></td></tr>
+                      <tr><td>Dirección Punto Focal </td><td><%=direccionpuntofocal%></td> 
+                      <tr><td>Miembros del Comite</td><td> <%=miembrocomite%></td><tr>
+                        <th id="col1">AREA </th>
+                        <th id="col2"><%=areacooperacion%></th></tr>  
+                        <tr><td>COMPONENTES </td><td><%=componentecooperacion%></td></tr>
                     </tbody>
                 </table>       
               </div>
@@ -18,5 +29,6 @@
     </div>      
   </div>
   <div class="modal-footer">    
-    <button class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+    <button class="btn" data-dismiss="modal">Cerrar</button>
+    <a href="#" class="btn btn-primary" data-dismiss="modal"><i class="icon-share icon-white"></i> Compartir</a>
   </div>

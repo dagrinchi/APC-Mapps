@@ -28,6 +28,14 @@ define(function(require) {
             "click .share": "btnShare"
         },
 
+        initialize: function() {
+            var self = this;
+            this.$el.on('hidden', function () {
+                console.log("Bye modal");
+                self.$el.remove();
+            });
+        },
+
         btnShare: function() {
             var self = this;
             require(['html2canvas'], function() {
@@ -51,11 +59,6 @@ define(function(require) {
             this.$el.html(this.template(this.model.toJSON()));
             this.$el.modal('show');
             this.$el.children(".modal-body").height($(window).height() - 200);
-
-            this.$el.on('hidden', function () {                
-                //Backbone.history.history.back();
-                self.$el.remove();
-            });
             return this;
         }
     });

@@ -18,6 +18,9 @@
         line-height: 14px !important;
         height: 45px !important;
     }
+    #logos {
+        margin-left: 0%;
+    }
 }
 @media (min-width:481px) { 
     /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
@@ -35,6 +38,9 @@
         font-size: 1.5rem !important;
         line-height: 18px !important;
         height: 45px !important;
+    }
+    #logos {
+        margin-left: 2.5%;
     }
 }
 @media (min-width:641px) { 
@@ -54,7 +60,14 @@
         line-height: 20px !important;
         height: 45px !important;
     }
-
+    #logos {
+        margin-left: 7%;
+    }
+}
+@media (min-width:841px) { 
+    #logos {
+        margin-left: 20%;
+    }
 }
 @media (min-width:961px) { 
     /* tablet, landscape iPad, lo-res laptops ands desktops */ 
@@ -72,6 +85,9 @@
         font-size: 1.7rem !important;
         line-height: 20px !important;
         height: 45px !important;
+    }
+    #logos {
+        margin-left: 23%;
     }
 }
 @media (min-width:1025px) { 
@@ -91,6 +107,9 @@
         font-size: 1.8rem !important;
         line-height: 20px !important;
         height: 45px !important;
+    }
+    #logos {
+        margin-left: 24%;
     }
 }
 
@@ -112,27 +131,33 @@
         line-height: 20px !important;
         height: 45px !important;
     }
+    #logos {
+        margin-left: 31%;
+    }
 }
 /*===========end media queries========================*/
 
-#demandProyects {
+#demandProyects, #btnSurAreas {
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
     font-weight: 100;
     text-rendering: optimizelegibility;
     font-size: 1.1rem;
     color: #fff;
     text-shadow: none;
-    border: none;
+    border: none;    
+    background-color: #f5a932;
+    box-shadow: none;
+    text-align: center;
+}
+#demandProyects {
     background-image: url(../img/colombia.svg);
     background-size: 32px;
     background-position: 4px center;
     background-repeat: no-repeat;
-    background-color: #f5a932;
-    box-shadow: none;
     cursor: pointer;
 }
 
-#southProyects {
+#southProyects, #btnSurSectores {
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
     font-weight: 100;
     text-rendering: optimizelegibility;
@@ -140,13 +165,16 @@
     color: #fff;
     text-shadow: none;
     border: none;
+    box-shadow: none;
+    background-color: #8c44ae;
+    cursor: pointer;
+    text-align: center;
+}
+#southProyects {
     background-image: url(../img/south.svg);
     background-size: 32px;
     background-position: 4px center;
-    background-repeat: no-repeat;
-    background-color: #8c44ae;
-    box-shadow: none;
-    cursor: pointer;
+    background-repeat: no-repeat;    
 }
 
 #descriptionText {
@@ -190,10 +218,10 @@
     border-radius: 6px;
 }
 
-#containerLogo {
+.containerLogo {
     background-color: #ffffff;
     box-shadow: none;
-    padding: 1rem 1rem 0rem 1rem;
+    padding: 0rem 1rem 0rem 1rem;
     overflow: hidden;
     position: relative;
 }
@@ -205,16 +233,6 @@
     overflow: hidden;
     position: relative;
 }
-
-
-#logoApc {
-    width: 100%;
-}
-#logogov {
-    width: 100%;
-}
-
-
 
 #introContainer{
     padding: 30px 30px 30px 30px;
@@ -415,7 +433,7 @@
 
 #titulo {
     margin: 6.5px 0;
-    font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+    /*font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;*/
     font-weight: 100;
     line-height: 25px;
     color: inherit;
@@ -425,7 +443,7 @@
     font-size: 1.3rem;
     padding: 5px;
     border-radius: 0px 0px 0px 0px;
-    height: 2.8rem;
+    /*height: 2.8rem;*/
 }
 
 #detalles-contenedor {
@@ -536,3 +554,31 @@
     font-size: larger;
 }
 
+#tuto1 {
+    background-image: url(../img/tutorial/Prioridadesdelpais.jpg);
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#tuto2 {
+    background-image: url(../img/tutorial/CooperacionSur-Sur.jpg);
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#tuto3 {
+    background-image: url(../img/tutorial/AyudaProyectos.jpg);
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#tuto4 {
+    background-image: url(../img/tutorial/AyudaDirectorio.jpg);
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

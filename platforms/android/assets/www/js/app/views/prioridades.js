@@ -51,49 +51,81 @@ define(function(require) {
             this.template = _.template(modalTpl, {
                 title: self.options.title,
                 list: self.options.list
-            });            
+            });
+            this.$el.on('hidden', function() {
+                console.log("Bye modal");
+                self.$el.remove();
+            });
         },
 
         events: {
             "click .items": "chkItem",
-            "click .ok": "btnOK"
+            "click #ok": "btnOK"
         },
 
         btnOK: function() {
-            if (this.options.table === "demanda")
-                $.when(APC.collections.demCollection.findBySelection()).done(function() {
-                    APC.selection.demanda = {
-                        cols: {
-                            actor: [],
-                            territorio: [],
-                            municipio: [],
-                            otrossectoresrelacionados: [],
-                            sectorliderpolitica: []
-                        }
-                    };
-                });
+            console.log("btnOK: Click boton OK despues de la selección.");
 
-            if (this.options.table === "dci")
-                $.when(APC.collections.coopCollection.findBySelection()).done(function() {
-                    APC.selection.dci = {
-                        cols: {
-                            terrirorio: [],
-                            areacooperacion: []
-                        }
-                    };
-                });
+            if (this.options.table === "demanda") {
+                switch (this.options.cols) {
+                    case "codigoenci":
+                        APC.collections.demCollection.findBySelection();
+                        APC.collections.coopCollection.findBySelection();
+                        break;
+                    case "territorio":
+                        APC.collections.demCollection.findBySelection();
+                        APC.collections.coopCollection.findBySelection();
+                        break;
+                    default:                        
+                        APC.collections.demCollection.findBySelection();
+                        break;
+                }
+            } else if (this.options.table === "dci") {
+                switch (this.options.cols) {
+                    case "codigoarea":
+                        APC.collections.demCollection.findBySelection();
+                        APC.collections.coopCollection.findBySelection();
+                        break;
+                    case "terrirorio":
+                        APC.collections.demCollection.findBySelection();
+                        APC.collections.coopCollection.findBySelection();
+                        break;
+                    default:
+                        APC.collections.coopCollection.findBySelection();
+                        break;
+                }
+            }
+
         },
 
         chkItem: function(e) {
             var self = this;
             if (e.currentTarget.checked) {
                 APC.selection[self.options.table]["cols"][self.options.cols].push(e.currentTarget.value);
+                if (self.options.table === "demanda" && self.options.cols === "codigoenci") {                    
+                    APC.selection["dci"]["cols"]["codigoarea"].push(e.currentTarget.value);
+                } else if (self.options.table === "demanda" && self.options.cols === "territorio") {                    
+                    APC.selection["dci"]["cols"]["terrirorio"].push(e.currentTarget.value);
+                } else if (self.options.table === "dci" && self.options.cols === "codigoarea") {                    
+                    APC.selection["demanda"]["cols"]["codigoenci"].push(e.currentTarget.value);
+                } else if (self.options.table === "dci" && self.options.cols === "terrirorio") {                    
+                    APC.selection["demanda"]["cols"]["territorio"].push(e.currentTarget.value);
+                }
             } else {
                 APC.selection[self.options.table]["cols"][self.options.cols].splice(APC.selection[self.options.table]["cols"][self.options.cols].indexOf(e.currentTarget.value), 1);
+                if (self.options.table === "demanda" && self.options.cols === "codigoenci") {                    
+                    APC.selection["dci"]["cols"]["codigoarea"].splice(APC.selection["dci"]["cols"]["codigoarea"].indexOf(e.currentTarget.value), 1);
+                } else if (self.options.table === "demanda" && self.options.cols === "territorio") {                    
+                    APC.selection["dci"]["cols"]["terrirorio"].splice(APC.selection["dci"]["cols"]["terrirorio"].indexOf(e.currentTarget.value), 1);
+                } else if (self.options.table === "dci" && self.options.cols === "codigoarea") {                    
+                    APC.selection["demanda"]["cols"]["codigoenci"].splice(APC.selection["demanda"]["cols"]["codigoenci"].indexOf(e.currentTarget.value), 1);
+                } else if (self.options.table === "dci" && self.options.cols === "terrirorio") {                    
+                    APC.selection["demanda"]["cols"]["territorio"].splice(APC.selection["demanda"]["cols"]["territorio"].indexOf(e.currentTarget.value), 1);
+                }
             }
         },
 
-        render: function() {            
+        render: function() {
             this.$el.html(this.template);
             this.$el.modal('show');
             this.$el.children(".modal-body").height($(window).height() - 200);
@@ -107,7 +139,7 @@ define(function(require) {
         template: _.template(tpl),
 
         initialize: function() {
-            
+
         },
 
         events: {
@@ -121,13 +153,35 @@ define(function(require) {
             "click .share": "btnShare"
         },
 
+        clearSelection: function() {
+            APC.selection.demanda = {
+                cols: {
+                    'actor': [],
+                    'territorio': [],
+                    'municipio': [],
+                    'codigoenci': [],
+                    'sectorliderpolitica': [],
+                    'lat': [],
+                    'long': []
+                }
+            };
+            APC.selection.dci = {
+                cols: {
+                    'terrirorio': [],
+                    'codigoarea': [],
+                    'lat': [],
+                    'long': []
+                }
+            };
+        },
+
         btnShare: function() {
             require(['html2canvas'], function() {
                 html2canvas(document.getElementsByTagName("body"), {
                     useCORS: true,
-                    onrendered: function(canvas) {                        
+                    onrendered: function(canvas) {
                         window.plugins.socialsharing.available(function(isAvailable) {
-                            if (isAvailable) {                                
+                            if (isAvailable) {
                                 window.plugins.socialsharing.share("APC-Mapps", "APC-Mapps", canvas.toDataURL(), "http://www.apccolombia.gov.co/");
                             }
                         });
@@ -137,122 +191,123 @@ define(function(require) {
             return false;
         },
 
-        btnDemActores: function() {            
+        btnDemActores: function() {
+            console.log("btnDemActores: Click en btnDemActores");
+            this.clearSelection();
             APC.views.demActoresListView = new listEl({
                 collection: APC.collections.demActoresCollection
             });
 
-            if (typeof APC.views.demActoresModal === "undefined") {
-                APC.views.demActoresModal = new modalList({ 
-                    id: "demActoresModal",
-                    title: "Cooperantes",
-                    list: APC.views.demActoresListView.render().$el.html(),
-                    table: "demanda",
-                    cols: "actor"
-                });
-            }
+            //if (typeof APC.views.demActoresModal === "undefined") {
+            APC.views.demActoresModal = new modalList({
+                id: "demActoresModal",
+                title: "Cooperantes",
+                list: APC.views.demActoresListView.render().$el.html(),
+                table: "demanda",
+                cols: "actor"
+            });
             APC.views.demActoresModal.render();
         },
 
-        btnDemTerritorios: function() {            
+        btnDemTerritorios: function() {
+            this.clearSelection();
             APC.views.demTerritoriosListView = new listEl({
                 collection: APC.collections.demTerritoriosCollection
             });
 
-            if (typeof APC.views.demTerritoriosModal === "undefined") {
-                APC.views.demTerritoriosModal = new modalList({
-                    id: "demTerritoriosModal",
-                    title: "Territorios",
-                    list: APC.views.demTerritoriosListView.render().$el.html(),
-                    table: "demanda",
-                    cols: "territorio"
-                });
-            }
+            //if (typeof APC.views.demTerritoriosModal === "undefined") {
+            APC.views.demTerritoriosModal = new modalList({
+                id: "demTerritoriosModal",
+                title: "Territorios",
+                list: APC.views.demTerritoriosListView.render().$el.html(),
+                table: "demanda",
+                cols: "territorio"
+            });
             APC.views.demTerritoriosModal.render();
         },
 
-        btnDemMunicipios: function() {            
+        btnDemMunicipios: function() {
+            this.clearSelection();
             APC.views.demMunicipiosListView = new listEl({
                 collection: APC.collections.demMunicipiosCollection
             });
 
-            if (typeof APC.views.demMunicipiosModalListView === "undefined") {
-                APC.views.demMunicipiosModalListView = new modalList({
-                    id: "demMunicipiosModal",
-                    title: "Municipios",
-                    list: APC.views.demMunicipiosListView.render().$el.html(),
-                    table: "demanda",
-                    cols: "municipio"
-                });
-            }
+            //if (typeof APC.views.demMunicipiosModalListView === "undefined") {
+            APC.views.demMunicipiosModalListView = new modalList({
+                id: "demMunicipiosModal",
+                title: "Municipios",
+                list: APC.views.demMunicipiosListView.render().$el.html(),
+                table: "demanda",
+                cols: "municipio"
+            });
             APC.views.demMunicipiosModalListView.render();
         },
 
-        btnDemAreas: function() {            
+        btnDemAreas: function() {
+            this.clearSelection();
             APC.views.demAreasListView = new listEl({
                 collection: APC.collections.demAreasCollection
             });
 
-            if (typeof APC.views.demAreasModalListView === "undefined") {
-                APC.views.demAreasModalListView = new modalList({
-                    id: "demAreasModal",
-                    title: "Áreas",
-                    list: APC.views.demAreasListView.render().$el.html(),
-                    table: "demanda",
-                    cols: "codigoenci"
-                });
-            }   
+            //if (typeof APC.views.demAreasModalListView === "undefined") {
+            APC.views.demAreasModalListView = new modalList({
+                id: "demAreasModal",
+                title: "Áreas",
+                list: APC.views.demAreasListView.render().$el.html(),
+                table: "demanda",
+                cols: "codigoenci"
+            });
             APC.views.demAreasModalListView.render();
         },
 
-        btnDemSectores: function() {            
+        btnDemSectores: function() {
+            this.clearSelection();
             APC.views.demSectoresListView = new listEl({
                 collection: APC.collections.demSectoresCollection
             });
 
-            if (typeof APC.views.demSectoresModalListView === "undefined") {
-                APC.views.demSectoresModalListView = new modalList({
-                    id: "demSectoresModal",
-                    title: "Sectores",
-                    list: APC.views.demSectoresListView.render().$el.html(),
-                    table: "demanda",
-                    cols: "sectorliderpolitica"
-                });
-            }
+            //if (typeof APC.views.demSectoresModalListView === "undefined") {
+            APC.views.demSectoresModalListView = new modalList({
+                id: "demSectoresModal",
+                title: "Sectores",
+                list: APC.views.demSectoresListView.render().$el.html(),
+                table: "demanda",
+                cols: "sectorliderpolitica"
+            });
             APC.views.demSectoresModalListView.render();
         },
 
-        btnProTerritorios: function() {            
+        btnProTerritorios: function() {
+            this.clearSelection();
             APC.views.proTerritoriosListView = new listEl({
                 collection: APC.collections.proTerritoriosCollection
             });
 
-            if (typeof APC.views.proTerritoriosModalListView === "undefined") {
-                APC.views.proTerritoriosModalListView = new modalList({
-                    id: "proTerritoriosModal",
-                    title: "Territorios",
-                    list: APC.views.proTerritoriosListView.render().$el.html(),
-                    table: "dci",
-                    cols: "terrirorio"
-                });
-            }
+            //if (typeof APC.views.proTerritoriosModalListView === "undefined") {
+            APC.views.proTerritoriosModalListView = new modalList({
+                id: "proTerritoriosModal",
+                title: "Territorios",
+                list: APC.views.proTerritoriosListView.render().$el.html(),
+                table: "dci",
+                cols: "terrirorio"
+            });
             APC.views.proTerritoriosModalListView.render();
         },
 
-        btnProAreas: function() {            
+        btnProAreas: function() {
+            this.clearSelection();
             APC.views.proAreasListView = new listEl({
                 collection: APC.collections.proAreasCollection
             });
 
-            if (typeof APC.views.proAreasModalListView === "undefined") {
-                APC.views.proAreasModalListView = new modalList({
-                    id: "proAreasModal",
-                    title: "Áreas",
-                    list: APC.views.proAreasListView.render().$el.html(),
-                    table: "dci",
-                    cols: "areacooperacion"
-                });
-            }
+            //if (typeof APC.views.proAreasModalListView === "undefined") {
+            APC.views.proAreasModalListView = new modalList({
+                id: "proAreasModal",
+                title: "Áreas",
+                list: APC.views.proAreasListView.render().$el.html(),
+                table: "dci",
+                cols: "codigoarea"
+            });
             APC.views.proAreasModalListView.render();
         },
 
@@ -264,18 +319,44 @@ define(function(require) {
 
             require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
 
-                google.maps.event.addListener(APC.views.mapDemanda.map, 'dragend', function() {
-                    APC.views.mapCooperacion.map.setCenter(APC.views.mapDemanda.map.getCenter());
-                    APC.views.mapCooperacion.map.setZoom(APC.views.mapDemanda.map.getZoom());
+                var mapDemanda = APC.views.mapDemanda.map;
+                var mapCooperacion = APC.views.mapCooperacion.map;
+
+                //ZOOM
+                google.maps.event.addListener(mapDemanda, 'zoom_changed', function() {
+                    mapCooperacion.setZoom(mapDemanda.getZoom());
                 });
-                google.maps.event.addListener(APC.views.mapCooperacion.map, 'dragend', function() {
-                    APC.views.mapDemanda.map.setCenter(APC.views.mapCooperacion.map.getCenter());
-                    APC.views.mapDemanda.map.setZoom(APC.views.mapCooperacion.map.getZoom());
+
+                google.maps.event.addListener(mapDemanda, 'drag', function() {
+                    google.maps.event.clearListeners(mapCooperacion, 'center_changed');
+                    // google.maps.event.clearListeners(mapCooperacion, 'zoom_changed');
+
+                    //CENTER
+                    google.maps.event.addListener(mapDemanda, 'center_changed', function() {
+                        mapCooperacion.setCenter(mapDemanda.getCenter());
+                    });
+
+                    //ZOOM
+                    // google.maps.event.addListener(mapDemanda, 'zoom_changed', function() {
+                    //     mapCooperacion.setZoom(mapDemanda.getZoom());    
+                    // });                    
+                });
+                google.maps.event.addListener(mapCooperacion, 'drag', function() {
+                    google.maps.event.clearListeners(mapDemanda, 'center_changed');
+                    // google.maps.event.clearListeners(mapDemanda, 'zoom_changed');
+
+                    //CENTER
+                    google.maps.event.addListener(mapCooperacion, 'center_changed', function() {
+                        mapDemanda.setCenter(mapCooperacion.getCenter());
+                    });
+
+                    //ZOOM
+                    // google.maps.event.addListener(mapCooperacion, 'zoom_changed', function() {
+                    //     mapDemanda.setZoom(mapCooperacion.getZoom());    
+                    // });                    
                 });
 
             });
-            
-            return this;
         }
     });
 

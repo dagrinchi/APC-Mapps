@@ -28,7 +28,8 @@ define(function(require) {
             "dci/:RowKey": "detalleDci",
             "directorio": "directorio",
             "ejecutasproyectos": "ejecutas",
-            "acercade": "acercade"
+            "acercade": "acercade",
+            "ayuda/:seccion" : "ayuda"
         },
 
         checkConnection: function() {
@@ -54,7 +55,7 @@ define(function(require) {
                     longitude: -74.075833300
                 }
             };
-            
+
             var wh = $(window).height();
 
             navigator.geolocation.getCurrentPosition(function(gp) {
@@ -62,7 +63,7 @@ define(function(require) {
             }, function(error) {
                 console.error('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
             });
-            
+
             if (this.checkConnection()) {
 
                 require(['app/utils/init', 'app/views/intro', 'app/views/map'], function(Initdb, IntroView, MapView) {
@@ -106,7 +107,7 @@ define(function(require) {
                     }, function(r) {
                         APC.views.introView.progressBar(r.count, r.msg);
                     });
-                    
+
                 });
             } else {
                 navigator.notification.alert('No hay una conexión a internet!', function() {
@@ -185,6 +186,8 @@ define(function(require) {
 
                             if (typeof APC.views.prioridadesPageView === 'undefined')
                                 APC.views.prioridadesPageView = new PrioridadesPageView();
+
+                            APC.views.prioridadesPageView.clearSelection();
                             APC.views.prioridadesPageView.render();
                         });
                     });
@@ -201,7 +204,7 @@ define(function(require) {
             if (this.checkConnection() && typeof google !== 'undefined') {
                 require(['app/views/sursur', 'app/collections/surAreas', 'app/collections/surSectores', 'app/collections/sursur'], function(sursurview, SurAreasCollection, SurSectoresCollection, sursurCollection) {
                     $("#loadingBox").fadeIn(500, function() {
-                        
+
                         if (typeof APC.collections.surAreasCollection === 'undefined')
                             APC.collections.surAreasCollection = new SurAreasCollection();
                         if (typeof APC.collections.surSectoresCollection === 'undefined')
@@ -212,9 +215,14 @@ define(function(require) {
                         $.when(APC.collections.surAreasCollection.findAll(),
                             APC.collections.surSectoresCollection.findAll(),
                             APC.collections.sursurCollection.findAll()).done(function() {
-                            APC.views.sursurview = new sursurview();
-                            APC.views.sursurview.render();
+
+                            if (typeof APC.views.sursurview === 'undefined')
+                                APC.views.sursurview = new sursurview();
+
+                            APC.views.sursurview.clearSelection();
+                            APC.collections.sursurCollection.clearMarkers();
                             APC.collections.sursurCollection.initMapMarkers();
+                            APC.views.sursurview.render();
                         });
                     });
                 });
@@ -332,6 +340,20 @@ define(function(require) {
                     Backbone.history.loadUrl("/");
                 }, 'Atención', 'Reintentar');
             }
+        },
+
+        ayuda: function(seccion) {
+            require(['app/views/modalHelp', 'text!tpl/' + seccion + '.html'], function(modalHelp, tpl) {
+                if (typeof APC.views[seccion] === "undefined")
+                    APC.views[seccion] = new modalHelp({
+                        id: seccion,
+                        title: "Ayuda",
+                        content: tpl
+                    });
+                APC.views[seccion].render();
+            });
+
+            return false;
         }
 
     });

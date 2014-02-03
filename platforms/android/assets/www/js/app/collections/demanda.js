@@ -62,7 +62,7 @@ define(function(require) {
             return deferred.promise();
         },
 
-        findBySelection: function() {
+        findBySelection: function() {            
             var deferred = $.Deferred();
             var self = this;
 
@@ -78,47 +78,42 @@ define(function(require) {
         },
 
         buildSQL: function() {
-            var selection = [];
-            var sql = this.sqlInit;
-
-            $.each(APC.selection, function(k1, v1) {
-                var item = [];
-                $.each(v1["cols"], function(k2, v2) {
-                    $.each(v2, function(k3, v3) {
-                        var val = {};
-                        val[k2] = v3;
-                        item.push(val);
-                    });
-                });
-                if (item[0]) {
-                    selection.push(item);
+            var selection = {
+                cols: [],
+                vals: []
+            };
+            $.each(APC.selection.demanda.cols, function(k1, v1) {
+                if (v1.length > 0) {
+                    selection.cols.push(k1);
+                    selection.vals.push(v1);
                 }
             });
+            var sql = this.sqlInit;
 
-            $.each(selection, function(k1, v1) {
-                sql += " WHERE (";
+            $.each(selection.vals, function(k1, v1) {                
+                if (k1 === 0) {
+                    sql += "WHERE (";
+                } else {
+                    sql += " AND (";
+                }
                 $.each(v1, function(k2, v2) {
                     if (k2 > 0) {
                         sql += " OR ";
                     }
-                    $.each(v2, function(k3, v3) {
-                        sql += k3 + " = " + "'" + v3 + "'";
-                    });
+                    sql += selection.cols[k1] + " LIKE " + "'" + v2 + "'";
                 });
                 sql += ")";
             });
-
-            sql += this.sqlEnd;
-            console.log(sql);
             return sql;
         },
 
         initMapMarkersWithDb: function() {
+            console.log("initMapMarkersWithDb: Creando markers con DB.");
             this.markers = [];
             var self = this;
 
             $.each(this.models, function(k1, v1) {
-                if (v1.get("long") > 0 || v1.get("lat") > 0)                    
+                if (v1.get("long") > 0 || v1.get("lat") > 0)
                     self.createMarker(v1.get("RowKey"), v1.get("territorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
             });
 
@@ -180,9 +175,9 @@ define(function(require) {
 
         createMarker: function(RowKey, add, lat, lng) {
             var self = this;
-            
+
             require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
-                
+
                 var marker = new google.maps.Marker({
                     position: new google.maps.LatLng(lat, lng),
                     map: APC.views.mapDemanda.map,
@@ -196,7 +191,16 @@ define(function(require) {
                     if (typeof APC.collections.demByMunicipios === 'undefined')
                         APC.collections.demByMunicipios = new demandaByMunicipios();
 
-                    $.when(APC.collections.demByMunicipios.findByMunicipio(add)).done(function() {
+                    APC.selection.demanda.cols['lat'] = [];
+                    APC.selection.demanda.cols['lat'].push(lat);
+
+                    APC.selection.demanda.cols['long'] = [];
+                    APC.selection.demanda.cols['long'].push(lng);
+
+                    APC.selection.demanda.cols['territorio'] = [];
+                    APC.selection.demanda.cols['territorio'].push(add);
+
+                    $.when(APC.collections.demByMunicipios.findByMunicipio()).done(function() {
                         var modal = new modalView({
                             id: RowKey,
                             title: add,

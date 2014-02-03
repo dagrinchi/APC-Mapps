@@ -22,16 +22,47 @@ define(function(require) {
 
     return Backbone.Collection.extend({
 
+        sql: "SELECT DISTINCT * FROM dci INNER JOIN (SELECT DISTINCT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON dane.nomdep LIKE dci.terrirorio WHERE dane.codmun = '' GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ",
+
         baseapc : {},
 
         initialize: function() {
             this.baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
         },
 
-        findByDepartamento: function(dep) {            
+        buildSQL: function() {
+            var selection = {
+                cols: [],
+                vals: []
+            };
+            $.each(APC.selection.dci.cols, function(k1, v1) {
+                if (v1.length > 0) {
+                    selection.cols.push(k1);
+                    selection.vals.push(v1);
+                }
+            });
+            var sql = this.sql;
+
+            $.each(selection.vals, function(k1, v1) {                
+                if (k1 === 0) {
+                    sql += "WHERE (";
+                } else {
+                    sql += " AND (";
+                }
+                $.each(v1, function(k2, v2) {
+                    if (k2 > 0) {
+                        sql += " OR ";
+                    }
+                    sql += selection.cols[k1] + " = " + "'" + v2 + "'";
+                });
+                sql += ")";
+            });
+            return sql;
+        },
+
+        findByDepartamento: function() {            
             var self = this;
-            var sql = "SELECT DISTINCT Rowkey, areacooperacion, componentecooperacion, puntofocal FROM dci WHERE terrirorio = '" + dep + "'";            
-            this.baseapc.execute(sql, model, function(data) {
+            this.baseapc.execute(self.buildSQL(), model, function(data) {
                 self.reset(data);
                 deferred.resolve();
             });

@@ -11,7 +11,7 @@
                     <thead>
                     <tr>
                         <th id="col1">Código proyecto</th>
-                        <th id="col2">#<%= codigoproyecto %></%></th>
+                        <th id="col2"><%= codigoproyecto %></%></th>
                     </tr>
                     <tr>
                         <th id="col1a">Proyecto</th>
@@ -70,18 +70,10 @@
                     <tr>
                         <td>Total aportes</td>
                         <td><%= total_aportes %></%>&nbsp;<%= moneda %></%></td>
-                    </tr>
-                    <tr>
-                        <td>Código territorio</td>
-                        <td><%= codigoterritorios %></%></td>
                     </tr>    
                     <tr>
                         <td>Territorio</td>
                         <td><%= territorio %></%></td>
-                    </tr> 
-                    <tr>
-                        <td>Código municipio</td>
-                        <td><%= codigomunicipios %></%></td>
                     </tr>    
                     <tr>
                         <td>Municipio</td>
@@ -107,5 +99,6 @@
     </div>      
   </div>
   <div class="modal-footer">    
-    <button class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+    <button class="btn" data-dismiss="modal">Cerrar</button>
+    <a href="#" class="btn btn-primary share" data-dismiss="modal"><i class="icon-share icon-white"></i> Compartir</a>
   </div>

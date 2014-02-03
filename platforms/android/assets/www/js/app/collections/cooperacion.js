@@ -75,26 +75,21 @@ define(function(require) {
         },
 
         buildSQL: function() {
-            var selection = [];
-            var sql = this.sql;
-
-            $.each(APC.selection, function(k1, v1) {
-                var item = [];
-                $.each(v1["cols"], function(k2, v2) {
-                    $.each(v2, function(k3, v3) {
-                        var val = {};
-                        val[k2] = v3;
-                        item.push(val);
-                    });
-                });
-                if (item[0]) {
-                    selection.push(item);
+            var selection = {
+                cols: [],
+                vals: []
+            };
+            $.each(APC.selection.dci.cols, function(k1, v1) {
+                if (v1.length > 0) {
+                    selection.cols.push(k1);
+                    selection.vals.push(v1);
                 }
             });
+            var sql = this.sql;
 
-            $.each(selection, function(k1, v1) {
+            $.each(selection.vals, function(k1, v1) {                
                 if (k1 === 0) {
-                    sql += "WHERE ";
+                    sql += "WHERE (";
                 } else {
                     sql += " AND (";
                 }
@@ -102,13 +97,9 @@ define(function(require) {
                     if (k2 > 0) {
                         sql += " OR ";
                     }
-                    $.each(v2, function(k3, v3) {
-                        sql += k3 + " = " + "'" + v3 + "'";
-                    });
+                    sql += selection.cols[k1] + " LIKE " + "'" + v2 + "'";
                 });
-                if (k1 !== 0) {
-                    sql += ")";
-                }
+                sql += ")";
             });
             return sql;
         },
@@ -151,7 +142,16 @@ define(function(require) {
                     if (typeof APC.collections.coopByDepartamento === 'undefined')
                         APC.collections.coopByDepartamento = new coopByDepto();
 
-                    $.when(APC.collections.coopByDepartamento.findByDepartamento(add)).done(function() {
+                    APC.selection.dci.cols['lat'] = [];
+                    APC.selection.dci.cols['lat'].push(lat);
+
+                    APC.selection.dci.cols['long'] = [];
+                    APC.selection.dci.cols['long'].push(lng);
+
+                    APC.selection.dci.cols['terrirorio'] = [];
+                    APC.selection.dci.cols['terrirorio'].push(add);
+
+                    $.when(APC.collections.coopByDepartamento.findByDepartamento()).done(function() {
                         var modal = new modalView({
                             id: RowKey,
                             title: add,

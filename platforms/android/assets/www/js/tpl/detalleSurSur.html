@@ -7,24 +7,22 @@
   <div id="descriptionText-detalles">   
     <div id="blocksList-detalles">
           <div>
-            <div id="titulo" style="background-color: #8c44ae; margin: 0;"><%= pais %></div>
+            <div id="titulo" style="background-color: #8c44ae; margin: 0;">
+                <p><%= pais %></p>
+                <p><%= tipocooperacon %></p>
+                <p><%= programaproyectoactividad %></p>
+            </div>
           </div>
           <div id="panel-detalles">   
-              <table>
-                <thead>
-                <tr>
-                    <th id="col1">Tipo de cooperación</th>
-                    <th id="col2">#<%= tipocooperacon %></th>
-                </tr>
-                </thead>
+              <table>                
                 <tbody>
                     <tr>
                         <td>Modalidad de cooperación</td>
                         <td><%= modalidadcooperacion %></td>
                     </tr>
                     <tr>
-                        <td>Proyecto</td>
-                        <td><%= programaproyectoactividad %></td>
+                        <td>Objetivo proyecto</td>
+                        <td><%= objetivoprogramaproyectoactividad %></td>
                     </tr>
                     <tr>
                         <td>Fuente de cooperación</td>
@@ -39,6 +37,22 @@
                         <td><%= areacooperacion %></td>
                     </tr>
                     <tr>
+                        <td>Componente de cooperación</td>
+                        <td><%= compenentecooperacion %></td>
+                    </tr>
+                    <tr>
+                        <td>Territorio</td>
+                        <td><%= territorio %></td>
+                    </tr>
+                    <tr>
+                        <td>Sector lider política</td>
+                        <td><%= sectorliderpolitica %></td>
+                    </tr>
+                    <tr>
+                        <td>Otros sectores</td>
+                        <td><%= otrossectoresrelacionados %></td>
+                    </tr>
+                    <tr>
                         <td>Ejecutor Nacional</td>
                         <td><%= ejecutornacional %></td>
                     </tr>
@@ -46,27 +60,26 @@
                         <td>Ejecutor Internacional</td>
                         <td><%= ejecutorinternacional %></td>
                     </tr>
+                    <tr>
+                        <td>Fecha inicio</td>
+                        <td><%= fechainicio %></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha final</td>
+                        <td><%= fechafinal %></td>
+                    </tr>
+                    <tr>
+                        <td>Estado proyecto</td>
+                        <td><%= estadoproyecto %></td>
+                    </tr>
                 </tbody>
             </table>       
           </div>
-          <div id="container-botton-panel" style="background-color: #8c44ae;">
-            <div id="bottom-panel">
-                <table>
-                    <tbody>
-                        <tr>
-                        <td>Territorio de cooperación</td>
-                        </tr>
-                        <tr>
-                        <td><%= territorio %></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>  
-          </div>                 
         </div>         
     </div>  
 </div>     
-  </div>
-  <div class="modal-footer">    
-    <button class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-  </div>
+</div>
+<div class="modal-footer">    
+<button class="btn" data-dismiss="modal">Cerrar</button>
+<a href="#" class="btn btn-primary" data-dismiss="modal"><i class="icon-share icon-white"></i> Compartir</a>
+</div>

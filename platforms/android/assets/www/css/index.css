@@ -93,7 +93,7 @@ h1, h2, h3 {
 }
 
 .map-canvas-c {
-    margin-top: 41px;
+    margin-bottom: 48px;
 }
 
 .overlay-a {
@@ -191,14 +191,19 @@ and (-webkit-min-device-pixel-ratio: 1) {
 and (min-device-width : 320px) 
 and (max-device-width : 568px) 
 and (orientation : portrait) {
-    
+    .introLogo {
+        padding-top: 20% !important;
+    }
 }
 
 /*iPhone 2G/3G/3GS Resolution*/
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 480px) 
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px)
 and (orientation : portrait) {
+    .introLogo {
+        padding-top: 15% !important;
+    }
     
 }
 

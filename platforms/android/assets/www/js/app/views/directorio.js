@@ -22,20 +22,20 @@ define(function(require) {
 		tagName: 'li',
 		className: 'topcoat-list__item',
 		template: _.template(directorioItemTpl),
-		
+
 		events: {
-            "click .share": "btnShare"
-        },
-        
-        btnShare: function(e) {
-        	window.plugins.socialsharing.available(function(isAvailable) {
-                if (isAvailable) {                                
-                    window.plugins.socialsharing.share(e.delegateTarget.innerText, "APC-Mapps", null, "http://www.apccolombia.gov.co/");
-                }
-            });
-            return false;
-        },
-		
+			"click .share": "btnShare"
+		},
+
+		btnShare: function(e) {
+			window.plugins.socialsharing.available(function(isAvailable) {
+				if (isAvailable) {
+					window.plugins.socialsharing.share(e.delegateTarget.innerText, "APC-Mapps", null, "http://www.apccolombia.gov.co/");
+				}
+			});
+			return false;
+		},
+
 		render: function() {
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
@@ -43,10 +43,10 @@ define(function(require) {
 	});
 
 	var DirectorioListView = Backbone.View.extend({
-		
+
 		tagName: "ul",
 		className: 'topcoat-list__container',
-		
+
 		initialize: function() {
 			this.collection.bind("reset", this.render, this);
 		},
@@ -69,7 +69,7 @@ define(function(require) {
 		events: {
 			"keyup #search-dir": "search"
 		},
-		
+
 		search: function(event) {
 			var key = $('#search-dir').val();
 			this.collection.findByName(key);
@@ -80,9 +80,9 @@ define(function(require) {
 			var list = new DirectorioListView({
 				collection: self.collection
 			});
-			this.$el.html(_.template(directorioPageTpl));		
+			this.$el.html(_.template(directorioPageTpl));
 
-			$("#dirList").height($(window).height() - 118);	
+			$("#dirList").height($(window).height() - 118);
 			$("#dirList").html(list.render().el);
 			return this;
 		}

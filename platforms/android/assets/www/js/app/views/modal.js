@@ -45,6 +45,14 @@ define(function(require) {
 
         className: "modal hide fade",
 
+        initialize: function() {
+            var self = this;
+            this.$el.on('hidden', function () {
+                console.log("Bye modal");
+                self.$el.remove();
+            });
+        },
+
         render: function() {
             var self = this;
             var listElement = new listEl({
