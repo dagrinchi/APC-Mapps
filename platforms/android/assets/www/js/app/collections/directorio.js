@@ -31,7 +31,7 @@ define(function(require) {
 
         findByName: function(key) {            
             var self = this;
-            var sql = "SELECT * FROM directorio WHERE nombredelrepresentante LIKE '%" + key + "%'";            
+            var sql = "SELECT * FROM directorio WHERE nombredelaorganizacion LIKE '%" + key + "%'";            
             this.baseapc.execute(sql, model, function(data) {
                 self.reset(data);               
             });

@@ -39,7 +39,7 @@ define(function(require) {
                 content: self.options.content
             }));
 
-            this.$el.children(".modal-body").height($(window).height() - 200);
+            this.$el.children(".modal-body").height($(window).height() - 220);
             this.$el.modal('show');            
             return this;
         }

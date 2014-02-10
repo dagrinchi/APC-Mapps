@@ -25,6 +25,7 @@ define(function(require) {
 			maxZoom: 12,
 			mapTypeControl: false,
 			streetViewControl: false,
+			zoomControl: true,
 			panControl: false,
 			center: {},
 			mapTypeId: "roadmap"
@@ -32,10 +33,10 @@ define(function(require) {
 
 		initialize: function() {		 	
 			var self = this;
-			require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
-				self.mapOptions.center = new google.maps.LatLng(self.options.latitude, self.options.longitude);
-				self.mapOptions.mapTypeId = google.maps.MapTypeId.ROADMAP;
-			});	
+			
+			self.mapOptions.center = new google.maps.LatLng(self.options.latitude, self.options.longitude);
+			self.mapOptions.mapTypeId = google.maps.MapTypeId.ROADMAP;
+			self.mapOptions.zoomControl = self.options.zoomControl;
 		},
 
 		render: function() {
@@ -43,9 +44,8 @@ define(function(require) {
 			$("#" + self.id).width("100%");
 			$("#" + self.id).height(self.options.height);
 			
-			require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {			
-				self.map = new google.maps.Map(document.getElementById(self.id), self.mapOptions);
-			});		
+			
+			self.map = new google.maps.Map(document.getElementById(self.id), self.mapOptions);
 			return this;
 		}
 	});

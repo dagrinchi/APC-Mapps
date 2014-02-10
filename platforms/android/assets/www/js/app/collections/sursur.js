@@ -36,11 +36,11 @@ define(function(require) {
 
         initialize: function() {
             var self = this;
-            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
-                self.geo = new google.maps.Geocoder();
-                self.bounds = new google.maps.LatLngBounds();
-                self.infowindow = new google.maps.InfoWindow();
-            });
+
+            self.geo = new google.maps.Geocoder();
+            self.bounds = new google.maps.LatLngBounds();
+            self.infowindow = new google.maps.InfoWindow();
+
             this.baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
         },
 
@@ -128,67 +128,63 @@ define(function(require) {
         getAddress: function(pais) {
             var self = this;
 
-            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
-                self.geo.geocode({
-                    address: pais
-                }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var p = results[0].geometry.location;
-                        var lat = p.lat();
-                        var lng = p.lng();
-                        self.createMarker(lat, lng, pais);
-                        // console.log('address=' + search + ' lat=' + lat + ' lng=' + lng + '(delay=' + self.delay + 'ms)');
-                        self.delay = 100;
+            self.geo.geocode({
+                address: pais
+            }, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var p = results[0].geometry.location;
+                    var lat = p.lat();
+                    var lng = p.lng();
+                    self.createMarker(lat, lng, pais);
+                    // console.log('address=' + search + ' lat=' + lat + ' lng=' + lng + '(delay=' + self.delay + 'ms)');
+                    self.delay = 100;
+                } else {
+                    if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+                        self.nextAddress--;
+                        self.delay++;
                     } else {
-                        if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
-                            self.nextAddress--;
-                            self.delay++;
-                        } else {
-                            var reason = "Code " + status;
-                            console.error('address="' + pais + '" error=' + reason + '(delay=' + self.delay + 'ms)');
-                        }
+                        var reason = "Code " + status;
+                        console.error('address="' + pais + '" error=' + reason + '(delay=' + self.delay + 'ms)');
                     }
-                    self.geoCoder();
-                });
+                }
+                self.geoCoder();
             });
         },
 
         createMarker: function(lat, lng, pais) {
             var self = this;
 
-            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(lat, lng),
-                    map: APC.views.mapSursur.map,
-                    zIndex: Math.round(4.5 * -100000) << 5,
-                    icon: "img/sursur/" + pais + ".png",
-                    animation: google.maps.Animation.DROP
-                });
-
-                self.markers.push(marker);
-
-                google.maps.event.addListener(marker, 'click', function() {
-
-                    if (typeof APC.collections.sursurByCountry === 'undefined')
-                        APC.collections.sursurByCountry = new sursurByCountry();
-
-                    APC.selection.sursur.cols['pais'] = [];
-                    APC.selection.sursur.cols['pais'].push(pais);
-
-                    $.when(APC.collections.sursurByCountry.findByCountry()).done(function() {
-                        var modal = new modalView({
-                            id: pais,
-                            title: pais,
-                            collection: APC.collections.sursurByCountry
-                        });
-                        setTimeout(function() {
-                            modal.render();
-                        }, 500);
-                    });
-                });
-
-                self.bounds.extend(marker.position);
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: APC.views.mapSursur.map,
+                zIndex: Math.round(4.5 * -100000) << 5,
+                icon: "img/sursur/" + pais + ".png",
+                animation: google.maps.Animation.DROP
             });
+
+            self.markers.push(marker);
+
+            google.maps.event.addListener(marker, 'click', function() {
+
+                if (typeof APC.collections.sursurByCountry === 'undefined')
+                    APC.collections.sursurByCountry = new sursurByCountry();
+
+                APC.selection.sursur.cols['pais'] = [];
+                APC.selection.sursur.cols['pais'].push(pais);
+
+                $.when(APC.collections.sursurByCountry.findByCountry()).done(function() {
+                    var modal = new modalView({
+                        id: pais,
+                        title: pais,
+                        collection: APC.collections.sursurByCountry
+                    });
+                    setTimeout(function() {
+                        modal.render();
+                    }, 500);
+                });
+            });
+
+            self.bounds.extend(marker.position);
         },
 
         clearMarkers: function() {

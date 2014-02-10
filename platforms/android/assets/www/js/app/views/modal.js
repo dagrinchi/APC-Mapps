@@ -64,7 +64,7 @@ define(function(require) {
                 content: listElement.render().$el.html()
             }));
 
-            this.$el.children(".modal-body").height($(window).height() - 200);
+            this.$el.children(".modal-body").height($(window).height() - 220);
             this.$el.modal('show');            
             return this;
         }

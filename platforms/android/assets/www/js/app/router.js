@@ -29,7 +29,7 @@ define(function(require) {
             "directorio": "directorio",
             "ejecutasproyectos": "ejecutas",
             "acercade": "acercade",
-            "ayuda/:seccion" : "ayuda"
+            "ayuda/:seccion": "ayuda"
         },
 
         checkConnection: function() {
@@ -49,45 +49,10 @@ define(function(require) {
         },
 
         intro: function() {
-            var position = {
-                coords: {
-                    latitude: 4.598055600,
-                    longitude: -74.075833300
-                }
-            };
-
-            var wh = $(window).height();
-
-            navigator.geolocation.getCurrentPosition(function(gp) {
-                position = gp;
-            }, function(error) {
-                console.error('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
-            });
 
             if (this.checkConnection()) {
 
-                require(['app/utils/init', 'app/views/intro', 'app/views/map'], function(Initdb, IntroView, MapView) {
-
-                    APC.views.mapDemanda = new MapView({
-                        id: "map-canvas-a",
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        height: (wh - 152) / 2
-                    });
-
-                    APC.views.mapCooperacion = new MapView({
-                        id: "map-canvas-b",
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        height: (wh - 152) / 2
-                    });
-
-                    APC.views.mapSursur = new MapView({
-                        id: "map-canvas-c",
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        height: wh - 111
-                    });
+                require(['app/utils/init', 'app/views/intro'], function(Initdb, IntroView) {
 
                     APC.views.introView = new IntroView();
                     APC.views.introView.render();
@@ -127,31 +92,36 @@ define(function(require) {
         },
 
         prioridades: function() {
-            if (this.checkConnection() && typeof google !== 'undefined') {
-                require([
-                    'app/collections/demanda',
-                    'app/collections/demActores',
-                    'app/collections/demTerritorios',
-                    'app/collections/demMunicipios',
-                    'app/collections/demAreas',
-                    'app/collections/demSectores',
-                    'app/collections/proTerritorios',
-                    'app/collections/proAreas',
-                    'app/collections/cooperacion',
-                    'app/views/prioridades'
-                ], function(
-                    DemandaCollection,
-                    DemActoresCollection,
-                    DemTerritoriosCollection,
-                    DemMunicipiosCollection,
-                    DemAreasCollection,
-                    DemSectoresCollection,
-                    ProTerritoriosCollection,
-                    ProAreasCollection,
-                    CooperacionCollection,
-                    PrioridadesPageView) {
+            $("#loadingBox").fadeIn();
 
-                    $("#loadingBox").fadeIn(500, function() {
+            var self = this;
+            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
+
+                if (self.checkConnection() && typeof google !== 'undefined') {
+                    require([
+                        'app/collections/demanda',
+                        'app/collections/demActores',
+                        'app/collections/demTerritorios',
+                        'app/collections/demMunicipios',
+                        'app/collections/demAreas',
+                        'app/collections/demSectores',
+                        'app/collections/proTerritorios',
+                        'app/collections/proAreas',
+                        'app/collections/cooperacion',
+                        'app/views/prioridades'
+                    ], function(
+                        DemandaCollection,
+                        DemActoresCollection,
+                        DemTerritoriosCollection,
+                        DemMunicipiosCollection,
+                        DemAreasCollection,
+                        DemSectoresCollection,
+                        ProTerritoriosCollection,
+                        ProAreasCollection,
+                        CooperacionCollection,
+                        PrioridadesPageView) {
+
+
                         if (typeof APC.collections.demCollection === 'undefined')
                             APC.collections.demCollection = new DemandaCollection();
 
@@ -191,19 +161,24 @@ define(function(require) {
                             APC.views.prioridadesPageView.render();
                         });
                     });
-                });
-            } else {
-                navigator.notification.alert('No hay una conexión a internet!', function() {
-                    console.log("Start again!!!");
-                    Backbone.history.loadUrl("/");
-                }, 'Atención', 'Reintentar');
-            }
+                } else {
+                    navigator.notification.alert('No hay una conexión a internet!', function() {
+                        console.log("Start again!!!");
+                        Backbone.history.loadUrl("/");
+                    }, 'Atención', 'Reintentar');
+                }
+
+            });
         },
 
         sursur: function() {
-            if (this.checkConnection() && typeof google !== 'undefined') {
-                require(['app/views/sursur', 'app/collections/surAreas', 'app/collections/surSectores', 'app/collections/sursur'], function(sursurview, SurAreasCollection, SurSectoresCollection, sursurCollection) {
-                    $("#loadingBox").fadeIn(500, function() {
+            $("#loadingBox").fadeIn();
+
+            var self = this;
+            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
+
+                if (self.checkConnection() && typeof google !== 'undefined') {
+                    require(['app/views/sursur', 'app/collections/surAreas', 'app/collections/surSectores', 'app/collections/sursur'], function(sursurview, SurAreasCollection, SurSectoresCollection, sursurCollection) {
 
                         if (typeof APC.collections.surAreasCollection === 'undefined')
                             APC.collections.surAreasCollection = new SurAreasCollection();
@@ -225,13 +200,14 @@ define(function(require) {
                             APC.views.sursurview.render();
                         });
                     });
-                });
-            } else {
-                navigator.notification.alert('No hay una conexión a internet!', function() {
-                    console.log("Start again!!!");
-                    Backbone.history.loadUrl("/");
-                }, 'Atención', 'Reintentar');
-            }
+                } else {
+                    navigator.notification.alert('No hay una conexión a internet!', function() {
+                        console.log("Start again!!!");
+                        Backbone.history.loadUrl("/");
+                    }, 'Atención', 'Reintentar');
+                }
+
+            });
         },
 
         detalleSursur: function(RowKey) {
@@ -250,23 +226,21 @@ define(function(require) {
         },
 
         proyectos: function() {
+            $("#loadingBox").fadeIn();
             var self = this;
             var wh = $(window).height();
             var limit = 10;
 
             require(['app/collections/proyectos', 'app/collections/sursurProyectos', 'app/views/proyectos'], function(ProyectosCollection, SursurProyectosColl, ProyectosPageView) {
-                $("#loadingBox").fadeIn(500, function() {
+                if (typeof APC.collections.proCollection === 'undefined')
+                    APC.collections.proCollection = new ProyectosCollection();
 
-                    if (typeof APC.collections.proCollection === 'undefined')
-                        APC.collections.proCollection = new ProyectosCollection();
+                if (typeof APC.collections.sursurProCollection === 'undefined')
+                    APC.collections.sursurProCollection = new SursurProyectosColl();
 
-                    if (typeof APC.collections.sursurProCollection === 'undefined')
-                        APC.collections.sursurProCollection = new SursurProyectosColl();
-
-                    $.when(APC.collections.proCollection.findAll(), APC.collections.sursurProCollection.findAll()).done(function() {
-                        APC.views.ProyectosPageView = new ProyectosPageView();
-                        APC.views.ProyectosPageView.render();
-                    });
+                $.when(APC.collections.proCollection.findAll(), APC.collections.sursurProCollection.findAll()).done(function() {
+                    APC.views.ProyectosPageView = new ProyectosPageView();
+                    APC.views.ProyectosPageView.render();
                 });
             });
         },
@@ -302,37 +276,34 @@ define(function(require) {
         },
 
         directorio: function() {
+            $("#loadingBox").fadeIn();
             require(['app/collections/directorio', 'app/views/directorio'], function(DirectorioCollection, DirectorioPageView) {
-                $("#loadingBox").fadeIn(500, function() {
-                    if (typeof APC.collections.directorioCollection === 'undefined')
-                        APC.collections.directorioCollection = new DirectorioCollection();
-                    $.when(APC.collections.directorioCollection.findAll()).done(function() {
-                        APC.views.DirectorioPageView = new DirectorioPageView({
-                            collection: APC.collections.directorioCollection
-                        });
-                        APC.views.DirectorioPageView.render();
+                if (typeof APC.collections.directorioCollection === 'undefined')
+                    APC.collections.directorioCollection = new DirectorioCollection();
+                $.when(APC.collections.directorioCollection.findAll()).done(function() {
+                    APC.views.DirectorioPageView = new DirectorioPageView({
+                        collection: APC.collections.directorioCollection
                     });
+                    APC.views.DirectorioPageView.render();
                 });
             });
 
         },
 
         ejecutas: function() {
+            $("#loadingBox").fadeIn();
             require(['app/views/ejecutas'], function(EjecutasView) {
-                $("#loadingBox").fadeIn(500, function() {
-                    APC.views.ejecutasView = new EjecutasView();
-                    APC.views.ejecutasView.render();
-                });
+                APC.views.ejecutasView = new EjecutasView();
+                APC.views.ejecutasView.render();
             });
         },
 
         acercade: function() {
+            $("#loadingBox").fadeIn();
             if (this.checkConnection()) {
                 require(['app/views/acercade'], function(AcercadeView) {
-                    $("#loadingBox").fadeIn(500, function() {
-                        APC.views.acercadeView = new AcercadeView();
-                        APC.views.acercadeView.render();
-                    });
+                    APC.views.acercadeView = new AcercadeView();
+                    APC.views.acercadeView.render();
                 });
             } else {
                 navigator.notification.alert('No hay una conexión a internet!', function() {

@@ -37,11 +37,11 @@ define(function(require) {
 
         initialize: function() {
             var self = this;
-            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
-                self.geo = new google.maps.Geocoder();
-                self.bounds = new google.maps.LatLngBounds();
-                self.infowindow = new google.maps.InfoWindow();
-            });
+
+            self.geo = new google.maps.Geocoder();
+            self.bounds = new google.maps.LatLngBounds();
+            self.infowindow = new google.maps.InfoWindow();
+
             this.baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
         },
 
@@ -87,7 +87,7 @@ define(function(require) {
             });
             var sql = this.sql;
 
-            $.each(selection.vals, function(k1, v1) {                
+            $.each(selection.vals, function(k1, v1) {
                 if (k1 === 0) {
                     sql += "WHERE (";
                 } else {
@@ -127,48 +127,45 @@ define(function(require) {
         createMarker: function(RowKey, add, lat, lng) {
             var self = this;
 
-            require(['async!https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false'], function() {
-
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(lat, lng),
-                    map: APC.views.mapCooperacion.map,
-                    zIndex: Math.round(4.5 * -100000) << 5
-                });
-
-                self.markers.push(marker);
-
-                google.maps.event.addListener(marker, 'click', function() {
-
-                    if (typeof APC.collections.coopByDepartamento === 'undefined')
-                        APC.collections.coopByDepartamento = new coopByDepto();
-
-                    APC.selection.dci.cols['lat'] = [];
-                    APC.selection.dci.cols['lat'].push(lat);
-
-                    APC.selection.dci.cols['long'] = [];
-                    APC.selection.dci.cols['long'].push(lng);
-
-                    APC.selection.dci.cols['terrirorio'] = [];
-                    APC.selection.dci.cols['terrirorio'].push(add);
-
-                    $.when(APC.collections.coopByDepartamento.findByDepartamento()).done(function() {
-                        var modal = new modalView({
-                            id: RowKey,
-                            title: add,
-                            collection: APC.collections.coopByDepartamento
-                        });
-                        setTimeout(function() {
-                            modal.render();
-                        }, 600);
-                    });
-
-                    // self.infowindow.setContent(add);
-                    // self.infowindow.open(APC.views.mapCooperacion.map, marker);
-                });
-
-                self.bounds.extend(marker.position);
-
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: APC.views.mapCooperacion.map,
+                zIndex: Math.round(4.5 * -100000) << 5
             });
+
+            self.markers.push(marker);
+
+            google.maps.event.addListener(marker, 'click', function() {
+
+                if (typeof APC.collections.coopByDepartamento === 'undefined')
+                    APC.collections.coopByDepartamento = new coopByDepto();
+
+                APC.selection.dci.cols['lat'] = [];
+                APC.selection.dci.cols['lat'].push(lat);
+
+                APC.selection.dci.cols['long'] = [];
+                APC.selection.dci.cols['long'].push(lng);
+
+                APC.selection.dci.cols['terrirorio'] = [];
+                APC.selection.dci.cols['terrirorio'].push(add);
+
+                $.when(APC.collections.coopByDepartamento.findByDepartamento()).done(function() {
+                    var modal = new modalView({
+                        id: RowKey,
+                        title: add,
+                        collection: APC.collections.coopByDepartamento
+                    });
+                    setTimeout(function() {
+                        modal.render();
+                    }, 600);
+                });
+
+                // self.infowindow.setContent(add);
+                // self.infowindow.open(APC.views.mapCooperacion.map, marker);
+            });
+
+            self.bounds.extend(marker.position);
+
         }
 
     });

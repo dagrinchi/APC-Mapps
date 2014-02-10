@@ -32,6 +32,7 @@ define(function(require) {
             var self = this;
             this.$el.on('hidden', function () {
                 console.log("Bye modal");
+                //Backbone.history.history.back();
                 self.$el.remove();
             });
         },
@@ -39,8 +40,7 @@ define(function(require) {
         btnShare: function() {
             var self = this;
             require(['html2canvas'], function() {
-                html2canvas(self.$el.find(".detalleProyecto"), {
-                    useCORS: true,
+                html2canvas(self.$el.find(".modal-body"), {
                     onrendered: function(canvas) {                        
                         window.plugins.socialsharing.available(function(isAvailable) {
                             if (isAvailable) {                                
@@ -58,7 +58,7 @@ define(function(require) {
             var self = this;        
             this.$el.html(this.template(this.model.toJSON()));
             this.$el.modal('show');
-            this.$el.children(".modal-body").height($(window).height() - 200);
+            this.$el.children(".modal-body").height($(window).height() - 220);
             return this;
         }
     });

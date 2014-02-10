@@ -1,3 +1,18 @@
+/*
+custom font Roboto
+*/
+
+@font-face {
+    font-family: 'Roboto', sans-serif;
+    src: url("Roboto-Thin.ttf") format("opentype"); 
+}
+
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    text-rendering: optimizeLegibility;
+}
+
 /* 
  * start the media queries
  */
@@ -259,41 +274,57 @@
     background-color: #2e8bcc;
     opacity: 0.75;     
     box-shadow: none;
+    padding-left: 0rem;
+    padding-right: 2.4rem;
 }
 
 #header-sur-sur{
     background-color: #8c44ae;
-    opacity: 0.75;     
+    opacity: 0.75;  
+    padding-left: 0rem;
+    padding-right: 2.4rem;   
 }
 
 #header-proyectos{
     background-color: #27ae27;
-    opacity: 0.75;       
+    opacity: 0.75; 
+    padding-left: 0rem;
+    padding-right: 2.4rem;      
+}
+
+#header-directorio{
+    background-color: #f1c40f;
+    opacity: 0.75;   
+    padding-left: 0rem;
+    padding-right: 2.4rem;    
 }
 
 #header-directorio{
     background-color: #f1c40f;
     opacity: 0.75;       
-}
-
-#header-directorio{
-    background-color: #f1c40f;
-    opacity: 0.75;       
+    padding-left: 0rem;
+    padding-right: 2.4rem;
 }
 
 #header-ejecutas-proyectos{
     background-color: #ff5500;
-    opacity: 0.75;       
+    opacity: 0.75;    
+    padding-left: 0rem;
+    padding-right: 2.4rem;   
 }
 
 #header-acerca-de{
     background-color: #f31212;;
-    opacity: 0.75;       
+    opacity: 0.75;
+    padding-left: 0rem;
+    padding-right: 2.4rem;       
 }
 
 #header-detalles{
     background-color: #27ae27;
-    opacity: 0.85;       
+    opacity: 0.85; 
+    padding-left: 0rem;
+    padding-right: 2.4rem;      
 }
 
 #text-head-prioridades{
@@ -545,8 +576,8 @@
 }
 
 #botonCompartirDirectorio{
-    bottom: 49px;
-    left: 22px;
+    bottom: 30px;
+    right: 0px;
 }
 
 #titleEjecutas {
@@ -581,4 +612,8 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+#dirList {
+    width: 100% !important;
+    position: fixed;
 }

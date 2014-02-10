@@ -432,3 +432,16 @@ and (orientation : portrait) {
 #projectList, #dirList, #sursurList {
     overflow: scroll !important;
 }
+
+.selectionList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+}
+
+.selectionList li {
+    display: table;
+    margin: 1px;
+    width: 100%;
+}

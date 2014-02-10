@@ -57,6 +57,8 @@ define(function(require) {
                 });
                 sql += ")";
             });
+
+            sql += " ORDER BY dci.codigoarea, dci.codigocomponente ";
             return sql;
         },
 

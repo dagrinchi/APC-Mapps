@@ -15,12 +15,12 @@ define(function(require) {
     var $ = require('jquery'),
         Backbone = require('backbone'),
         _ = require('underscore'),        
-        modalTpl = require('text!tpl/modal.html'),
+        modalTpl = require('text!tpl/modalCooperacion.html'),
         coopMarker = require('text!tpl/coopMarkerListItem.html'),
         bootstrap = require('bootstrap/bootstrap');
 
     var listItemView = Backbone.View.extend({
-        tagName: 'h4',
+        tagName: 'li',
         className: '',        
         template: _.template(coopMarker),
         render: function() {                                    
@@ -53,6 +53,27 @@ define(function(require) {
             });
         },
 
+        events: {
+            "click .share": "btnShare"
+        },
+
+        btnShare: function() {
+            var self = this;
+            require(['html2canvas'], function() {
+                html2canvas(self.$el.find(".modal-body"), {
+                    onrendered: function(canvas) {                        
+                        window.plugins.socialsharing.available(function(isAvailable) {
+                            if (isAvailable) {                                
+                                window.plugins.socialsharing.share("APC-Mapps", "APC-Mapps", canvas.toDataURL(), "http://www.apccolombia.gov.co/");
+                            }
+                        });
+                    }
+                });
+            });
+
+            return false;
+        },
+
         render: function() {
             var self = this;
             var listElement = new listEl({
@@ -61,10 +82,13 @@ define(function(require) {
 
             this.$el.html(_.template(modalTpl, {
                 title: self.options.title,
+                puntofocal: self.collection.models[0].attributes.puntofocal,
+                direccionpuntofocal: self.collection.models[0].attributes.direccionpuntofocal,
+                miembrosdelcomite: self.collection.models[0].attributes.miembrocomite,
                 content: listElement.render().$el.html()
             }));
 
-            this.$el.children(".modal-body").height($(window).height() - 200);
+            this.$el.children(".modal-body").height($(window).height() - 220);
             this.$el.modal('show');            
             return this;
         }

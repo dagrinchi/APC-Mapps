@@ -169,7 +169,32 @@ define(function(require) {
 
         render: function() {
             this.$el.html(this.template);
-            APC.views.mapSursur.render();
+
+            var position = {
+                coords: {
+                    latitude: 4.598055600,
+                    longitude: -74.075833300
+                }
+            };
+
+            var wh = $(window).height();
+
+            navigator.geolocation.getCurrentPosition(function(gp) {
+                position = gp;
+            }, function(error) {
+                console.error('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+            });
+
+            require(['app/views/map'], function(MapView) {
+                APC.views.mapSursur = new MapView({
+                    id: "map-canvas-c",
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    height: wh - 111,
+                    zoomControl: true
+                });
+                APC.views.mapSursur.render();
+            });
             return this;
         }
     });

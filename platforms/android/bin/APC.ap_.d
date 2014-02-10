@@ -39,6 +39,10 @@
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/bootstrap/js/bootstrap.min.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/custom.css \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/index.css \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/Roboto-Light.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/Roboto-Medium.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/Roboto-Regular.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/Roboto-Thin.ttf \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/style-progress-bar.css \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/switch.css \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/topcoat-desktop-dark.css \
@@ -50,6 +54,7 @@
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/topcoat-mobile-light.css \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/css/topcoat-mobile-light.min.css \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/LICENSE.txt \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/SourceCodePro-Black.otf \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/SourceCodePro-Bold.otf \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/SourceCodePro-ExtraLight.otf \
@@ -68,6 +73,24 @@
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/SourceSansPro-Regular.otf \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/SourceSansPro-Semibold.otf \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/SourceSansPro-SemiboldIt.otf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-Black.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-BlackItalic.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-Bold.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-BoldItalic.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-Italic.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-Light.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-LightItalic.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-Medium.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-MediumItalic.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-Regular.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-Thin.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/Roboto-ThinItalic.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/RobotoCondensed-Bold.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/RobotoCondensed-BoldItalic.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/RobotoCondensed-Italic.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/RobotoCondensed-Light.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/RobotoCondensed-LightItalic.ttf \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/font/roboto/RobotoCondensed-Regular.ttf \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/img/about_me.png \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/img/alert.svg \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/img/arrow_down.svg \
@@ -280,6 +303,7 @@
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/collections/proAreas.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/collections/proTerritorios.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/collections/proyectos.js \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/collections/selection.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/collections/surAreas.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/collections/surSectores.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/collections/sursur.js \
@@ -321,6 +345,7 @@
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/views/modalSursur.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/views/prioridades.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/views/proyectos.js \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/views/selection.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/app/views/sursur.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/lib/backbone-relational.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/lib/backbone.js \
@@ -355,6 +380,7 @@
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/intro.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/listItem.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/modal.html \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/modalCooperacion.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/modalHelp.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/modalList.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/prioridades.html \
@@ -362,6 +388,7 @@
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/proyectosHelp.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/proyectosItem.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/proyectosPage.html \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/selection.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/sursur.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/sursurHelp.html \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/tpl/sursurItem.html \

@@ -1,26 +1,17 @@
-<div style="text-align:left; width: 100%;">
-    <div id="leftdiv" style="display:inline-block; width: 80%;">
-       <h4 style="margin: 0 !important; 
-           padding: 0 !important; 
-           font-weight: 300; 
-           text-rendering: optimizeLegibility;">
-           <%= nombredelrepresentante %>
-        </h4>
-        <p style="padding: 0; margin: 0;">
-            <%= direccion %>, <%= ciudadpais %>
-        </p>
-        <p id="p1">
-            <%= telefono %>
-        </p>
-        <p id="p2">
-            <%= paginaweb %>
-        </p>
-        <p style="padding: 0; margin: 0;"><%= nombredelaorganizacion %></p>
-    </div>
-    <div id="rightdiv" style="display:inline-block; width: 17%;
- ">
-        <a id="botonCompartirDirectorio" class="topcoat-icon-button--quiet share" href="#">
-            <img src="img/share.svg" width="27px" height="28px" />
-        </a>                 
-    </div>
+<div style="text-align:left; position: relative;">
+   <h4 style="margin: 0 !important; 
+       padding: 0 !important; 
+       font-weight: 300; 
+       text-rendering: optimizeLegibility;">
+       <%= nombredelaorganizacion %>
+    </h4>
+    <p style="padding: 0; margin: 0; overflow: hidden;"><%= direccion %>, <%= ciudadpais %></p>
+    <p style="padding: 0; margin: 0; overflow: hidden;"><%= telefono %></p>
+    <p style="padding: 0; margin: 0; overflow: hidden;"><%= nombredelrepresentante %></p>
+    <p style="padding: 0; margin: 0; overflow: hidden;"><%= cargo %></p>        
+    <p style="padding: 0; margin: 0; overflow: hidden;"><%= paginaweb %></p>
+
+    <a id="botonCompartirDirectorio" class="topcoat-icon-button--quiet share" href="#" style="position: absolute;">
+        <img src="img/share.svg" width="27px" height="28px" />
+    </a>                 
 </div>  
