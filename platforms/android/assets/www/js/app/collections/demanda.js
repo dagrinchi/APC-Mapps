@@ -22,7 +22,7 @@ define(function(require) {
 
     return Backbone.Collection.extend({
 
-        sqlInit: "select * from demanda LEFT join dane on (((demanda.municipio like dane.nommun) and (demanda.territorio like dane.nomdep)) or ((demanda.municipio NOT like dane.nommun) and (demanda.territorio like dane.nomdep) and demanda.municipio = '' and demanda.territorio = 'AMBITO NACIONAL') OR ((demanda.municipio = dane.nommun) and (demanda.territorio like dane.nomdep) and demanda.municipio = '' and demanda.territorio != 'AMBITO NACIONAL' AND dane.nommun != 'AMBITO NACIONAL')) ",
+        sqlInit: "select DISTINCT * from demanda inner join dane on (((CAST(demanda.codigomunicipios AS UNSIGNED) = CAST(dane.codmun AS UNSIGNED)) and (CAST(demanda.codigoterritorios AS UNSIGNED) = CAST(dane.coddep AS UNSIGNED))))",
 
         sqlEnd: "",
 
@@ -113,8 +113,8 @@ define(function(require) {
             var self = this;
 
             $.each(this.models, function(k1, v1) {
-                if (v1.get("long") > 0 || v1.get("lat") > 0)
-                    self.createMarker(v1.get("RowKey"), v1.get("territorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
+                //if (v1.get("long") > 0 || v1.get("lat") > 0)
+                self.createMarker(v1.get("RowKey"), v1.get("territorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
             });
 
             if (typeof APC.views.mapDemanda.markerCluster !== "undefined") {

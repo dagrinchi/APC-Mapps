@@ -23,7 +23,7 @@ define(function(require) {
 
         baseapc: {},
 
-        sqlInit: "select * from demanda LEFT join dane on (((demanda.municipio like dane.nommun) and (demanda.territorio like dane.nomdep)) or ((demanda.municipio NOT like dane.nommun) and (demanda.territorio like dane.nomdep) and demanda.municipio = '' and demanda.territorio = 'AMBITO NACIONAL') OR ((demanda.municipio = dane.nommun) and (demanda.territorio like dane.nomdep) and demanda.municipio = '' and demanda.territorio != 'AMBITO NACIONAL' AND dane.nommun != 'AMBITO NACIONAL')) ",
+        sqlInit: "select DISTINCT * from demanda inner join dane on (((CAST(demanda.codigomunicipios AS UNSIGNED) = CAST(dane.codmun AS UNSIGNED)) and (CAST(demanda.codigoterritorios AS UNSIGNED) = CAST(dane.coddep AS UNSIGNED))))",
 
         initialize: function() {
             this.baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));

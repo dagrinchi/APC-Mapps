@@ -61,20 +61,25 @@
                     </tr> 
                     <tr>
                         <td>Aporte nacional</td>
-                        <td><%= total_aporte_nacional %>&nbsp;<%= moneda %></td>
+                        <td>
+                            <div id="leftcolumn"><%= total_aporte_nacional %></div>
+                            <div id="rightcolumn"><%= moneda %></div>
+                        </td>
                     </tr>    
                     <tr>
                         <td>Aporte internacional</td>
-                        <td><%= total_aporte_intercional %>&nbsp;<%= moneda %></td>
+                        <td>
+                            <div id="leftcolumn"><%= total_aporte_intercional %></div>
+                            <div id="rightcolumn"><%= moneda %></div>
+                        </td>
                     </tr>         
                     <tr>
                         <td>Total aportes</td>
-                        <td><%= total_aportes %>&nbsp;<%= moneda %></td>
-                    </tr>    
-                    <tr>
-                        <td>Territorio</td>
-                        <td><%= territorio %></td>
-                    </tr>    
+                        <td>
+                            <div id="leftcolumn"><%= total_aportes %></div>
+                            <div id="rightcolumn"><%= moneda %></div>
+                        </td>
+                    </tr>
                     <tr>
                         <td>Municipio</td>
                         <td><%= municipio %></td>
