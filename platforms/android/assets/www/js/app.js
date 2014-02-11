@@ -73,6 +73,7 @@ require.config({
 });
 
 require(['../../phonegap', 'fastclick', 'app/router'], function(phonegap, fclick, router) {
+    document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     document.addEventListener('deviceready', function() {
         fclick.attach(document.body);
         APC.router = new router();

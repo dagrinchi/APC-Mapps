@@ -21,7 +21,7 @@ define(function(require) {
         bootstrap = require('bootstrap/bootstrap');
 
     var listItemView = Backbone.View.extend({
-        tagName: 'div',
+        tagName: 'li',
         className: '',
         template: _.template(listItemTpl),
         render: function() {
@@ -55,6 +55,11 @@ define(function(require) {
             this.$el.on('hidden', function() {
                 console.log("Bye modal");
                 self.$el.remove();
+            });
+            this.$el.on('shown', function() {   
+                require(['iscroll'], function() {
+                    var scroll = new IScroll('#modalList', { mouseWheel: true });  
+                });                            
             });
         },
 
@@ -141,8 +146,8 @@ define(function(require) {
 
         render: function() {
             this.$el.html(this.template);
-            this.$el.modal('show');
-            this.$el.children(".modal-body").height($(window).height() - 220);
+            this.$el.modal('show');            
+            this.$el.children(".modal-body").height($(window).height() - 220);            
             return this;
         }
     });

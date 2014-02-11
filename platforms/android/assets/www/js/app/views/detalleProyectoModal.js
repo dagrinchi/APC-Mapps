@@ -35,6 +35,11 @@ define(function(require) {
                 //Backbone.history.history.back();
                 self.$el.remove();
             });
+            this.$el.on('shown', function() {   
+                require(['iscroll'], function() {
+                    var scroll = new IScroll('#detalleProyecto', { scrollY: true, scrollX: false });  
+                });                            
+            });
         },
 
         btnShare: function() {

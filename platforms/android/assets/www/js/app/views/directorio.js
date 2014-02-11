@@ -83,7 +83,12 @@ define(function(require) {
 			this.$el.html(_.template(directorioPageTpl));
 
 			$("#dirList").height($(window).height() - 118);
-			$("#dirList").html(list.render().el);
+			$("#dirList").children().html(list.render().el);
+
+			require(['iscroll'], function() {                
+                var dirScroll = new IScroll('#dirList', { mouseWheel: true });  
+            });
+
 			return this;
 		}
 	});

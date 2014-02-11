@@ -132,34 +132,37 @@
 
  			$('#search-project').val("");
  			APC.collections.proCollection.findAll();
+
  			return false;
  		},
 
  		proyectosSursur: function() {
+ 			var self = this;
+ 			
  			$("#projectList").hide();
  			$("#sursurList").fadeIn();
 
  			$('#search-project').val("");
  			APC.collections.sursurProCollection.findAll();
+
+ 			require(['iscroll'], function() {                
+                var sursurScroll = new IScroll('#sursurList', { mouseWheel: true });  
+                sursurScroll.on('scrollEnd', self.scrollSursurList);
+            });
+
  			return false;
  		},
 
- 		scrollProyectosList: function(e) {
- 			var st = $(e.currentTarget).scrollTop() + $(e.currentTarget).height() + 200;
- 			var sh = $(e.currentTarget).children().height();
- 			if (st > sh) {
- 				APC.collections.proCollection.proOff += 20;
- 				APC.collections.proCollection.findNext();
- 			}
+ 		scrollProyectosList: function() {
+			APC.collections.proCollection.proOff += 20;
+			APC.collections.proCollection.findNext();			
+			this.refresh();
  		},
 
- 		scrollSursurList: function(e) {
- 			var st = $(e.currentTarget).scrollTop() + $(e.currentTarget).height() + 200;
- 			var sh = $(e.currentTarget).children().height();
- 			if (st > sh) {
- 				APC.collections.sursurProCollection.surOff += 20;
- 				APC.collections.sursurProCollection.findNext();
- 			}
+ 		scrollSursurList: function() { 			
+			APC.collections.sursurProCollection.surOff += 20;
+			APC.collections.sursurProCollection.findNext();
+			this.refresh();
  		},
 
  		render: function() {
@@ -175,12 +178,15 @@
  			this.$el.html(_.template(proyectosPageTpl));
 
  			$("#projectList").height($(window).height() - 167);
- 			$("#projectList").html(listProyectos.render().el);
- 			$("#projectList").on("scroll", this.scrollProyectosList);
-
+ 			$("#projectList").children().html(listProyectos.render().el);
  			$("#sursurList").height($(window).height() - 167);
- 			$("#sursurList").html(listSursur.render().el);
- 			$("#sursurList").on("scroll", this.scrollSursurList);
+ 			$("#sursurList").children().html(listSursur.render().el);
+
+ 			require(['iscroll'], function() {
+                var projectScroll = new IScroll('#projectList', { mouseWheel: true });              
+                projectScroll.on('scrollEnd', self.scrollProyectosList);
+            });
+
  			return this;
  		}
  	});

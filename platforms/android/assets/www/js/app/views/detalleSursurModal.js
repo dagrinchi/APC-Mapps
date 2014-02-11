@@ -34,6 +34,11 @@ define(function(require) {
                 console.log("Bye modal");
                 self.$el.remove();
             });
+            this.$el.on('shown', function() {   
+                require(['iscroll'], function() {
+                    var scroll = new IScroll('#detalleSursur', { scrollY: true, scrollX: false });  
+                });                            
+            });
         },
 
         btnShare: function() {

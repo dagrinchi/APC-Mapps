@@ -22,7 +22,7 @@ define(function(require) {
 
 
     var listItemView = Backbone.View.extend({
-        tagName: 'div',
+        tagName: 'li',
         className: '',
         template: _.template(listItemTpl),
         render: function() {
@@ -57,6 +57,11 @@ define(function(require) {
             this.$el.on('hidden', function() {
                 console.log("Bye modal");
                 self.$el.remove();
+            });
+            this.$el.on('shown', function() {   
+                require(['iscroll'], function() {
+                    var scroll = new IScroll('#modalList', { mouseWheel: true });  
+                });                            
             });
         },
 

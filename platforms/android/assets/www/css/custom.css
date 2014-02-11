@@ -165,7 +165,7 @@ h2 {
     text-align: center;
 }
 #demandProyects {
-    background-image: url(../img/colombia.svg);
+    background-image: url(../img/colombia.png);
     background-size: 32px;
     background-position: 4px center;
     background-repeat: no-repeat;
@@ -186,13 +186,13 @@ h2 {
     text-align: center;
 }
 #southProyects {
-    background-image: url(../img/south.svg);
+    background-image: url(../img/south.png);
     background-size: 32px;
     background-position: 4px center;
     background-repeat: no-repeat;    
 }
 
-#descriptionText {
+.descriptionText {
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 14px;    

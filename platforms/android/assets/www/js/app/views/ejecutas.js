@@ -61,6 +61,9 @@ define(function(require) {
 
         render: function() {
             this.$el.html(this.template);
+            require(['iscroll'], function() {                
+                var scroll = new IScroll('#ejecutasPage', { scrollY: true, scrollX: false });  
+            });
             $(".container").height($(window).height() - 117);
             return this;
         }

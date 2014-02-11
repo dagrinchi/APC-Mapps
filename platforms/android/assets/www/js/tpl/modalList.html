@@ -2,7 +2,13 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3><%= title %></h3>
   </div>
-  <div class="modal-body"><%= list %></div>
+  <div class="modal-body" id="modalList">
+  	<div id="scroller">
+	  	<ul style="list-style: none; padding: 0; margin: 0 0 10px 0;">
+	  		<%= list %>
+	  	</ul>
+  	</div>
+  </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
     <button id="ok" class="btn btn-primary" data-dismiss="modal">Aceptar</button>

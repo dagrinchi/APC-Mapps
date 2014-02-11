@@ -2,14 +2,16 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3><%= title %></h3>
 </div>
-<div class="modal-body">
-	<p style="font-weight: bold; margin-bottom: 3px;">Punto focal:</p>
-	<p><%= puntofocal %></p>
-	<p style="font-weight: bold; margin-bottom: 3px;">Dirección punto focal:</p>
-	<p><%= direccionpuntofocal %></p>
-	<p style="font-weight: bold; margin-bottom: 3px;">Miembros del comité:</p>
-	<p><%= miembrosdelcomite %></p>
-	<ul class="topcoat-list"><%= content %></ul>
+<div class="modal-body" id="dciDetalle">
+	<div id="scroller">
+		<p style="font-weight: bold; margin-bottom: 3px;">Punto focal:</p>
+		<p><%= puntofocal %></p>
+		<p style="font-weight: bold; margin-bottom: 3px;">Dirección punto focal:</p>
+		<p><%= direccionpuntofocal %></p>
+		<p style="font-weight: bold; margin-bottom: 3px;">Miembros del comité:</p>
+		<p><%= miembrosdelcomite %></p>
+		<ul class="topcoat-list"><%= content %></ul>
+	</div>
 </div>
 <div class="modal-footer">    
 	<button class="btn" data-dismiss="modal">Cerrar</button>
