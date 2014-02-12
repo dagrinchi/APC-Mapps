@@ -440,11 +440,13 @@ h2 {
     color: #fff;
 }
 
-#h4-custom{
-    line-height: 16px;
+.h4-custom{
+    line-height: 20px;
     margin-top: 3px;
     margin-bottom: 3px;
     padding-bottom: 0px;  
+    font-size: 1em;
+    font-weight: bold;
 }
 
 #h4-directorio{

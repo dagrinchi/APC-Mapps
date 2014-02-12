@@ -20,9 +20,22 @@ define(function(require) {
         bootstrap = require('bootstrap/bootstrap');
 
     var listItemView = Backbone.View.extend({
-        tagName: 'h4',
-        className: '',        
+        
+        tagName: 'li',
+        
+        className: 'topcoat-list__item',
+        
+        attributes: { "style" : "padding: 1rem;" },        
+        
         template: _.template(demMarker),
+        
+        initialize: function() {
+            var data = this.model.toJSON();
+            this.$el.on("tap", function() {
+                document.location.hash = "#proyectos/" + data["RowKey"];
+            });
+        },
+        
         render: function() {                                    
             this.$el.html(this.template(this.model.toJSON()));
             return this;
@@ -30,6 +43,11 @@ define(function(require) {
     });
 
     var listEl = Backbone.View.extend({
+        
+        tagName: "ul",
+        
+        className: 'topcoat-list',
+        
         render: function() {
             this.collection.each(function(m) {
                 var itemView = new listItemView({
@@ -46,11 +64,13 @@ define(function(require) {
         className: "modal hide fade",
 
         initialize: function() {
+            
             var self = this;
             this.$el.on('hidden', function () {
                 console.log("Bye modal");
                 self.$el.remove();
             });
+            
         },
 
         render: function() {
@@ -60,12 +80,22 @@ define(function(require) {
             });
 
             this.$el.html(_.template(modalTpl, {
-                title: self.options.title,
-                content: listElement.render().$el.html()
-            }));
+                title: self.options.title
+            }));           
+
+            $("body").append(this.el);
 
             this.$el.children(".modal-body").height($(window).height() - 220);
-            this.$el.modal('show');            
+            $("#ModalList").children().html(listElement.render().el);
+
+            this.$el.on('shown', function() {   
+                require(['iscroll'], function() {
+                    var scroll = new IScroll('#ModalList', { tap: true });  
+                });                            
+            });
+
+            
+            this.$el.modal('show');
             return this;
         }
     });

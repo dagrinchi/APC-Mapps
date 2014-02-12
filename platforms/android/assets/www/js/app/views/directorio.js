@@ -86,7 +86,7 @@ define(function(require) {
 			$("#dirList").children().html(list.render().el);
 
 			require(['iscroll'], function() {                
-                var dirScroll = new IScroll('#dirList', { mouseWheel: true });  
+                var dirScroll = new IScroll('#dirList', { click: true });  
             });
 
 			return this;

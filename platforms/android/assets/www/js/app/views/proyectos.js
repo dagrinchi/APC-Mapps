@@ -25,6 +25,13 @@
  		className: 'topcoat-list__item',
  		template: _.template(proyectoTpl),
 
+    initialize: function() {
+      var data = this.model.toJSON();
+      this.$el.on("tap", function() {
+          document.location.hash = "#proyectos/" + data["RowKey"];
+      });
+    },
+
  		render: function() {
  			this.$el.html(this.template(this.model.toJSON()));
  			return this;
@@ -67,6 +74,13 @@
  		tagName: 'li',
  		className: 'topcoat-list__item',
  		template: _.template(sursurTpl),
+
+    initialize: function() {
+      var data = this.model.toJSON();
+      this.$el.on("tap", function() {
+          document.location.hash = "#sursur/" + data["RowKey"];
+      });
+    },
 
  		render: function() {
  			this.$el.html(this.template(this.model.toJSON()));
@@ -117,13 +131,11 @@
  		},
 
  		searchProyectos: function(event) {
- 			var key = $('#search-project').val();
- 			if (key.length > 4) {
+ 			var key = $('#search-project').val(); 			
  				APC.collections.proCollection.findByName(key);
  				APC.collections.sursurProCollection.findByName(key);
  				// $("#projectList").off("scroll");
  				// $("#sursurList").off("scroll");
- 			}
  		},
 
  		proyectosDemanda: function() {
@@ -146,7 +158,7 @@
  			APC.collections.sursurProCollection.findAll();
 
  			require(['iscroll'], function() {                
-                var sursurScroll = new IScroll('#sursurList', { mouseWheel: true });  
+                var sursurScroll = new IScroll('#sursurList', { tap: true });  
                 sursurScroll.on('scrollEnd', self.scrollSursurList);
             });
 
@@ -183,7 +195,7 @@
  			$("#sursurList").children().html(listSursur.render().el);
 
  			require(['iscroll'], function() {
-                var projectScroll = new IScroll('#projectList', { mouseWheel: true });              
+                var projectScroll = new IScroll('#projectList', { tap: true });              
                 projectScroll.on('scrollEnd', self.scrollProyectosList);
             });
 
