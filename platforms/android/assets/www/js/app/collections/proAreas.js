@@ -30,7 +30,7 @@ define(function(require) {
         findAll: function() {
             var baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
             var self = this;            
-            baseapc.execute("select distinct dci.codigoarea || ' ' || dci.areacooperacion as item, dci.codigoarea as value from dci where dci.areacooperacion <> '' order by dci.areacooperacion", model, function(data) {
+            baseapc.execute("select distinct dci.codigocomponente || ' ' || dci.componentecooperacion as item, dci.codigocomponente as value from dci where dci.codigocomponente <> '' AND dci.codigocomponente <> '999999' order by dci.componentecooperacion", model, function(data) {
                 self.reset(data);
                 deferred.resolve();
             });

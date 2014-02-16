@@ -42,7 +42,16 @@ define(function(require) {
                     selection.vals.push(v1);
                 }
             });
-            var sql = "SELECT DISTINCT " + selection.cols.join() + " FROM " + table;
+            var select = selection.cols.join();
+            var sql = "SELECT DISTINCT ";
+            if (select === "codigoenci") {
+                sql += select + " || ' ' || enci codigoenci FROM " + table;    
+            } else if (select === "codigocomponente") {
+                sql += select + " || ' ' || componentecooperacion codigocomponente FROM " + table;    
+            } else {
+                sql += select + " FROM " + table;    
+            }
+            
             $.each(selection.vals, function(k1, v1) {                
                 if (k1 === 0) {
                     sql += " WHERE (";
@@ -58,10 +67,17 @@ define(function(require) {
                 sql += ")";
             });
 
+            if (select === "codigoenci") {
+                sql += "GROUP BY " + table + ".codigoenci";
+            } else if (select === "codigocomponente") {
+                sql += "GROUP BY " + table + ".codigocomponente";
+            }
+
+            console.log(sql);
             return sql;
         },
 
-        find: function(table) {
+        findSelection: function(table) {
             var baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
             var self = this;   
             baseapc.execute(this.buildSQL(table), model, function(data) {
