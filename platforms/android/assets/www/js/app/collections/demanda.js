@@ -54,9 +54,6 @@ define(function(require) {
             this.baseapc.execute(self.sqlInit + self.sqlEnd, model, function(data) {
                 self.reset(data);
                 deferred.resolve();
-                setTimeout(function() {
-                    self.initMapMarkersWithDb();
-                }, 3000);
             });
 
             return deferred.promise();
@@ -66,13 +63,22 @@ define(function(require) {
             var deferred = $.Deferred();
             var self = this;
 
-            this.baseapc.execute(this.buildSQL(), model, function(data) {
-                self.reset(data);
-                deferred.resolve();
-                setTimeout(function() {
+            var actores = APC.selection.demanda.cols['actor'].length;
+            var territorios = APC.selection.demanda.cols['territorio'].length;
+            var municipios = APC.selection.demanda.cols['municipio'].length;
+            var areas = APC.selection.demanda.cols['codigoenci'].length;
+            var sectores = APC.selection.demanda.cols['sectorliderpolitica'].length;
+
+            if (actores > 0 || territorios > 0 || municipios > 0 || areas > 0 || sectores > 0) {
+                this.baseapc.execute(this.buildSQL(), model, function(data) {
+                    self.reset(data);
+                    deferred.resolve();
                     self.initMapMarkersWithDb();
-                }, 3000);
-            });
+                });
+            } else {
+                APC.views.mapDemanda.markerCluster.clearMarkers();
+                deferred.resolve();
+            }
 
             return deferred.promise();
         },
@@ -107,26 +113,29 @@ define(function(require) {
             return sql;
         },
 
-        initMapMarkersWithDb: function() {
-            console.log("initMapMarkersWithDb: Creando markers con DB.");
-            this.markers = [];
+        initMapMarkersWithDb: function() {            
             var self = this;
-
-            $.each(this.models, function(k1, v1) {
-                //if (v1.get("long") > 0 || v1.get("lat") > 0)
-                self.createMarker(v1.get("RowKey"), v1.get("territorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
-            });
-
-            if (typeof APC.views.mapDemanda.markerCluster !== "undefined") {
-                APC.views.mapDemanda.markerCluster.clearMarkers();
-            }
-            require(['markerclustererCompiled'], function() {
-                APC.views.mapDemanda.markerCluster = new MarkerClusterer(APC.views.mapDemanda.map, self.markers, {
-                    maxZoom: 11,
-                    gridSize: 50
+            if (typeof this.models === "undefined") {
+                console.log("initMapMarkersWithDb: Nothing!");
+                APC.collections.demCollection.initMapMarkersWithDb();
+            } else {
+                self.markers = [];
+                $.each(self.models, function(k1, v1) {
+                    //if (v1.get("long") > 0 || v1.get("lat") > 0)
+                    self.createMarker(v1.get("RowKey"), v1.get("territorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
                 });
-            });
-            // APC.views.mapDemanda.map.fitBounds(self.bounds);
+
+                if (typeof APC.views.mapDemanda.markerCluster !== "undefined") {
+                    APC.views.mapDemanda.markerCluster.clearMarkers();
+                }
+                require(['markerclustererCompiled'], function() {
+                    APC.views.mapDemanda.markerCluster = new MarkerClusterer(APC.views.mapDemanda.map, self.markers, {
+                        maxZoom: 11,
+                        gridSize: 50
+                    });
+                });
+                // APC.views.mapDemanda.map.fitBounds(self.bounds);
+            }
         },
 
         initMapMarkersWithGeo: function() {

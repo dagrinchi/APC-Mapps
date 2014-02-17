@@ -52,9 +52,7 @@ define(function(require) {
             this.baseapc.execute(self.sql, model, function(data) {
                 self.reset(data);
                 deferred.resolve();
-                setTimeout(function() {
-                    self.initMapMarkersWithDb();
-                }, 3000);
+                setTimeout(self.initMapMarkersWithDb, 2000);
             });
             return deferred.promise();
         },
@@ -66,9 +64,7 @@ define(function(require) {
             this.baseapc.execute(this.buildSQL(), model, function(data) {
                 self.reset(data);
                 deferred.resolve();
-                setTimeout(function() {
-                    self.initMapMarkersWithDb();
-                }, 3000);
+                self.initMapMarkersWithDb();
             });
 
             return deferred.promise();
@@ -104,24 +100,28 @@ define(function(require) {
             return sql;
         },
 
-        initMapMarkersWithDb: function() {
-            this.markers = [];
+        initMapMarkersWithDb: function() {            
             var self = this;
-
-            $.each(this.models, function(k1, v1) {
-                self.createMarker(v1.get("RowKey"), v1.get("terrirorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
-            });
-
-            if (typeof APC.views.mapCooperacion.markerCluster !== "undefined") {
-                APC.views.mapCooperacion.markerCluster.clearMarkers();
-            }
-            require(['markerclustererCompiled'], function() {
-                APC.views.mapCooperacion.markerCluster = new MarkerClusterer(APC.views.mapCooperacion.map, self.markers, {
-                    maxZoom: 11,
-                    gridSize: 50
+            if (typeof this.models === "undefined") {
+                console.log("initMapMarkersWithDb: Nothing!");
+                APC.collections.coopCollection.initMapMarkersWithDb();
+            } else {
+                self.markers = [];
+                $.each(self.models, function(k1, v1) {
+                    self.createMarker(v1.get("RowKey"), v1.get("terrirorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
                 });
-            });
-            // APC.views.mapCooperacion.map.fitBounds(self.bounds);
+
+                if (typeof APC.views.mapCooperacion.markerCluster !== "undefined") {
+                    APC.views.mapCooperacion.markerCluster.clearMarkers();
+                }
+                require(['markerclustererCompiled'], function() {
+                    APC.views.mapCooperacion.markerCluster = new MarkerClusterer(APC.views.mapCooperacion.map, self.markers, {
+                        maxZoom: 11,
+                        gridSize: 50
+                    });
+                });
+                // APC.views.mapCooperacion.map.fitBounds(self.bounds);    
+            }
         },
 
         createMarker: function(RowKey, add, lat, lng) {

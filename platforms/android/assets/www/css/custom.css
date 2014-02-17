@@ -633,3 +633,6 @@ h2 {
     float: left;
     padding-top: 15px;
 }
+.componentBody {
+    padding-left: 40px;
+}

@@ -101,6 +101,7 @@ h1, h2, h3 {
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 1;
     /*background-color: #ff5500;
     opacity: 0.2;*/
 }
@@ -128,6 +129,7 @@ h1, h2, h3 {
     position: absolute;
     right: 0;   
     width: 100%;
+    z-index: 1;
     /*background-color: #27ae27;
     opacity: 0.2;*/
 }
@@ -444,4 +446,9 @@ and (orientation : portrait) {
     display: table;
     margin: 1px;
     width: 100%;
+}
+
+.selectionBadge {
+    --moz-opacity: 0.8;
+    opacity: 0.8;
 }

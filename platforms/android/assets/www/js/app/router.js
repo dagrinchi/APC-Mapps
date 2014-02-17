@@ -109,8 +109,8 @@ define(function(require) {
                         'app/collections/proAreas',
                         'app/collections/cooperacion',
                         'app/views/prioridades'
-                    ], function(
-                        DemandaCollection,
+                    ], function(         
+                        DemandaCollection,               
                         DemActoresCollection,
                         DemTerritoriosCollection,
                         DemMunicipiosCollection,
@@ -144,8 +144,7 @@ define(function(require) {
                         if (typeof APC.collections.coopCollection === 'undefined')
                             APC.collections.coopCollection = new CooperacionCollection();
 
-                        $.when(APC.collections.demCollection.findAll(),
-                            APC.collections.coopCollection.findAll(),
+                        $.when(APC.collections.coopCollection.findAll(),
                             APC.collections.demActoresCollection.findAll(),
                             APC.collections.demTerritoriosCollection.findAll(),
                             APC.collections.demMunicipiosCollection.findAll(),
@@ -293,7 +292,8 @@ define(function(require) {
         ejecutas: function() {
             $("#loadingBox").fadeIn();
             require(['app/views/ejecutas'], function(EjecutasView) {
-                APC.views.ejecutasView = new EjecutasView();
+                if (typeof APC.views.ejecutasView === "undefined")
+                    APC.views.ejecutasView = new EjecutasView();
                 APC.views.ejecutasView.render();
             });
         },
@@ -302,7 +302,8 @@ define(function(require) {
             $("#loadingBox").fadeIn();
             if (this.checkConnection()) {
                 require(['app/views/acercade'], function(AcercadeView) {
-                    APC.views.acercadeView = new AcercadeView();
+                    if (typeof APC.views.acercadeView === "undefined")
+                        APC.views.acercadeView = new AcercadeView();
                     APC.views.acercadeView.render();
                 });
             } else {

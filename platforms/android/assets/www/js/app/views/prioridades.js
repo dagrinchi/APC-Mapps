@@ -56,10 +56,12 @@ define(function(require) {
                 console.log("Bye modal");
                 self.$el.remove();
             });
-            this.$el.on('shown', function() {   
+            this.$el.on('shown', function() {
                 require(['iscroll'], function() {
-                    var scroll = new IScroll('#modalList', { mouseWheel: true });  
-                });                            
+                    var scroll = new IScroll('#modalList', {
+                        mouseWheel: true
+                    });
+                });
             });
         },
 
@@ -90,7 +92,7 @@ define(function(require) {
                 }
             } else if (table === "dci") {
                 switch (cols) {
-                    case "codigoarea":
+                    case "codigocomponente":
                         APC.collections.demCollection.findBySelection();
                         APC.collections.coopCollection.findBySelection();
                         break;
@@ -106,14 +108,32 @@ define(function(require) {
 
             require(['app/collections/selection', 'app/views/selection'], function(selectionColl, selectionView) {
 
-                APC.collections[table + 'Selection'] = new selectionColl();
-                $.when(APC.collections[table + 'Selection'].find(table)).done(function() {
-                    APC.views[table + 'Selection'] = new selectionView({
-                        collection: APC.collections[table + 'Selection'],
-                        table: table
+                if (table === "demanda") {
+                    if (cols === "codigoenci" || cols === "territorio") {
+                        APC.collections['dciSelection'] = new selectionColl();
+                        drawSelection('dci', APC.collections['dciSelection']);
+                    } else if (typeof APC.collections['dciSelection'] !== "undefined") {
+                        APC.collections['dciSelection'].reset();
+                    }
+                    APC.collections['demandaSelection'] = new selectionColl();
+                    drawSelection('demanda', APC.collections['demandaSelection']);
+                } else if (table === "dci") {
+                    APC.collections['demandaSelection'] = new selectionColl();
+                    drawSelection('demanda', APC.collections['demandaSelection']);
+                    APC.collections['dciSelection'] = new selectionColl();
+                    drawSelection('dci', APC.collections['dciSelection']);                    
+                }
+                
+                function drawSelection(table, collection) {
+                    $.when(collection.findSelection(table)).done(function() {
+                        APC.views[table + 'Selection'] = new selectionView({
+                            collection: collection,
+                            table: table
+                        });
+                        $("#" + table + "SelectionList").html(APC.views[table + 'Selection'].render().$el);
                     });
-                    $("#" + table + "SelectionList").html(APC.views[table + 'Selection'].render().$el);
-                });
+                }
+                
             });
         },
 
@@ -122,10 +142,10 @@ define(function(require) {
             if (e.currentTarget.checked) {
                 APC.selection[self.options.table]["cols"][self.options.cols].push(e.currentTarget.value);
                 if (self.options.table === "demanda" && self.options.cols === "codigoenci") {
-                    APC.selection["dci"]["cols"]["codigoarea"].push(e.currentTarget.value);
+                    APC.selection["dci"]["cols"]["codigocomponente"].push(e.currentTarget.value);
                 } else if (self.options.table === "demanda" && self.options.cols === "territorio") {
                     APC.selection["dci"]["cols"]["terrirorio"].push(e.currentTarget.value);
-                } else if (self.options.table === "dci" && self.options.cols === "codigoarea") {
+                } else if (self.options.table === "dci" && self.options.cols === "codigocomponente") {
                     APC.selection["demanda"]["cols"]["codigoenci"].push(e.currentTarget.value);
                 } else if (self.options.table === "dci" && self.options.cols === "terrirorio") {
                     APC.selection["demanda"]["cols"]["territorio"].push(e.currentTarget.value);
@@ -133,10 +153,10 @@ define(function(require) {
             } else {
                 APC.selection[self.options.table]["cols"][self.options.cols].splice(APC.selection[self.options.table]["cols"][self.options.cols].indexOf(e.currentTarget.value), 1);
                 if (self.options.table === "demanda" && self.options.cols === "codigoenci") {
-                    APC.selection["dci"]["cols"]["codigoarea"].splice(APC.selection["dci"]["cols"]["codigoarea"].indexOf(e.currentTarget.value), 1);
+                    APC.selection["dci"]["cols"]["codigocomponente"].splice(APC.selection["dci"]["cols"]["codigocomponente"].indexOf(e.currentTarget.value), 1);
                 } else if (self.options.table === "demanda" && self.options.cols === "territorio") {
                     APC.selection["dci"]["cols"]["terrirorio"].splice(APC.selection["dci"]["cols"]["terrirorio"].indexOf(e.currentTarget.value), 1);
-                } else if (self.options.table === "dci" && self.options.cols === "codigoarea") {
+                } else if (self.options.table === "dci" && self.options.cols === "codigocomponente") {
                     APC.selection["demanda"]["cols"]["codigoenci"].splice(APC.selection["demanda"]["cols"]["codigoenci"].indexOf(e.currentTarget.value), 1);
                 } else if (self.options.table === "dci" && self.options.cols === "terrirorio") {
                     APC.selection["demanda"]["cols"]["territorio"].splice(APC.selection["demanda"]["cols"]["territorio"].indexOf(e.currentTarget.value), 1);
@@ -146,8 +166,8 @@ define(function(require) {
 
         render: function() {
             this.$el.html(this.template);
-            this.$el.modal('show');            
-            this.$el.children(".modal-body").height($(window).height() - 220);            
+            this.$el.modal('show');
+            this.$el.children(".modal-body").height($(window).height() - 220);
             return this;
         }
     });
@@ -157,8 +177,8 @@ define(function(require) {
 
         template: _.template(tpl),
 
-        initialize: function() {
-
+        initialize: function() {        
+            
         },
 
         events: {
@@ -187,7 +207,7 @@ define(function(require) {
             APC.selection.dci = {
                 cols: {
                     'terrirorio': [],
-                    'codigoarea': [],
+                    'codigocomponente': [],
                     'lat': [],
                     'long': []
                 }
@@ -325,9 +345,9 @@ define(function(require) {
                 title: "Áreas",
                 list: APC.views.proAreasListView.render().$el.html(),
                 table: "dci",
-                cols: "codigoarea"
+                cols: "codigocomponente"
             });
-            APC.views.proAreasModalListView.render();            
+            APC.views.proAreasModalListView.render();
         },
 
         render: function() {

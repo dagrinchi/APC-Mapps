@@ -20,7 +20,7 @@ define(function(require) {
 		map: {},
 
 		mapOptions: {
-			zoom: 3,
+			zoom: 2,
 			minZoom: 2,
 			maxZoom: 12,
 			mapTypeControl: false,
