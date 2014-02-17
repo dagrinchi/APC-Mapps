@@ -21,7 +21,10 @@ define(function(require) {
 
     var listItemView = Backbone.View.extend({
         tagName: 'li',
-        className: '',        
+        className: 'topcoat-list__item',
+        attributes: {
+            "style" : "padding-top: 0px; padding-bottom: 0px;"
+        },        
         template: _.template(coopMarker),
         render: function() {                                    
             this.$el.html(this.template(this.model.toJSON()));
