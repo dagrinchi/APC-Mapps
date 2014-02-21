@@ -33,7 +33,7 @@ define(function(require) {
             require(['iscroll'], function() {                
                 var scroll = new IScroll('#acercadePage', { scrollY: true, scrollX: false });  
             });
-            $(".container").height($(window).height() - 117);
+            $(".container").height($(window).height() - 155);
             return this;
         }
     });

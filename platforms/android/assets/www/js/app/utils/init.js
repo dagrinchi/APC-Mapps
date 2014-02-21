@@ -13,7 +13,8 @@ define(function(require) {
 	"use strict";
 
 	var $ = require('jquery'),
-		dane = require('app/fixtures/dane');
+		dane = require('app/fixtures/dane'),
+		moment = require('moment');
 
 	var app = {
 
@@ -40,11 +41,9 @@ define(function(require) {
 		checkUpdatedData: function() {
 			console.log("checkUpdatedData: Comprobando si los datos están actualizados!");
 			app.deferred.notify({ msg: "Comprobando datos actualizados!" , count: 0 });
-			var s = new Date();
-			s.setMonth(s.getMonth() - 3);
-			var updated = window.localStorage.getItem("updated");
-			var u = new Date(updated);
-			if (updated && u > s) {
+			var updated = window.localStorage.getItem("updated");			
+
+			if (updated && moment() < moment(updated).add(7, "days")) {
 				console.log("checkUpdatedData: Los datos están actualizados! " + updated);
 				return true;
 			} else {

@@ -23,8 +23,7 @@ define(function(require) {
 
     return Backbone.Collection.extend({
 
-        sql: "SELECT DISTINCT * FROM dci INNER JOIN (SELECT DISTINCT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON dane.nomdep LIKE dci.terrirorio WHERE dane.codmun = '' GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ",
-
+        sql: "SELECT DISTINCT * FROM dci INNER JOIN (SELECT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON (dane.nomdep LIKE dci.terrirorio and dane.codmun = '') or(dane.nommun LIKE dci.terrirorio) GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ", 
         markers: [],
 
         delay: 100,
@@ -52,7 +51,7 @@ define(function(require) {
             this.baseapc.execute(self.sql, model, function(data) {
                 self.reset(data);
                 deferred.resolve();
-                setTimeout(self.initMapMarkersWithDb, 2000);
+                setTimeout(self.initMapMarkersWithDb, 3000);
             });
             return deferred.promise();
         },
@@ -97,6 +96,7 @@ define(function(require) {
                 });
                 sql += ")";
             });
+                                      console.log(sql);
             return sql;
         },
 

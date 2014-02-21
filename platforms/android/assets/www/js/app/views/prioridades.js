@@ -139,17 +139,26 @@ define(function(require) {
 
         chkItem: function(e) {
             var self = this;
+
             if (e.currentTarget.checked) {
-                APC.selection[self.options.table]["cols"][self.options.cols].push(e.currentTarget.value);
-                if (self.options.table === "demanda" && self.options.cols === "codigoenci") {
-                    APC.selection["dci"]["cols"]["codigocomponente"].push(e.currentTarget.value);
-                } else if (self.options.table === "demanda" && self.options.cols === "territorio") {
-                    APC.selection["dci"]["cols"]["terrirorio"].push(e.currentTarget.value);
-                } else if (self.options.table === "dci" && self.options.cols === "codigocomponente") {
-                    APC.selection["demanda"]["cols"]["codigoenci"].push(e.currentTarget.value);
-                } else if (self.options.table === "dci" && self.options.cols === "terrirorio") {
-                    APC.selection["demanda"]["cols"]["territorio"].push(e.currentTarget.value);
+
+                if (APC.selection[self.options.table]["cols"][self.options.cols].length >= 4) {
+                    navigator.notification.alert('Sólo puedes hacer una selección de máximo 4 items!', function() {}, 'Atención', 'Aceptar');
+                    return false;
+                } else {
+                    APC.selection[self.options.table]["cols"][self.options.cols].push(e.currentTarget.value);
+                    if (self.options.table === "demanda" && self.options.cols === "codigoenci") {
+                        APC.selection["dci"]["cols"]["codigocomponente"].push(e.currentTarget.value);
+                    } else if (self.options.table === "demanda" && self.options.cols === "territorio") {
+                        APC.selection["dci"]["cols"]["terrirorio"].push(e.currentTarget.value);
+                    } else if (self.options.table === "dci" && self.options.cols === "codigocomponente") {
+                        APC.selection["demanda"]["cols"]["codigoenci"].push(e.currentTarget.value);
+                    } else if (self.options.table === "dci" && self.options.cols === "terrirorio") {
+                        APC.selection["demanda"]["cols"]["territorio"].push(e.currentTarget.value);
+                    }
                 }
+
+
             } else {
                 APC.selection[self.options.table]["cols"][self.options.cols].splice(APC.selection[self.options.table]["cols"][self.options.cols].indexOf(e.currentTarget.value), 1);
                 if (self.options.table === "demanda" && self.options.cols === "codigoenci") {
@@ -162,6 +171,9 @@ define(function(require) {
                     APC.selection["demanda"]["cols"]["territorio"].splice(APC.selection["demanda"]["cols"]["territorio"].indexOf(e.currentTarget.value), 1);
                 }
             }
+
+            return true;
+
         },
 
         render: function() {

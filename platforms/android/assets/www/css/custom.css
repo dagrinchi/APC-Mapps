@@ -35,6 +35,14 @@ h2 {
     }
     #logos {
         margin-left: 0%;
+    }    
+}
+@media (max-width:320px) {
+    /* smartphones, iPhone, portrait 480x320 phones */ 
+    #demandCollapse button, #cooperationCollapse button {
+        min-height: 25px;
+        height: 25px;
+        line-height: 4px;
     }
 }
 @media (min-width:481px) { 

@@ -358,6 +358,7 @@
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/lib/iscroll.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/lib/jquery.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/lib/markerclustererCompiled.js \
+/Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/lib/moment.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/lib/require.js \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/lib/requirejs-plugins \
 /Users/david/phonegap-projects/APC-Mapps/platforms/android/assets/www/js/lib/text.js \

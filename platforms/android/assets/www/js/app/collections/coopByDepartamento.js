@@ -22,7 +22,7 @@ define(function(require) {
 
     return Backbone.Collection.extend({
 
-        sql: "SELECT DISTINCT * FROM dci INNER JOIN (SELECT DISTINCT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON dane.nomdep LIKE dci.terrirorio WHERE dane.codmun = '' GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ",
+        sql: "SELECT DISTINCT * FROM dci INNER JOIN (SELECT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON (dane.nomdep LIKE dci.terrirorio and dane.codmun = '') or(dane.nommun LIKE dci.terrirorio) GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ", 
 
         baseapc : {},
 
