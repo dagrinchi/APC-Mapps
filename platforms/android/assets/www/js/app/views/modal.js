@@ -74,28 +74,34 @@ define(function(require) {
         },
 
         render: function() {
-            var self = this;
-            var listElement = new listEl({
-                collection : this.collection
-            });
+            console.log("render demanda modal!");
+            if (this.collection.models.length > 0) {
 
-            this.$el.html(_.template(modalTpl, {
-                title: self.options.title
-            }));           
+                var self = this;
+                var listElement = new listEl({
+                    collection : this.collection
+                });
 
-            $("body").append(this.el);
+                this.$el.html(_.template(modalTpl, {
+                    title: self.options.title
+                }));           
 
-            this.$el.children(".modal-body").height($(window).height() - 220);
-            $("#ModalList").children().html(listElement.render().el);
+                $("body").append(this.el);
 
-            this.$el.on('shown', function() {   
-                require(['iscroll'], function() {
-                    var scroll = new IScroll('#ModalList', { tap: true });  
-                });                            
-            });
+                this.$el.children(".modal-body").height($(window).height() - 220);
+                $("#ModalList").children().html(listElement.render().el);
 
-            
-            this.$el.modal('show');
+                this.$el.on('shown', function() {   
+                    require(['iscroll'], function() {
+                        var scroll = new IScroll('#ModalList', { tap: true });  
+                    });                            
+                });
+
+                
+                this.$el.modal('show');
+            } else {
+                this.render();
+            }
             return this;
         }
     });

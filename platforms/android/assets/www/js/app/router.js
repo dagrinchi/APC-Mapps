@@ -108,9 +108,10 @@ define(function(require) {
                         'app/collections/proTerritorios',
                         'app/collections/proAreas',
                         'app/collections/cooperacion',
-                        'app/views/prioridades'
-                    ], function(         
-                        DemandaCollection,               
+                        'app/views/prioridades',
+                        'backbone-relational'
+                    ], function(
+                        DemandaCollection,
                         DemActoresCollection,
                         DemTerritoriosCollection,
                         DemMunicipiosCollection,

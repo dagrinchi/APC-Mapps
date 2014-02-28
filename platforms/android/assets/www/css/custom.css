@@ -585,7 +585,7 @@ h2 {
     border-bottom: 1px solid #9daca9;
 }
 
-#botonCompartirDirectorio{
+.botonCompartirDirectorio{
     bottom: 30px;
     right: 0px;
 }
@@ -623,10 +623,10 @@ h2 {
     background-repeat: no-repeat;
     background-position: center;
 }
-#dirList {
+/*#dirList {
     width: 100% !important;
     position: fixed;
-}
+}*/
 #leftcolumn {
     width: 100px; 
     border: 0px solid red; 

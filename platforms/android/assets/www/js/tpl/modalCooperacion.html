@@ -1,16 +1,33 @@
- <div class="modal-header">
+<div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3><%= title %></h3>
+    <% _.each(dci, function(d1) { %>
+    	<h3><%= d1.terrirorio %></h3>
+    <% }); %>
 </div>
-<div class="modal-body" id="dciDetalle">
+<div id="dciDetalle" class="modal-body">
 	<div id="scroller">
-		<p style="font-weight: bold; margin-bottom: 3px;">Punto focal:</p>
-		<p><%= puntofocal %></p>
-		<p style="font-weight: bold; margin-bottom: 3px;">Dirección punto focal:</p>
-		<p><%= direccionpuntofocal %></p>
-		<p style="font-weight: bold; margin-bottom: 3px;">Miembros del comité:</p>
-		<p><%= miembrosdelcomite %></p>
-		<ul class="topcoat-list"><%= content %></ul>
+		<% _.each(dci, function(d) { %>
+			<div>
+				<p style="font-weight: bold; margin-bottom: 3px;">Punto focal:</p>
+				<p><%= d.puntofocal %></p>
+				<p style="font-weight: bold; margin-bottom: 3px;">Dirección punto focal:</p>
+				<p><%= d.direccionpuntofocal %></p>
+				<p style="font-weight: bold; margin-bottom: 3px;">Miembros del comité:</p>
+				<p><%= d.miembrocomite %></p>
+			</div>
+			<ul class="topcoat-list">		
+				<% _.each(d.areas, function(a) { %>
+				<li class="topcoat-list__item" style="padding-top: 0px; padding-bottom: 0px;">
+					<p style="font-weight: bold; margin-bottom: 3px;">Area:</p>
+					<p><%= a.codigoarea %> <%= a.areacooperacion %></p>
+					<p class="componentBody" style="font-weight: bold; margin-bottom: 3px;">Componentes:</p>
+					<% _.each(a.componentes, function(c) { %>
+						<p class="componentBody"><%= c.codigocomponente %> <%= c.componentecooperacion %></p>
+					<% }); %>
+				</li>
+				<% }); %>			
+			</ul>
+		<% }); %>
 	</div>
 </div>
 <div class="modal-footer">    

@@ -213,9 +213,7 @@ define(function(require) {
                         title: add,
                         collection: APC.collections.demByMunicipios
                     });
-                    setTimeout(function() {
-                        modal.render();
-                    }, 600);
+                    modal.render();
                 });
             });
 

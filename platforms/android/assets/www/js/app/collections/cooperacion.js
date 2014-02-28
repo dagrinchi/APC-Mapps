@@ -23,7 +23,7 @@ define(function(require) {
 
     return Backbone.Collection.extend({
 
-        sql: "SELECT DISTINCT * FROM dci INNER JOIN (SELECT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON (dane.nomdep LIKE dci.terrirorio and dane.codmun = '') or(dane.nommun LIKE dci.terrirorio) GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ", 
+        sql: "SELECT DISTINCT * FROM dci INNER JOIN (SELECT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON (dane.nomdep LIKE dci.terrirorio and dane.codmun = '') or(dane.nommun LIKE dci.terrirorio) GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ",
         markers: [],
 
         delay: 100,
@@ -51,7 +51,7 @@ define(function(require) {
             this.baseapc.execute(self.sql, model, function(data) {
                 self.reset(data);
                 deferred.resolve();
-                setTimeout(self.initMapMarkersWithDb, 3000);
+                setTimeout(self.initMapMarkersWithDb, 3500);
             });
             return deferred.promise();
         },
@@ -96,14 +96,13 @@ define(function(require) {
                 });
                 sql += ")";
             });
-                                      console.log(sql);
+            console.log(sql);
             return sql;
         },
 
-        initMapMarkersWithDb: function() {            
+        initMapMarkersWithDb: function() {
             var self = this;
-            if (typeof this.models === "undefined") {
-                console.log("initMapMarkersWithDb: Nothing!");
+            if (typeof this.models === "undefined" || this.models.length <= 0) {
                 APC.collections.coopCollection.initMapMarkersWithDb();
             } else {
                 self.markers = [];
@@ -149,15 +148,32 @@ define(function(require) {
                 APC.selection.dci.cols['terrirorio'] = [];
                 APC.selection.dci.cols['terrirorio'].push(add);
 
-                $.when(APC.collections.coopByDepartamento.findByDepartamento()).done(function() {
-                    var modal = new modalView({
-                        id: RowKey,
-                        title: add,
-                        collection: APC.collections.coopByDepartamento
-                    });
-                    setTimeout(function() {
-                        modal.render();
-                    }, 600);
+                APC.collections.coopByDepartamento.fetch({
+                    success: function(territorioCollection) {
+                        territorioCollection.each(function(territorio) {
+                            territorio.get("areas").fetch({
+                                success: function(areasCollection) {
+                                    var len = areasCollection.length;
+                                    areasCollection.each(function(area, k) {
+                                        area.get("componentes").fetch({
+                                            data: area.get("codigoarea"),
+                                            success: function(componentesCollection) {
+                                                if (len === k + 1) {
+                                                    var modal = new modalView({
+                                                        id: RowKey,
+                                                        title: add,
+                                                        collection: APC.collections.coopByDepartamento
+                                                    });
+                                                    modal.render();
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            });
+                        });
+
+                    }
                 });
 
                 // self.infowindow.setContent(add);

@@ -23,8 +23,12 @@ define(function(require) {
 		className: 'topcoat-list__item',
 		template: _.template(directorioItemTpl),
 
-		events: {
-			"click .share": "btnShare"
+		initialize: function() {
+			var self = this;
+			var data = this.model.toJSON();			
+			this.$el.on("tap", function() {
+				self.btnShare();
+			});
 		},
 
 		btnShare: function(e) {

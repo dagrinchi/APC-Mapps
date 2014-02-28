@@ -431,10 +431,6 @@ and (orientation : portrait) {
     cursor: default;
 }
 
-#projectList, #dirList, #sursurList {
-    overflow: scroll !important;
-}
-
 .selectionList {
     margin: 0;
     padding: 0;
