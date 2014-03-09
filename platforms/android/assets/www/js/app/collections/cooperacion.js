@@ -136,6 +136,8 @@ define(function(require) {
 
             google.maps.event.addListener(marker, 'click', function() {
 
+                $("#loadingBox").fadeIn();
+
                 if (typeof APC.collections.coopByDepartamento === 'undefined')
                     APC.collections.coopByDepartamento = new coopByDepto();
 
@@ -159,6 +161,7 @@ define(function(require) {
                                             data: area.get("codigoarea"),
                                             success: function(componentesCollection) {
                                                 if (len === k + 1) {
+                                                    $("#loadingBox").hide();
                                                     var modal = new modalView({
                                                         id: RowKey,
                                                         title: add,

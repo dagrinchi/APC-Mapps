@@ -239,6 +239,7 @@ and (orientation : portrait) {
     background-color: #000;
     opacity: 0.5;
     display: none;
+    z-index: 1000;
 }
 
 .introWrapper {
