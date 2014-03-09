@@ -46,11 +46,10 @@ define(function(require) {
 
         findByNameNext: function(key) {
             var self = this;
-            this.surByNameOff = 0;
             var sql = "SELECT DISTINCT RowKey, programaproyectoactividad proyectoprograma FROM sursur WHERE programaproyectoactividad LIKE '%" + key + "%' ORDER BY programaproyectoactividad LIMIT  " + this.surByNameOff + ", " + this.surLimit;
             this.baseapc.execute(sql, model, function(data) {
                 if (data.length > 0) {
-                    self.reset(data);
+                    self.add(data);
                 }
             });
         },

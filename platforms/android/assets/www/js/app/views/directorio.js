@@ -23,12 +23,16 @@ define(function(require) {
 		className: 'topcoat-list__item',
 		template: _.template(directorioItemTpl),
 
+		events: {
+			"click .share" : "btnShare"
+		},
+
 		initialize: function() {
 			var self = this;
-			var data = this.model.toJSON();			
-			this.$el.on("tap", function() {
-				self.btnShare();
-			});
+			var data = this.model.toJSON();
+			// this.$el.on("tap", function() {
+			// 	self.btnShare();
+			// });
 		},
 
 		btnShare: function(e) {
@@ -53,6 +57,14 @@ define(function(require) {
 
 		initialize: function() {
 			this.collection.bind("reset", this.render, this);
+			this.collection.bind("add", this.addOne, this);
+		},
+
+		addOne: function(contacto) {
+			var contactView = new DirectorioItemView({
+				model : contacto
+			});
+			this.$el.append(contactView.render().el);
 		},
 
 		render: function() {
@@ -76,9 +88,26 @@ define(function(require) {
 
 		search: function(event) {
 			var key = $('#search-dir').val();
-			this.collection.findByName(key);
+			if (key.length > 0) {
+				this.collection.findByName(key);
+			} else {
+				this.collection.findAll();
+			}
 		},
-		
+
+		scrollDirectorio: function() {
+			if (this.y === this.maxScrollY) {
+				if ($('#search-dir').val().length > 0) {
+					APC.collections.directorioCollection.offByName += 20;
+					APC.collections.directorioCollection.findByNameNext($('#search-dir').val());
+				} else {
+					APC.collections.directorioCollection.offset += 20;
+					APC.collections.directorioCollection.findNext();
+				}
+				this.refresh();
+			}
+		},
+
 		render: function() {
 			var self = this;
 			var list = new DirectorioListView({
@@ -89,9 +118,12 @@ define(function(require) {
 			$("#dirList").height($(window).height() - 118);
 			$("#dirList").children().html(list.render().el);
 
-			require(['iscroll'], function() {                
-                var dirScroll = new IScroll('#dirList', { tap: true });  
-            });
+			require(['iscroll'], function() {
+				var dirScroll = new IScroll('#dirList', {
+					tap: true
+				});
+				dirScroll.on("scrollEnd", self.scrollDirectorio);
+			});
 
 			return this;
 		}

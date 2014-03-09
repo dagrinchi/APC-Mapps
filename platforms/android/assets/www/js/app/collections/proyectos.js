@@ -45,11 +45,10 @@ define(function(require) {
 
         findByNameNext: function(key) {
             var self = this;
-            this.proByNameOff = 0;
             var sql = "SELECT DISTINCT RowKey, proyectoprograma FROM demanda WHERE proyectoprograma LIKE '%" + key + "%' GROUP BY codigoproyecto ORDER BY proyectoprograma LIMIT  " + this.proByNameOff + ", " + this.proLimit;
             this.baseapc.execute(sql, model, function(data) {
                 if (data.length > 0) {
-                    self.reset(data);
+                    self.add(data);
                 }
             });
         },
@@ -63,7 +62,6 @@ define(function(require) {
                 self.reset(data);
                 deferred.resolve();
             });
-
             return deferred.promise();
         },
 

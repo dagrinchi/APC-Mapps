@@ -132,8 +132,14 @@
 
      searchProyectos: function(event) {
        var key = $('#search-project').val();
-       APC.collections.proCollection.findByName(key);
-       APC.collections.sursurProCollection.findByName(key);
+       if (key.length > 0) {
+         APC.collections.proCollection.findByName(key);
+         APC.collections.sursurProCollection.findByName(key);
+       } else {
+         APC.collections.proCollection.findAll();
+         APC.collections.sursurProCollection.findAll();
+       }
+
        // $("#projectList").off("scroll");
        // $("#sursurList").off("scroll");
      },
@@ -168,25 +174,29 @@
      },
 
      scrollProyectosList: function() {
-       APC.collections.proCollection.proOff += 20;
-       if ($('#search-project').val().length > 0) {
-         APC.collections.proCollection.findByNameNext();
-       } else {
-         APC.collections.proCollection.findNext();
+       if (this.y === this.maxScrollY) {
+         if ($('#search-project').val().length > 0) {
+           APC.collections.proCollection.proByNameOff += 20;
+           APC.collections.proCollection.findByNameNext($('#search-project').val());
+         } else {
+           APC.collections.proCollection.proOff += 20;
+           APC.collections.proCollection.findNext();
+         }
+         this.refresh();
        }
-       this.refresh();
      },
 
      scrollSursurList: function() {
-       APC.collections.sursurProCollection.surOff += 20;
-       if ($('#search-project').val().length > 0) {
-          console.log("findByNameNext()");
-         APC.collections.sursurProCollection.findByNameNext();
-       } else {
-          console.log("findNext()");
-         APC.collections.sursurProCollection.findNext();
+       if (this.y === this.maxScrollY) {
+         if ($('#search-project').val().length > 0) {
+           APC.collections.sursurProCollection.surOsurByNameOff += 20;
+           APC.collections.sursurProCollection.findByNameNext($('#search-project').val());
+         } else {
+           APC.collections.sursurProCollection.surOff += 20;
+           APC.collections.sursurProCollection.findNext();
+         }
+         this.refresh();
        }
-       this.refresh();
      },
 
      render: function() {
