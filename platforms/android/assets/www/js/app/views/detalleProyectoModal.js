@@ -20,7 +20,7 @@ define(function(require) {
 
     return Backbone.View.extend({
 
-        className: "modal hide fade",
+        className: "modal hide",
 
         template: _.template(tpl),
 

@@ -45,7 +45,7 @@ define(function(require) {
 
     var modalList = Backbone.View.extend({
 
-        className: "modal hide fade",
+        className: "modal hide",
 
         initialize: function() {
             var self = this;
