@@ -35,25 +35,30 @@ define(function(require) {
 				data: this.model.toJSON()
 			};
 			var table = this.options.table;
+			var tmp = _.keys(data.data);
 			var cols;
-			_.each(data.data, function(item, key) {
-				cols = key;
-				if (table === "demanda" && cols === "codigoenci") {
-					APC.selection["demanda"]["cols"]["codigoenci"].splice(APC.selection["demanda"]["cols"]["codigoenci"].indexOf(item), 1);
-					APC.selection["dci"]["cols"]["codigocomponente"].splice(APC.selection["dci"]["cols"]["codigocomponente"].indexOf(item), 1);
-				} else if (table === "demanda" && cols === "territorio") {
-					APC.selection["demanda"]["cols"]["territorio"].splice(APC.selection["demanda"]["cols"]["territorio"].indexOf(item), 1);
-					APC.selection["dci"]["cols"]["terrirorio"].splice(APC.selection["dci"]["cols"]["terrirorio"].indexOf(item), 1);
-				} else if (table === "dci" && cols === "codigocomponente") {
-					APC.selection["demanda"]["cols"]["codigoenci"].splice(APC.selection["demanda"]["cols"]["codigoenci"].indexOf(item), 1);
-					APC.selection["dci"]["cols"]["codigocomponente"].splice(APC.selection["dci"]["cols"]["codigocomponente"].indexOf(item), 1);
-				} else if (table === "dci" && cols === "terrirorio") {
-					APC.selection["demanda"]["cols"]["territorio"].splice(APC.selection["demanda"]["cols"]["territorio"].indexOf(item), 1);
-					APC.selection["dci"]["cols"]["terrirorio"].splice(APC.selection["dci"]["cols"]["terrirorio"].indexOf(item), 1);
-				} else {
-					APC.selection[table]["cols"][cols].splice(APC.selection[table]["cols"][cols].indexOf(item), 1);
-				}
-			});
+
+			if (typeof tmp[1] !== "undefined") {
+				cols = tmp[1];
+			} else {
+				cols = tmp[0];
+			}
+
+			if (table === "demanda" && cols === "codigoenci") {
+				APC.selection["demanda"]["cols"]["codigoenci"].splice(APC.selection["demanda"]["cols"]["codigoenci"].indexOf(data.data[cols]), 1);
+				APC.selection["dci"]["cols"]["codigocomponente"].splice(APC.selection["dci"]["cols"]["codigocomponente"].indexOf(data.data[cols]), 1);
+			} else if (table === "demanda" && cols === "territorio") {
+				APC.selection["demanda"]["cols"]["territorio"].splice(APC.selection["demanda"]["cols"]["territorio"].indexOf(data.data[cols]), 1);
+				APC.selection["dci"]["cols"]["terrirorio"].splice(APC.selection["dci"]["cols"]["terrirorio"].indexOf(data.data[cols]), 1);
+			} else if (table === "dci" && cols === "codigocomponente") {
+				APC.selection["demanda"]["cols"]["codigoenci"].splice(APC.selection["demanda"]["cols"]["codigoenci"].indexOf(data.data[cols]), 1);
+				APC.selection["dci"]["cols"]["codigocomponente"].splice(APC.selection["dci"]["cols"]["codigocomponente"].indexOf(data.data[cols]), 1);
+			} else if (table === "dci" && cols === "terrirorio") {
+				APC.selection["demanda"]["cols"]["territorio"].splice(APC.selection["demanda"]["cols"]["territorio"].indexOf(data.data[cols]), 1);
+				APC.selection["dci"]["cols"]["terrirorio"].splice(APC.selection["dci"]["cols"]["terrirorio"].indexOf(data.data[cols]), 1);
+			} else {
+				APC.selection[table]["cols"][cols].splice(APC.selection[table]["cols"][cols].indexOf(data.data[cols]), 1);
+			}
 
 			if (table === "demanda") {
 				switch (cols) {
@@ -90,7 +95,7 @@ define(function(require) {
 
 		render: function() {
 			var self = this;
-			var list = '<% _.each(data, function(item, key) { %><i class="icon-remove icon-white"></i> <%= item %><% }); %>';
+			var list = '<% $.each(data, function(key, item) { %><i class="icon-remove icon-white"></i> <%= item %><% return false; }); %>';
 			var data = {
 				data: this.model.toJSON()
 			};

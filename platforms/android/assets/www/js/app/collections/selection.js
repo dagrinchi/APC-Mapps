@@ -45,9 +45,9 @@ define(function(require) {
             var select = selection.cols.join();
             var sql = "SELECT DISTINCT ";
             if (select === "codigoenci") {
-                sql += select + " || ' ' || enci codigoenci FROM " + table;    
+                sql += select + " || ' ' || enci enci, codigoenci FROM " + table;    
             } else if (select === "codigocomponente") {
-                sql += select + " || ' ' || componentecooperacion codigocomponente FROM " + table;    
+                sql += select + " || ' ' || componentecooperacion componentecooperacion, codigocomponente FROM " + table;    
             } else {
                 sql += select + " FROM " + table;    
             }
@@ -68,12 +68,12 @@ define(function(require) {
             });
 
             if (select === "codigoenci") {
-                sql += "GROUP BY " + table + ".codigoenci";
+                sql += " GROUP BY " + table + ".codigoenci";
             } else if (select === "codigocomponente") {
-                sql += "GROUP BY " + table + ".codigocomponente";
+                sql += " GROUP BY " + table + ".codigocomponente";
             }
 
-            console.log(sql);
+            //console.log(sql);
             return sql;
         },
 

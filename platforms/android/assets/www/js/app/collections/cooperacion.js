@@ -96,7 +96,7 @@ define(function(require) {
                 });
                 sql += ")";
             });
-            console.log(sql);
+            //console.log(sql);
             return sql;
         },
 
