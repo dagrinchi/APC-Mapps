@@ -128,6 +128,7 @@ define(function(require) {
             require(['html2canvas'], function() {
                 html2canvas(document.getElementsByTagName("body"), {
                     useCORS: true,
+                    proxy: "http://cool4code.com/apc/html2canvasproxy.php",
                     onrendered: function(canvas) {
                         window.plugins.socialsharing.available(function(isAvailable) {
                             if (isAvailable) {

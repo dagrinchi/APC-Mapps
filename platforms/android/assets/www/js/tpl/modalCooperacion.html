@@ -3,14 +3,12 @@
         <button class="btn" data-dismiss="modal" style="float:right;"><i class="icon-remove"></i> Cerrar</button>
         <a href="#" class="btn btn-primary share" style="float:right;"><i class="icon-share icon-white"></i> Compartir</a>
     </div>
-    <% _.each(dci, function(d1) { %>
-    	<h3><%= d1.terrirorio %></h3>
-    <% }); %>    
 </div>
 <div id="dciDetalle" class="modal-body">
 	<div id="scroller">
 		<% _.each(dci, function(d) { %>
 			<div>
+				<h3><%= d.terrirorio %></h3>
 				<p style="font-weight: bold; margin-bottom: 3px;">Punto focal:</p>
 				<p><%= d.puntofocal %></p>
 				<p style="font-weight: bold; margin-bottom: 3px;">Dirección punto focal:</p>

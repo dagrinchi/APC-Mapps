@@ -230,10 +230,11 @@ define(function(require) {
             require(['html2canvas'], function() {
                 html2canvas(document.getElementsByTagName("body"), {
                     useCORS: true,
-                    onrendered: function(canvas) {
+                    proxy: "http://cool4code.com/apc/html2canvasproxy.php",
+                    onrendered: function(canvas) {                        
                         window.plugins.socialsharing.available(function(isAvailable) {
                             if (isAvailable) {
-                                window.plugins.socialsharing.share("APC-Mapps", "APC-Mapps", canvas.toDataURL(), "http://www.apccolombia.gov.co/");
+                                window.plugins.socialsharing.share("APC-Mapps", "APC-Mapps", canvas.toDataURL("image/png"), "http://www.apccolombia.gov.co/");
                             }
                         });
                     }
