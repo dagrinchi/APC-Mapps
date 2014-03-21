@@ -2299,8 +2299,8 @@ define(function(require) {
 		"nommun": "El Carmen de Atrato",
 		"coddep": "27",
 		"nomdep": "Chocó",
-		"lat": "",
-		"long": ""
+		"lat": "5.989088",
+		"long": "-76.368198"
 	}, {
 		"codmun": "13244",
 		"nommun": "El Carmen de Boli­var",
@@ -4098,15 +4098,15 @@ define(function(require) {
 		"nommun": "Medio Atrato",
 		"coddep": "27",
 		"nomdep": "Chocó",
-		"lat": "",
-		"long": ""
+		"lat": "5.9896392",
+		"long": "-76.7332481"
 	}, {
 		"codmun": "27430",
 		"nommun": "Medio Baudo",
 		"coddep": "27",
 		"nomdep": "Chocó",
-		"lat": "",
-		"long": ""
+		"lat": "5.132476",
+		"long": "-76.965168"
 	}, {
 		"codmun": "27450",
 		"nommun": "Medio San Juan (ANDAGOYA)",
@@ -7927,8 +7927,8 @@ define(function(require) {
 		"nommun": "Zona Bananera (PRADO - SEVILLA)",
 		"coddep": "47",
 		"nomdep": "Magdalena",
-		"lat": "",
-		"long": ""
+		"lat": "10.7932",
+		"long": "-74.170530"
 	}, {
 		"codmun": "54003",
 		"nommun": "ibrego",
@@ -7993,26 +7993,25 @@ define(function(require) {
 		"lat": "-1.30",
 		"long": "-69.56"
 	}, {
-		"codmun": "97511",	
+		"codmun": "97511",
 		"nommun": "Pacoa",
 		"coddep": "97",
 		"nomdep": "Vaupés",
 		"lat": "0.25",
 		"long": "-70.75"
 	}, {
-		"codmun": "97777",	
+		"codmun": "97777",
 		"nommun": "Papunaua",
 		"coddep": "97",
 		"nomdep": "Vaupés",
 		"lat": "1.91",
 		"long": "-70.60"
-	},{
-		"codmun": "",	
+	}, {
+		"codmun": "",
 		"nommun": "",
 		"coddep": "11",
 		"nomdep": "Bogotá D.C.",
 		"lat": "4.6",
 		"long": "-74.0833333"
-	}
-	];
+	}];
 });
