@@ -128,7 +128,7 @@
 - (void)applicationDidReceiveMemoryWarning:(UIApplication*)application
 {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    [self.viewController.webView stringByEvaluatingJavaScriptFromString:@"document.location.reload();"];
+    [self.viewController.webView reload];
 }
 
 
