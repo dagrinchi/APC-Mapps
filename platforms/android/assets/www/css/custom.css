@@ -160,6 +160,21 @@ h2 {
 }
 /*===========end media queries========================*/
 
+
+#demandProyects:active, #btnSurAreas:active,
+#demandProyects.active, #btnSurAreas.active
+{
+    text-decoration: underline;
+    background-color: #f5a932;
+    font-weight: 300;
+}
+#southProyects:active, #btnSurSectores:active,
+#southProyects.active, #btnSurSectores.active
+{
+    text-decoration: underline;
+    background-color: #8c44ae;   
+    font-weight: 300;
+}
 #demandProyects, #btnSurAreas {
     font-family: "Segoe UI Light", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
     font-weight: 100;
@@ -168,7 +183,7 @@ h2 {
     color: #fff;
     text-shadow: none;
     border: none;    
-    background-color: #f5a932;
+    background-color: #FFCB77;
     box-shadow: none;
     text-align: center;
 }
@@ -189,7 +204,7 @@ h2 {
     text-shadow: none;
     border: none;
     box-shadow: none;
-    background-color: #8c44ae;
+    background-color: #D089F1;
     cursor: pointer;
     text-align: center;
 }

@@ -63,32 +63,50 @@ define(function(require) {
 			if (table === "demanda") {
 				switch (cols) {
 					case "codigoenci":
-						APC.collections.demCollection.findBySelection();
-						APC.collections.coopCollection.findBySelection();
+						demanda();
+						cooperacion();
 						break;
 					case "territorio":
-						APC.collections.demCollection.findBySelection();
-						APC.collections.coopCollection.findBySelection();
+						demanda();
+						cooperacion();
 						break;
 					default:
-						APC.collections.demCollection.findBySelection();
+						demanda();
 						break;
 				}
 			} else if (table === "dci") {
 				switch (cols) {
 					case "codigocomponente":
-						APC.collections.demCollection.findBySelection();
-						APC.collections.coopCollection.findBySelection();
+						demanda();
+						cooperacion();
 						break;
 					case "terrirorio":
-						APC.collections.demCollection.findBySelection();
-						APC.collections.coopCollection.findBySelection();
+						demanda();
+						cooperacion();
 						break;
 					default:
-						APC.collections.coopCollection.findBySelection();
+						cooperacion();
 						break;
 				}
 			}
+
+			function demanda() {
+                APC.collections.demCollection.selection = true;
+                APC.collections.demCollection.fetch({
+                    "success" : function() {
+                        APC.collections.demCollection.initMapMarkersWithDb();
+                    }
+                });
+            }
+
+			function cooperacion() {
+                APC.collections.coopCollection.selection = true;
+                APC.collections.coopCollection.fetch({
+                    "success": function() {
+                        APC.collections.coopCollection.initMapMarkersWithDb();
+                    }
+                });
+            }
 
 			this.model.destroy();
 		},
@@ -122,7 +140,7 @@ define(function(require) {
 		initialize: function() {
 			this.collection.bind("reset", this.render, this);
 			this.collection.bind("remove", this.removeItem, this);
-			this.collection.bind("reset", this.resetAction, this);
+			//this.collection.bind("reset", this.resetAction, this);
 		},
 
 		resetAction: function() {

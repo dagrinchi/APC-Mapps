@@ -145,6 +145,8 @@
      },
 
      proyectosDemanda: function() {
+       $("#demandProyects").addClass("active");
+       $("#southProyects").removeClass("active");
        $("#sursurList").hide();
        $("#projectList").fadeIn();
 
@@ -155,6 +157,8 @@
      },
 
      proyectosSursur: function() {
+       $("#southProyects").addClass("active");
+       $("#demandProyects").removeClass("active");
        var self = this;
 
        $("#projectList").hide();

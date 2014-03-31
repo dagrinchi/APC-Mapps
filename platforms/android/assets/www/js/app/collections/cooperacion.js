@@ -13,9 +13,9 @@ define(function(require) {
     "use strict";
 
     var Backbone = require('backbone'),
-        DB = require('app/utils/db'),
         model = require('app/models/cooperacion'),
         modalView = require('app/views/modalCoop'),
+        ApcCooperacion = require('app/utils/cooperacion-data'),
         coopByDepto = require('app/collections/coopByDepartamento');
 
     var $ = require('jquery'),
@@ -23,104 +23,58 @@ define(function(require) {
 
     return Backbone.Collection.extend({
 
-        sql: "SELECT DISTINCT * FROM dci INNER JOIN (SELECT dci.terrirorio terr, dane.lat, dane.long FROM dci INNER JOIN dane ON (dane.nomdep LIKE dci.terrirorio and dane.codmun = '') or(dane.nommun LIKE dci.terrirorio) GROUP BY dci.terrirorio) dciterr ON dciterr.terr = dci.terrirorio ",
+        selection: false,
+
         markers: [],
-
-        delay: 100,
-
-        nextAddress: 0,
 
         model: model,
 
-        baseapc: {},
+        sync: function(method, model, options) {
+            if (method === "read") {
+                if (this.selection) {
+                    // var terrirorio = APC.selection.dci.cols['terrirorio'].length;
+                    // var areas = APC.selection.dci.cols['codigocomponente'].length;
+                    // if (terrirorio > 0 ||  areas > 0) {
+                    ApcCooperacion.findBySelection().done(function(data) {
+                        options.success(data);
+                    });
+                    // } else {
+                    //     if (typeof APC.views.mapCooperacion.markerCluster !== "undefined") {
+                    //         APC.views.mapCooperacion.markerCluster.clearMarkers();
+                    //     }
+                    // }
+                } else {
+                    ApcCooperacion.findAll().done(function(data) {
+                        options.success(data);
+                    });
+                }
+
+            }
+        },
 
         initialize: function() {
-            var self = this;
-
-            self.geo = new google.maps.Geocoder();
-            self.bounds = new google.maps.LatLngBounds();
-            self.infowindow = new google.maps.InfoWindow();
-
-            this.baseapc = new DB(window.openDatabase("apc", "1.0", "APC - Agencia Presidencial de la Cooperación en Colombia", 4145728));
-        },
-
-        findAll: function() {
-            var deferred = $.Deferred();
-            var self = this;
-
-            this.baseapc.execute(self.sql, model, function(data) {
-                self.reset(data);
-                deferred.resolve();
-                setTimeout(self.initMapMarkersWithDb, 3500);
-            });
-            return deferred.promise();
-        },
-
-        findBySelection: function() {
-            var deferred = $.Deferred();
-            var self = this;
-
-            this.baseapc.execute(this.buildSQL(), model, function(data) {
-                self.reset(data);
-                deferred.resolve();
-                self.initMapMarkersWithDb();
-            });
-
-            return deferred.promise();
-        },
-
-        buildSQL: function() {
-            var selection = {
-                cols: [],
-                vals: []
-            };
-            $.each(APC.selection.dci.cols, function(k1, v1) {
-                if (v1.length > 0) {
-                    selection.cols.push(k1);
-                    selection.vals.push(v1);
-                }
-            });
-            var sql = this.sql;
-
-            $.each(selection.vals, function(k1, v1) {
-                if (k1 === 0) {
-                    sql += "WHERE (";
-                } else {
-                    sql += " AND (";
-                }
-                $.each(v1, function(k2, v2) {
-                    if (k2 > 0) {
-                        sql += " OR ";
-                    }
-                    sql += selection.cols[k1] + " LIKE " + "'" + v2 + "'";
-                });
-                sql += ")";
-            });
-            //console.log(sql);
-            return sql;
+            this.geo = new google.maps.Geocoder();
+            this.bounds = new google.maps.LatLngBounds();
+            this.infowindow = new google.maps.InfoWindow();
         },
 
         initMapMarkersWithDb: function() {
             var self = this;
-            if (typeof this.models === "undefined" || this.models.length <= 0) {
-                APC.collections.coopCollection.initMapMarkersWithDb();
-            } else {
-                self.markers = [];
-                $.each(self.models, function(k1, v1) {
-                    self.createMarker(v1.get("RowKey"), v1.get("terrirorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
-                });
+            self.markers = [];
+            $.each(self.models, function(k1, v1) {
+                self.createMarker(v1.get("RowKey"), v1.get("terrirorio").trim(), parseFloat(v1.get("lat")), parseFloat(v1.get("long")));
+            });
 
-                if (typeof APC.views.mapCooperacion.markerCluster !== "undefined") {
-                    APC.views.mapCooperacion.markerCluster.clearMarkers();
-                }
-                require(['markerclustererCompiled'], function() {
-                    APC.views.mapCooperacion.markerCluster = new MarkerClusterer(APC.views.mapCooperacion.map, self.markers, {
-                        maxZoom: 11,
-                        gridSize: 50
-                    });
-                });
-                // APC.views.mapCooperacion.map.fitBounds(self.bounds);    
+            if (typeof APC.views.mapCooperacion.markerCluster !== "undefined") {
+                APC.views.mapCooperacion.markerCluster.clearMarkers();
             }
+            require(['markerclustererCompiled'], function() {
+                APC.views.mapCooperacion.markerCluster = new MarkerClusterer(APC.views.mapCooperacion.map, self.markers, {
+                    maxZoom: 11,
+                    gridSize: 50
+                });
+            });
+            // APC.views.mapCooperacion.map.fitBounds(self.bounds);    
         },
 
         createMarker: function(RowKey, add, lat, lng) {

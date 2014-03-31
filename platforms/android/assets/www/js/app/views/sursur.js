@@ -45,7 +45,7 @@ define(function(require) {
 
     var modalList = Backbone.View.extend({
 
-        className: "modal hide",
+        className: "modal hide fade",
 
         initialize: function() {
             var self = this;
@@ -128,7 +128,6 @@ define(function(require) {
             require(['html2canvas'], function() {
                 html2canvas(document.getElementsByTagName("body"), {
                     useCORS: true,
-                    proxy: "http://cool4code.com/apc/html2canvasproxy.php",
                     onrendered: function(canvas) {
                         window.plugins.socialsharing.available(function(isAvailable) {
                             if (isAvailable) {
@@ -142,6 +141,8 @@ define(function(require) {
         },
 
         btnSurAreas: function() {
+            $("#btnSurAreas").addClass("active");
+            $("#btnSurSectores").removeClass("active");
             this.clearSelection();
             APC.views.surAreasListView = new listEl({
                 collection: APC.collections.surAreasCollection
@@ -162,6 +163,8 @@ define(function(require) {
 
 
         btnSurSectores: function() {
+            $("#btnSurSectores").addClass("active");
+            $("#btnSurAreas").removeClass("active");
             this.clearSelection();
             APC.views.surSectoresListView = new listEl({
                 collection: APC.collections.surSectoresCollection

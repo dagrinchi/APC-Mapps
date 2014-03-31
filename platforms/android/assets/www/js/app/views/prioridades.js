@@ -18,7 +18,8 @@ define(function(require) {
         tpl = require('text!tpl/prioridades.html'),
         modalTpl = require('text!tpl/modalList.html'),
         listItemTpl = require('text!tpl/listItem.html'),
-        bootstrap = require('bootstrap/bootstrap');
+        bootstrap = require('bootstrap/bootstrap'),
+        CooperacionCollection = require('app/collections/cooperacion');
 
     var listItemView = Backbone.View.extend({
         tagName: 'li',
@@ -44,7 +45,7 @@ define(function(require) {
 
     var modalList = Backbone.View.extend({
 
-        className: "modal hide",
+        className: "modal hide fade",
 
         initialize: function() {
             var self = this;
@@ -76,54 +77,77 @@ define(function(require) {
             var table = this.options.table;
             var cols = this.options.cols;
 
-            if (table === "demanda") {
-                switch (cols) {
-                    case "codigoenci":
-                        APC.collections.demCollection.findBySelection();
-                        APC.collections.coopCollection.findBySelection();
-                        break;
-                    case "territorio":
-                        APC.collections.demCollection.findBySelection();
-                        APC.collections.coopCollection.findBySelection();
-                        break;
-                    default:
-                        APC.collections.demCollection.findBySelection();
-                        break;
-                }
-            } else if (table === "dci") {
-                switch (cols) {
-                    case "codigocomponente":
-                        APC.collections.demCollection.findBySelection();
-                        APC.collections.coopCollection.findBySelection();
-                        break;
-                    case "terrirorio":
-                        APC.collections.demCollection.findBySelection();
-                        APC.collections.coopCollection.findBySelection();
-                        break;
-                    default:
-                        APC.collections.coopCollection.findBySelection();
-                        break;
-                }
-            }
-
             require(['app/collections/selection', 'app/views/selection'], function(selectionColl, selectionView) {
 
                 if (table === "demanda") {
-                    if (cols === "codigoenci" || cols === "territorio") {
-                        APC.collections['dciSelection'] = new selectionColl();
-                        drawSelection('dci', APC.collections['dciSelection']);
-                    } else if (typeof APC.collections['dciSelection'] !== "undefined") {
-                        APC.collections['dciSelection'].reset();
+                    switch (cols) {
+                        case "codigoenci":
+                            demanda();
+                            cooperacion();
+                            APC.collections['demandaSelection'] = new selectionColl();
+                            drawSelection('demanda', APC.collections['demandaSelection']);
+                            APC.collections['dciSelection'] = new selectionColl();
+                            drawSelection('dci', APC.collections['dciSelection']);
+                            break;
+                        case "territorio":
+                            demanda();
+                            cooperacion();
+                            APC.collections['demandaSelection'] = new selectionColl();
+                            drawSelection('demanda', APC.collections['demandaSelection']);
+                            APC.collections['dciSelection'] = new selectionColl();
+                            drawSelection('dci', APC.collections['dciSelection']);
+                            break;
+                        default:
+                            demanda();
+                            APC.collections['demandaSelection'] = new selectionColl();
+                            drawSelection('demanda', APC.collections['demandaSelection']);
+                            if (typeof APC.views.mapCooperacion.markerCluster !== "undefined") {
+                                APC.views.mapCooperacion.markerCluster.clearMarkers();
+                            }
+                            break;
                     }
-                    APC.collections['demandaSelection'] = new selectionColl();
-                    drawSelection('demanda', APC.collections['demandaSelection']);
                 } else if (table === "dci") {
-                    APC.collections['demandaSelection'] = new selectionColl();
-                    drawSelection('demanda', APC.collections['demandaSelection']);
-                    APC.collections['dciSelection'] = new selectionColl();
-                    drawSelection('dci', APC.collections['dciSelection']);                    
+                    switch (cols) {
+                        case "codigocomponente":
+                            demanda();
+                            cooperacion();
+                            APC.collections['demandaSelection'] = new selectionColl();
+                            drawSelection('demanda', APC.collections['demandaSelection']);
+                            APC.collections['dciSelection'] = new selectionColl();
+                            drawSelection('dci', APC.collections['dciSelection']);
+                            break;
+                        case "terrirorio":
+                            demanda();
+                            cooperacion();
+                            APC.collections['demandaSelection'] = new selectionColl();
+                            drawSelection('demanda', APC.collections['demandaSelection']);
+                            APC.collections['dciSelection'] = new selectionColl();
+                            drawSelection('dci', APC.collections['dciSelection']);
+                            break;
+                        default:
+                            cooperacion();
+                            break;
+                    }
                 }
-                
+
+                function demanda() {
+                    APC.collections.demCollection.selection = true;
+                    APC.collections.demCollection.fetch({
+                        "success": function() {
+                            APC.collections.demCollection.initMapMarkersWithDb();
+                        }
+                    });
+                }
+
+                function cooperacion() {
+                    APC.collections.coopCollection.selection = true;
+                    APC.collections.coopCollection.fetch({
+                        "success": function() {
+                            APC.collections.coopCollection.initMapMarkersWithDb();
+                        }
+                    });
+                }
+
                 function drawSelection(table, collection) {
                     $.when(collection.findSelection(table)).done(function() {
                         APC.views[table + 'Selection'] = new selectionView({
@@ -133,7 +157,7 @@ define(function(require) {
                         $("#" + table + "SelectionList").html(APC.views[table + 'Selection'].render().$el);
                     });
                 }
-                
+
             });
         },
 
@@ -189,8 +213,8 @@ define(function(require) {
 
         template: _.template(tpl),
 
-        initialize: function() {        
-            
+        initialize: function() {
+
         },
 
         events: {
@@ -230,11 +254,10 @@ define(function(require) {
             require(['html2canvas'], function() {
                 html2canvas(document.getElementsByTagName("body"), {
                     useCORS: true,
-                    proxy: "http://cool4code.com/apc/html2canvasproxy.php",
-                    onrendered: function(canvas) {                        
+                    onrendered: function(canvas) {
                         window.plugins.socialsharing.available(function(isAvailable) {
                             if (isAvailable) {
-                                window.plugins.socialsharing.share("APC-Mapps", "APC-Mapps", canvas.toDataURL("image/png"), "http://www.apccolombia.gov.co/");
+                                window.plugins.socialsharing.share("APC-Mapps", "APC-Mapps", canvas.toDataURL(), "http://www.apccolombia.gov.co/");
                             }
                         });
                     }

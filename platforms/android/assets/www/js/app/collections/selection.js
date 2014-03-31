@@ -62,7 +62,7 @@ define(function(require) {
                     if (k2 > 0) {
                         sql += " OR ";
                     }
-                    sql += selection.cols[k1] + " = " + "'" + v2 + "'";
+                    sql += selection.cols[k1] + " LIKE " + "'" + v2 + "'";
                 });
                 sql += ")";
             });

@@ -124,7 +124,9 @@ define(function(require) {
 
 
                         if (typeof APC.collections.demCollection === 'undefined')
-                            APC.collections.demCollection = new DemandaCollection();
+                            APC.collections.demCollection = new DemandaCollection({
+                                selection : false
+                            });
 
                         if (typeof APC.collections.demActoresCollection === 'undefined')
                             APC.collections.demActoresCollection = new DemActoresCollection();
@@ -143,10 +145,11 @@ define(function(require) {
                             APC.collections.proAreasCollection = new ProAreasCollection();
 
                         if (typeof APC.collections.coopCollection === 'undefined')
-                            APC.collections.coopCollection = new CooperacionCollection();
+                            APC.collections.coopCollection = new CooperacionCollection({
+                                selection : false
+                            });
 
-                        $.when(APC.collections.coopCollection.findAll(),
-                            APC.collections.demActoresCollection.findAll(),
+                        $.when(APC.collections.demActoresCollection.findAll(),
                             APC.collections.demTerritoriosCollection.findAll(),
                             APC.collections.demMunicipiosCollection.findAll(),
                             APC.collections.demAreasCollection.findAll(),
@@ -154,11 +157,17 @@ define(function(require) {
                             APC.collections.proTerritoriosCollection.findAll(),
                             APC.collections.proAreasCollection.findAll()).done(function() {
 
-                            if (typeof APC.views.prioridadesPageView === 'undefined')
-                                APC.views.prioridadesPageView = new PrioridadesPageView();
+                            APC.collections.coopCollection.fetch({
+                                "success": function() {
+                                    if (typeof APC.views.prioridadesPageView === 'undefined')
+                                        APC.views.prioridadesPageView = new PrioridadesPageView();
 
-                            APC.views.prioridadesPageView.clearSelection();
-                            APC.views.prioridadesPageView.render();
+                                    APC.views.prioridadesPageView.clearSelection();
+                                    APC.views.prioridadesPageView.render();
+
+                                    APC.collections.coopCollection.initMapMarkersWithDb();
+                                }
+                            });
                         });
                     });
                 } else {
