@@ -123,10 +123,9 @@ define(function(require) {
                         PrioridadesPageView) {
 
 
-                        if (typeof APC.collections.demCollection === 'undefined')
-                            APC.collections.demCollection = new DemandaCollection({
-                                selection : false
-                            });
+                        //if (typeof APC.collections.demCollection === 'undefined')
+                            APC.collections.demCollection = new DemandaCollection();
+                            APC.collections.demCollection.selection = false;
 
                         if (typeof APC.collections.demActoresCollection === 'undefined')
                             APC.collections.demActoresCollection = new DemActoresCollection();
@@ -144,10 +143,9 @@ define(function(require) {
                         if (typeof APC.collections.proAreasCollection === 'undefined')
                             APC.collections.proAreasCollection = new ProAreasCollection();
 
-                        if (typeof APC.collections.coopCollection === 'undefined')
-                            APC.collections.coopCollection = new CooperacionCollection({
-                                selection : false
-                            });
+                        //if (typeof APC.collections.coopCollection === 'undefined')
+                            APC.collections.coopCollection = new CooperacionCollection();
+                            APC.collections.coopCollection.selection = false;
 
                         $.when(APC.collections.demActoresCollection.findAll(),
                             APC.collections.demTerritoriosCollection.findAll(),
