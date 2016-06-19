@@ -10,33 +10,33 @@
 	<string>APC</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>881F57CE-4260-43C7-8226-AF3B7DE04D42</key>
+		<key>433EFC69E2A85AD75B9B14EC41900ADA2645EAD1</key>
 		<string>https://github.com/dagrinchi/APC.git</string>
-		<key>FFC8D5D7-77FE-4C90-90FA-9268DE3BFB91</key>
+		<key>9EE2F2E05B98A8F9B048CAAD73FBA8260E797B1C</key>
 		<string>https://github.com/dagrinchi/APC-Mapps</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>platforms/ios/APC.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>881F57CE-4260-43C7-8226-AF3B7DE04D42</key>
+		<key>433EFC69E2A85AD75B9B14EC41900ADA2645EAD1</key>
 		<string>../../../../www</string>
-		<key>FFC8D5D7-77FE-4C90-90FA-9268DE3BFB91</key>
+		<key>9EE2F2E05B98A8F9B048CAAD73FBA8260E797B1C</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/dagrinchi/APC-Mapps</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>FFC8D5D7-77FE-4C90-90FA-9268DE3BFB91</string>
+	<string>9EE2F2E05B98A8F9B048CAAD73FBA8260E797B1C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FFC8D5D7-77FE-4C90-90FA-9268DE3BFB91</string>
+			<string>9EE2F2E05B98A8F9B048CAAD73FBA8260E797B1C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>APC-Mapps</string>
 		</dict>
@@ -44,7 +44,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>881F57CE-4260-43C7-8226-AF3B7DE04D42</string>
+			<string>433EFC69E2A85AD75B9B14EC41900ADA2645EAD1</string>
 			<key>IDESourceControlWCCName</key>
 			<string>www</string>
 		</dict>
